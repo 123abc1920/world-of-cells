@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Cell : MonoBehaviour
 {
+    public int resourceCount;
+    public CellTypes type;
+
     void Start()
     {
         

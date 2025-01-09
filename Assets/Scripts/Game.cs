@@ -17,6 +17,8 @@ public class click : MonoBehaviour
     private int row=10;
     private int col=10;
 
+    private System.Random random=new System.Random();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,10 @@ public class click : MonoBehaviour
             Cell c=Instantiate(cell);
             CellText t=Instantiate(cellText);
             c.newPos(x, y);
+            c.resourceCount=random.Next(1, 20);
+            c.type=Consts.types[random.Next(Consts.types.Length)];
+
+            t.resourceCount=c.resourceCount;
             t.newPos(x, y);
             if ((i+1)%col==0){
                 y-=width;
