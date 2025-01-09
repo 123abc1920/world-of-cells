@@ -9,7 +9,17 @@ public class Cell : MonoBehaviour
 
     void Start()
     {
-        
+        Color newColor=Color.green;
+        if (this.type==CellTypes.ROCK){
+            newColor=Consts.rockColor;
+        }else if (this.type==CellTypes.WATER){
+            newColor=Consts.waterColor;
+        }else if (this.type==CellTypes.TREE){
+            newColor=Consts.treeColor;
+        }else if (this.type==CellTypes.BRIDGE){
+            newColor=Consts.bridgeColor;
+        }
+        GetComponent<SpriteRenderer>().color=newColor;
     }
 
     public void newPos(int x, int y){
@@ -18,6 +28,6 @@ public class Cell : MonoBehaviour
 
     void Update()
     {
-
+        
     }
 }

@@ -12,7 +12,7 @@ public class CellText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GetComponent<TMP_Text>().text = this.resourceCount.ToString();
     }
 
     public void newPos(int x, int y){
@@ -22,6 +22,6 @@ public class CellText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<TMP_Text>().text = this.resourceCount.ToString();
+        
     }
 }
