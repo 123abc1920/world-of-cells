@@ -1,0 +1,5 @@
+.panel {
+    font-size: 10%;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
