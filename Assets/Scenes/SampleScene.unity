@@ -394,6 +394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cell: {fileID: -827147385542913259, guid: 0d2f964695f41bd48ba628d3e2ca9c99, type: 3}
   cellText: {fileID: 6650165570001422960, guid: 8f45441cb49dccc4bb71cc08887f48d9, type: 3}
+  player: {fileID: -5940075928938310951, guid: 6a6d6c5868d98444695829ddf79bbaed, type: 3}
   canvas: {fileID: 0}
 --- !u!4 &509196249
 Transform:

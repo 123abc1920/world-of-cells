@@ -10,6 +10,7 @@ public class click : MonoBehaviour
     public static Vector2 topRight;
     public Cell cell;
     public CellText cellText;
+    public Player player;
 
     public GameObject canvas;
 
@@ -40,6 +41,9 @@ public class click : MonoBehaviour
                 x=-width;
             }
         }
+
+        Player p=Instantiate(player);
+        p.newPos(0, 0);
     }
 
     // Update is called once per frame
