@@ -71,8 +71,8 @@ public class CameraC : MonoBehaviour
             {
                 start = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, Camera.main.nearClipPlane));
                 for (int i=0; i<Consts.cells.Length; i++){
-                    if (Consts.cells[i].pos.x<=start.x&&start.x<Consts.cells[i].pos.x+Consts.width-1){
-                        if (Consts.cells[i].pos.y<=start.y&&start.y<Consts.cells[i].pos.y+Consts.width-1){
+                    if (Consts.cells[i].pos.x<=start.x&&start.x<Consts.cells[i].pos.x+Consts.width){
+                        if (Consts.cells[i].pos.y>start.y&&start.y>=Consts.cells[i].pos.y-Consts.width){
                             Consts.player.cell=i;
                             Consts.player.newPos(Consts.cells[i].pos.x, Consts.cells[i].pos.y);
                             break;
