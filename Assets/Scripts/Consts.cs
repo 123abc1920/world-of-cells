@@ -16,5 +16,6 @@ public class Consts{
     public static Player player;
 
     public static int width=(int)Math.Round(Screen.height*0.0125f);
+    public static int ONE_ROW = 10;
 
 }

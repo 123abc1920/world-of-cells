@@ -7,6 +7,7 @@ public class Cell : MonoBehaviour
     public int resourceCount;
     public CellTypes type;
     public Vector3 pos;
+    public bool isAlive;
 
     void Start()
     {

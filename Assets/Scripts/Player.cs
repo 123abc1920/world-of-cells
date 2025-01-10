@@ -16,6 +16,10 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(x, y, 1);
     }
 
+    public int[] getAvailableCells() {
+        return new int[] {cell+1, cell-1, cell-Consts.ONE_ROW, cell+Consts.ONE_ROW};
+    }
+
     // Update is called once per frame
     void Update()
     {
