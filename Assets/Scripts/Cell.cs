@@ -6,6 +6,7 @@ public class Cell : MonoBehaviour
 {
     public int resourceCount;
     public CellTypes type;
+    public Vector3 pos;
 
     void Start()
     {
@@ -24,10 +25,11 @@ public class Cell : MonoBehaviour
 
     public void newPos(int x, int y){
         transform.position = new Vector3(x, y, 1);
+        pos=transform.position;
     }
 
     void Update()
     {
-        
+       
     }
 }

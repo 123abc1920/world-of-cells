@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public int cell;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        this.cell=0;
     }
 
-    public void newPos(int x, int y){
+    public void newPos(float x, float y){
         transform.position = new Vector3(x, y, 1);
     }
 

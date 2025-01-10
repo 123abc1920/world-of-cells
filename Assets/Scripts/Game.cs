@@ -27,6 +27,10 @@ public class click : MonoBehaviour
         bottomLeft = Camera.main.ScreenToWorldPoint(new Vector2(0,0));
         topRight = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
 
+        Player p=Instantiate(player);
+        p.newPos(0, 0);
+        Consts.player=p;
+
         for (int i = 0, x=0, y=0; i < col*row; i++, x+=width) {
             Cell c=Instantiate(cell);
             CellText t=Instantiate(cellText);
@@ -40,10 +44,10 @@ public class click : MonoBehaviour
                 y-=width;
                 x=-width;
             }
-        }
 
-        Player p=Instantiate(player);
-        p.newPos(0, 0);
+            Consts.cells[i]=c;
+            Consts.texts[i]=t;
+        }
     }
 
     // Update is called once per frame
