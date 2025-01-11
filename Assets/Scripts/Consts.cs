@@ -21,4 +21,18 @@ public class Consts{
     public static int width=(int)Math.Round(Screen.height*0.0125f);
     public static int ONE_ROW = 10;
 
+    public static void gameStep(Vector2 start){
+        for (int i=0; i<Consts.cells.Length; i++){
+            if (Array.IndexOf(MovingScript.getAvailableCells(Consts.player.cell, Consts.player.a), i)!=-1){
+                if (Consts.cells[i].pos.x-Consts.width/2<=start.x&&start.x<Consts.cells[i].pos.x+Consts.width/2){
+                    if (Consts.cells[i].pos.y+Consts.width/2>=start.y&&start.y>Consts.cells[i].pos.y-Consts.width/2){
+                        Consts.player.cell=i;
+                        Consts.player.newPos(Consts.cells[i].pos.x, Consts.cells[i].pos.y);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
 }

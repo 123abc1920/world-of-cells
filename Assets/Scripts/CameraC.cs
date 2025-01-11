@@ -66,21 +66,12 @@ public class CameraC : MonoBehaviour
                 }
                 transform.Translate(new Vector3(Mathf.Lerp(fx,sx, 0.5f),Mathf.Lerp(fy,sy, 0.5f), 0), Space.World);
                 start=finish;
+                return;
             }
-            if (touch.phase == TouchPhase.Stationary)
+            if (touch.phase == TouchPhase.Stationary||touch.phase==TouchPhase.Began)
             {
                 start = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, Camera.main.nearClipPlane));
-                for (int i=0; i<Consts.cells.Length; i++){
-                    if (Array.IndexOf(MovingScript.getAvailableCells(Consts.player.cell, Consts.player.a), i)!=-1){
-                        if (Consts.cells[i].pos.x<=start.x&&start.x<Consts.cells[i].pos.x+Consts.width){
-                            if (Consts.cells[i].pos.y>start.y&&start.y>=Consts.cells[i].pos.y-Consts.width){
-                                Consts.player.cell=i;
-                                Consts.player.newPos(Consts.cells[i].pos.x, Consts.cells[i].pos.y);
-                                break;
-                            }
-                        }
-                    }
-                }
+                Consts.gameStep(start);
             }
         }
     }

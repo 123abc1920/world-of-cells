@@ -5,7 +5,7 @@ using UnityEngine;
 public class RedEnemy : MonoBehaviour
 {
     public int cell;
-    public int[] a={1, Consts.ONE_ROW};
+    public int[] a={1, Consts.ONE_ROW, Consts.ONE_ROW-1, Consts.ONE_ROW+1};
 
     // Start is called before the first frame update
     void Start()
