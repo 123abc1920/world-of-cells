@@ -13,6 +13,9 @@ public class Game
     public BlueEnemy blueEnemy;
     public FluidEnemy fluidEnemy;
 
+    public int stepCount=0;
+    public int tree, rock, water;
+
     private System.Random random=new System.Random();
 
     public Game(Player p, RedEnemy re, BlueEnemy be, FluidEnemy fe, Cell[] c, CellText[] ct){
@@ -20,6 +23,12 @@ public class Game
         this.redEnemy=re;
         this.blueEnemy=be;
         this.fluidEnemy=fe;
+
+        this.tree=this.random.Next(20, 80);
+        this.rock=this.random.Next(20, 80);
+        this.water=this.random.Next(20, 80);
+
+        Debug.Log(tree+" "+rock+" "+water);
 
         for (int i=0; i<100; i++){
             this.cells[i]=c[i];
@@ -37,6 +46,7 @@ public class Game
 
                         monsterStep();
 
+                        Consts.game.stepCount++;
                         return;
                     }
                 }
