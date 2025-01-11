@@ -68,9 +68,8 @@ public class CameraC : MonoBehaviour
                 start=finish;
                 return;
             }
-            if (touch.phase == TouchPhase.Stationary||touch.phase==TouchPhase.Began)
+            if (touch.phase == TouchPhase.Stationary)
             {
-                start = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, Camera.main.nearClipPlane));
                 Consts.gameStep(start);
             }
         }
