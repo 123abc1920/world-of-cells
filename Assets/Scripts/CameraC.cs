@@ -70,7 +70,8 @@ public class CameraC : MonoBehaviour
             }
             if (touch.phase == TouchPhase.Stationary)
             {
-                Consts.gameStep(start);
+                Consts.game.gameStep(start);
+                Debug.Log(Consts.game.cells.Length+" swxderftgyhnuj");
             }
         }
     }

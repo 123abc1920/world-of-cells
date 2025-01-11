@@ -1,76 +1,78 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 using System;
 
-public class click : MonoBehaviour
+public class Game
 {
-    public static Vector2 bottomLeft;
-    public static Vector2 topRight;
-    public Cell cell;
-    public CellText cellText;
+    public Cell[] cells=new Cell[100];
+    public CellText[] texts=new CellText[100];
 
     public Player player;
     public RedEnemy redEnemy;
     public BlueEnemy blueEnemy;
     public FluidEnemy fluidEnemy;
 
-    public GameObject canvas;
-
-    private int width=(int)Math.Round(Screen.height*0.0125f);
-    private int row=10;
-    private int col=10;
-
     private System.Random random=new System.Random();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        var uiDocument = GetComponent<UIDocument>();
-        bottomLeft = Camera.main.ScreenToWorldPoint(new Vector2(0,0));
-        topRight = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+    public Game(Player p, RedEnemy re, BlueEnemy be, FluidEnemy fe, Cell[] c, CellText[] ct){
+        this.player=p;
+        this.redEnemy=re;
+        this.blueEnemy=be;
+        this.fluidEnemy=fe;
 
-        Player p=Instantiate(player);
-        p.newPos(0, 0);
-        Consts.player=p;
-
-        for (int i = 0, x=0, y=0; i < col*row; i++, x+=width) {
-            Cell c=Instantiate(cell);
-            CellText t=Instantiate(cellText);
-            c.newPos(x, y);
-            c.resourceCount=random.Next(1, 20);
-            c.type=Consts.types[random.Next(Consts.types.Length)];
-
-            t.resourceCount=c.resourceCount;
-            t.newPos(x, y);
-            if ((i+1)%col==0){
-                y-=width;
-                x=-width;
-            }
-
-            Consts.cells[i]=c;
-            Consts.texts[i]=t;
+        for (int i=0; i<100; i++){
+            this.cells[i]=c[i];
+            this.texts[i]=ct[i];
         }
-
-        RedEnemy rEnemy=Instantiate(redEnemy);
-        Cell target=Consts.cells[random.Next(100)];
-        rEnemy.newPos(target.pos.x, target.pos.y);
-        Consts.redEnemy=rEnemy;
-        BlueEnemy bEnemy=Instantiate(blueEnemy);
-        target=Consts.cells[random.Next(100)];
-        bEnemy.newPos(target.pos.x, target.pos.y);
-        Consts.blueEnemy=bEnemy;
-        FluidEnemy fEnemy=Instantiate(fluidEnemy);
-        target=Consts.cells[random.Next(100)];
-        fEnemy.newPos(target.pos.x, target.pos.y);
-        Consts.fluidEnemy=fEnemy;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void gameStep(Vector2 start){
+        for (int i=0; i<cells.Length; i++){
+            if (Array.IndexOf(getAvailableCells(player.cell, player.a), i)!=-1){
+                if (cells[i].pos.x-Consts.width/2<=start.x&&start.x<cells[i].pos.x+Consts.width/2){
+                    if (cells[i].pos.y+Consts.width/2>=start.y&&start.y>cells[i].pos.y-Consts.width/2){
+                        player.cell=i;
+                        player.newPos(cells[i].pos.x, cells[i].pos.y);
+
+                        monsterStep();
+
+                        return;
+                    }
+                }
+            }
+        }
     }
 
+    public void monsterStep(){
+        int[] availableCells=getAvailableCells(Consts.game.redEnemy.cell, Consts.game.redEnemy.a);
+        int index=this.random.Next(availableCells.Length);
+        Cell newCell=Consts.game.cells[index];
+        Consts.game.redEnemy.newPos(newCell.pos.x, newCell.pos.y);
+        Consts.game.redEnemy.cell=index;
+
+        availableCells=getAvailableCells(Consts.game.blueEnemy.cell, Consts.game.blueEnemy.a);
+        index=this.random.Next(availableCells.Length);
+        newCell=Consts.game.cells[index];
+        Consts.game.blueEnemy.newPos(newCell.pos.x, newCell.pos.y);
+        Consts.game.blueEnemy.cell=index;
+
+        availableCells=getAvailableCells(Consts.game.fluidEnemy.cell, Consts.game.fluidEnemy.a);
+        index=this.random.Next(availableCells.Length);
+        newCell=Consts.game.cells[index];
+        Consts.game.fluidEnemy.newPos(newCell.pos.x, newCell.pos.y);
+        Consts.game.fluidEnemy.cell=index;
+    }
+
+    public int[] getAvailableCells(int cell, int[] a) {
+        if (a.Length==2)
+        {
+            return new int[] {Math.Max(0, Math.Min(99, cell+a[0])), Math.Max(0, Math.Min(99, cell-a[0])), Math.Max(0, Math.Min(99, cell-a[1])), Math.Max(0, Math.Min(99, cell+a[1]))};
+        }
+        if (a.Length==4)
+        {
+            return new int[] {Math.Max(0, Math.Min(99, cell+a[0])), Math.Max(0, Math.Min(99, cell-a[0])), Math.Max(0, Math.Min(99, cell-a[1])), Math.Max(0, Math.Min(99, cell+a[1])), Math.Max(0, Math.Min(99, cell+a[2])), Math.Max(0, Math.Min(99, cell-a[2])), Math.Max(0, Math.Min(99, cell-a[3])), Math.Max(0, Math.Min(99, cell+a[3]))};
+        }
+        return new int[] {};
+    }
 }
