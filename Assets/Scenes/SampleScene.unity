@@ -395,6 +395,9 @@ MonoBehaviour:
   cell: {fileID: -827147385542913259, guid: 0d2f964695f41bd48ba628d3e2ca9c99, type: 3}
   cellText: {fileID: 6650165570001422960, guid: 8f45441cb49dccc4bb71cc08887f48d9, type: 3}
   player: {fileID: -5940075928938310951, guid: 6a6d6c5868d98444695829ddf79bbaed, type: 3}
+  redEnemy: {fileID: -7639225126994752184, guid: 1a77d9ed19cc2894eb1627439ae6128e, type: 3}
+  blueEnemy: {fileID: 6743525731041344917, guid: be0024d179bb5c44a8dfb24013012c0e, type: 3}
+  fluidEnemy: {fileID: -5868111930159657639, guid: ca094df5b39361647aec61ff02e06286, type: 3}
   canvas: {fileID: 0}
 --- !u!4 &509196249
 Transform:

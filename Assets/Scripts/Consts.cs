@@ -14,6 +14,9 @@ public class Consts{
     public static CellText[] texts=new CellText[100];
 
     public static Player player;
+    public static RedEnemy redEnemy;
+    public static BlueEnemy blueEnemy;
+    public static FluidEnemy fluidEnemy;
 
     public static int width=(int)Math.Round(Screen.height*0.0125f);
     public static int ONE_ROW = 10;

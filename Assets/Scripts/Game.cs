@@ -10,7 +10,11 @@ public class click : MonoBehaviour
     public static Vector2 topRight;
     public Cell cell;
     public CellText cellText;
+
     public Player player;
+    public RedEnemy redEnemy;
+    public BlueEnemy blueEnemy;
+    public FluidEnemy fluidEnemy;
 
     public GameObject canvas;
 
@@ -48,6 +52,19 @@ public class click : MonoBehaviour
             Consts.cells[i]=c;
             Consts.texts[i]=t;
         }
+
+        RedEnemy rEnemy=Instantiate(redEnemy);
+        Cell target=Consts.cells[random.Next(100)];
+        rEnemy.newPos(target.pos.x, target.pos.y);
+        Consts.redEnemy=rEnemy;
+        BlueEnemy bEnemy=Instantiate(blueEnemy);
+        target=Consts.cells[random.Next(100)];
+        bEnemy.newPos(target.pos.x, target.pos.y);
+        Consts.blueEnemy=bEnemy;
+        FluidEnemy fEnemy=Instantiate(fluidEnemy);
+        target=Consts.cells[random.Next(100)];
+        fEnemy.newPos(target.pos.x, target.pos.y);
+        Consts.fluidEnemy=fEnemy;
     }
 
     // Update is called once per frame
