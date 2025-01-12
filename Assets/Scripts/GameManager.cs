@@ -6,8 +6,6 @@ using System;
 
 public class click : MonoBehaviour
 {
-    public static Vector2 bottomLeft;
-    public static Vector2 topRight;
     public Cell cell;
     public CellText cellText;
 
@@ -27,10 +25,16 @@ public class click : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var uiDocument = GetComponent<UIDocument>();
-        bottomLeft = Camera.main.ScreenToWorldPoint(new Vector2(0,0));
-        topRight = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+        startNewGame();
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public void startNewGame(){
         Player p=Instantiate(player);
         p.newPos(0, 0);
 
@@ -42,6 +46,8 @@ public class click : MonoBehaviour
             c.newPos(x, y);
             c.resourceCount=random.Next(1, 20);
             c.type=Consts.types[random.Next(Consts.types.Length)];
+            c.id=i;
+            c.isAlive=true;
 
             t.resourceCount=c.resourceCount;
             t.newPos(x, y);
@@ -73,12 +79,6 @@ public class click : MonoBehaviour
         fEnemy.newPos(target.pos.x, target.pos.y);
         
         Consts.game=new Game(p, rEnemy, bEnemy, fEnemy, cells, texts);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
 }

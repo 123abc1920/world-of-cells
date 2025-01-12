@@ -25,6 +25,11 @@ public class CellText : MonoBehaviour
         transform.position = new Vector3(x, y, 0);
     }
 
+    public void hideText(){
+        this.resourceCount=0;
+        GetComponent<TMP_Text>().text = "";
+    }
+
     public void updateText(int r){
         this.resourceCount=r;
         GetComponent<TMP_Text>().text = this.resourceCount.ToString();

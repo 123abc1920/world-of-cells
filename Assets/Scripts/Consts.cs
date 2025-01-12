@@ -11,6 +11,7 @@ public class Consts{
     public static Color bridgeColor=new Color(0.68f, 0.57f, 0.29f, 1);
     public static Color destroyColor=new Color(0.7f, 0.24f, 0.32f, 1);
     public static Color emptyColor=new Color(0.82f, 0.78f, 0.72f, 1);
+    public static Color transparentColor=new Color(0.82f, 0.78f, 0.72f, 0);
 
     public static int width=(int)Math.Round(Screen.height*0.0125f);
     public static int ONE_ROW = 10;

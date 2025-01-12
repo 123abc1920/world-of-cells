@@ -17,6 +17,7 @@ public class Game
     public int tree, rock, water;
 
     private System.Random random=new System.Random();
+    private int[] toDestroy=new int[3];
 
     public Game(Player p, RedEnemy re, BlueEnemy be, FluidEnemy fe, Cell[] c, CellText[] ct){
         this.player=p;
@@ -32,6 +33,12 @@ public class Game
             this.cells[i]=c[i];
             this.texts[i]=ct[i];
         }
+
+        for (int j=0; j<3; j++)
+        {
+            toDestroy[j]=random.Next(100);
+            this.cells[toDestroy[j]].setPreDestroy();
+        }
     }
 
     public void gameStep(Vector2 start){
@@ -39,15 +46,24 @@ public class Game
             if (Array.IndexOf(getAvailableCells(player.cell, player.a), i)!=-1){
                 if (cells[i].pos.x-Consts.width/2<=start.x&&start.x<cells[i].pos.x+Consts.width/2){
                     if (cells[i].pos.y+Consts.width/2>=start.y&&start.y>cells[i].pos.y-Consts.width/2){
-                        player.cell=i;
-                        player.newPos(cells[i].pos.x, cells[i].pos.y);
-                        Consts.game.cells[i].getResource();
-                        Consts.game.texts[i].updateText(Consts.game.cells[i].resourceCount);
+                        if (cells[i].isAlive){
+                            player.cell=i;
+                            player.newPos(cells[i].pos.x, cells[i].pos.y);
+                            Consts.game.cells[i].getResource();
 
-                        monsterStep();
+                            monsterStep();
 
-                        Consts.game.stepCount++;
-                        return;
+                            for (int j=0; j<3; j++){
+                                this.cells[toDestroy[j]].setDestroy();
+                                toDestroy[j]=random.Next(100);
+                                if (this.cells[toDestroy[j]].isAlive){
+                                    this.cells[toDestroy[j]].setPreDestroy();
+                                }
+                            }
+
+                            Consts.game.stepCount++;
+                            return;
+                        }
                     }
                 }
             }
@@ -57,21 +73,27 @@ public class Game
     public void monsterStep(){
         int[] availableCells=getAvailableCells(Consts.game.redEnemy.cell, Consts.game.redEnemy.a);
         int index=this.random.Next(availableCells.Length);
-        Cell newCell=Consts.game.cells[index];
-        Consts.game.redEnemy.newPos(newCell.pos.x, newCell.pos.y);
-        Consts.game.redEnemy.cell=index;
+        if (cells[index].isAlive){
+            Cell newCell=Consts.game.cells[index];
+            Consts.game.redEnemy.newPos(newCell.pos.x, newCell.pos.y);
+            Consts.game.redEnemy.cell=index;
+        }
 
         availableCells=getAvailableCells(Consts.game.blueEnemy.cell, Consts.game.blueEnemy.a);
         index=this.random.Next(availableCells.Length);
-        newCell=Consts.game.cells[index];
-        Consts.game.blueEnemy.newPos(newCell.pos.x, newCell.pos.y);
-        Consts.game.blueEnemy.cell=index;
+        if (cells[index].isAlive){
+            Cell newCell=Consts.game.cells[index];
+            Consts.game.blueEnemy.newPos(newCell.pos.x, newCell.pos.y);
+            Consts.game.blueEnemy.cell=index;
+        }
 
         availableCells=getAvailableCells(Consts.game.fluidEnemy.cell, Consts.game.fluidEnemy.a);
         index=this.random.Next(availableCells.Length);
-        newCell=Consts.game.cells[index];
-        Consts.game.fluidEnemy.newPos(newCell.pos.x, newCell.pos.y);
-        Consts.game.fluidEnemy.cell=index;
+        if (cells[index].isAlive){
+            Cell newCell=Consts.game.cells[index];
+            Consts.game.fluidEnemy.newPos(newCell.pos.x, newCell.pos.y);
+            Consts.game.fluidEnemy.cell=index;
+        }
     }
 
     public int[] getAvailableCells(int cell, int[] a) {

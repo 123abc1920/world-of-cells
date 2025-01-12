@@ -7,7 +7,8 @@ public class Cell : MonoBehaviour
     public int resourceCount;
     public CellTypes type;
     public Vector3 pos;
-    public bool isAlive;
+    public bool isAlive=true;
+    public int id;
 
     void Start()
     {
@@ -34,11 +35,22 @@ public class Cell : MonoBehaviour
         pos=transform.position;
     }
 
+    public void setPreDestroy(){
+        GetComponent<SpriteRenderer>().color=Consts.destroyColor;
+    }
+
+    public void setDestroy(){
+        GetComponent<SpriteRenderer>().color=Consts.transparentColor;
+        Consts.game.texts[id].hideText();
+        this.isAlive=false;
+    }
+
     public void getResource(){
         if (this.resourceCount==0){
             return;
         }
         GetComponent<SpriteRenderer>().color=Consts.emptyColor;
+        Consts.game.texts[id].updateText(0);
         if (this.type==CellTypes.TREE){
             Consts.game.tree-=this.resourceCount;
             this.resourceCount=0;
