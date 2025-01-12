@@ -42,6 +42,7 @@ public class Cell : MonoBehaviour
     public void setDestroy(){
         GetComponent<SpriteRenderer>().color=Consts.transparentColor;
         Consts.game.texts[id].hideText();
+        Consts.game.texts[id].resourceCount=0;
         this.isAlive=false;
     }
 

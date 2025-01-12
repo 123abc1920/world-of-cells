@@ -26,8 +26,11 @@ public class CellText : MonoBehaviour
     }
 
     public void hideText(){
-        this.resourceCount=0;
         GetComponent<TMP_Text>().text = "";
+    }
+
+    public void showText(){
+        GetComponent<TMP_Text>().text = this.resourceCount.ToString();
     }
 
     public void updateText(int r){

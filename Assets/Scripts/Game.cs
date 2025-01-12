@@ -47,7 +47,10 @@ public class Game
                 if (cells[i].pos.x-Consts.width/2<=start.x&&start.x<cells[i].pos.x+Consts.width/2){
                     if (cells[i].pos.y+Consts.width/2>=start.y&&start.y>cells[i].pos.y-Consts.width/2){
                         if (cells[i].isAlive){
+                            this.texts[player.cell].showText();
                             player.cell=i;
+                            this.texts[player.cell].hideText();
+
                             player.newPos(cells[i].pos.x, cells[i].pos.y);
                             Consts.game.cells[i].getResource();
 
@@ -72,27 +75,36 @@ public class Game
 
     public void monsterStep(){
         int[] availableCells=getAvailableCells(Consts.game.redEnemy.cell, Consts.game.redEnemy.a);
-        int index=this.random.Next(availableCells.Length);
+        int index=availableCells[this.random.Next(availableCells.Length)];
         if (cells[index].isAlive){
             Cell newCell=Consts.game.cells[index];
             Consts.game.redEnemy.newPos(newCell.pos.x, newCell.pos.y);
+            
+            this.texts[Consts.game.redEnemy.cell].showText();
             Consts.game.redEnemy.cell=index;
+            this.texts[Consts.game.redEnemy.cell].hideText();
         }
 
         availableCells=getAvailableCells(Consts.game.blueEnemy.cell, Consts.game.blueEnemy.a);
-        index=this.random.Next(availableCells.Length);
+        index=availableCells[this.random.Next(availableCells.Length)];
         if (cells[index].isAlive){
             Cell newCell=Consts.game.cells[index];
             Consts.game.blueEnemy.newPos(newCell.pos.x, newCell.pos.y);
+            
+            this.texts[Consts.game.blueEnemy.cell].showText();
             Consts.game.blueEnemy.cell=index;
+            this.texts[Consts.game.blueEnemy.cell].hideText();
         }
 
         availableCells=getAvailableCells(Consts.game.fluidEnemy.cell, Consts.game.fluidEnemy.a);
-        index=this.random.Next(availableCells.Length);
+        index=availableCells[this.random.Next(availableCells.Length)];
         if (cells[index].isAlive){
             Cell newCell=Consts.game.cells[index];
             Consts.game.fluidEnemy.newPos(newCell.pos.x, newCell.pos.y);
+            
+            this.texts[Consts.game.fluidEnemy.cell].showText();
             Consts.game.fluidEnemy.cell=index;
+            this.texts[Consts.game.fluidEnemy.cell].hideText();
         }
     }
 
