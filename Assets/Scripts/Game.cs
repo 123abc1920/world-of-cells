@@ -28,8 +28,6 @@ public class Game
         this.rock=this.random.Next(20, 80);
         this.water=this.random.Next(20, 80);
 
-        Debug.Log(tree+" "+rock+" "+water);
-
         for (int i=0; i<100; i++){
             this.cells[i]=c[i];
             this.texts[i]=ct[i];
@@ -43,6 +41,8 @@ public class Game
                     if (cells[i].pos.y+Consts.width/2>=start.y&&start.y>cells[i].pos.y-Consts.width/2){
                         player.cell=i;
                         player.newPos(cells[i].pos.x, cells[i].pos.y);
+                        Consts.game.cells[i].getResource();
+                        Consts.game.texts[i].updateText(Consts.game.cells[i].resourceCount);
 
                         monsterStep();
 

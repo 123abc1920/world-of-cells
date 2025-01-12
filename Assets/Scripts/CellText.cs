@@ -15,13 +15,18 @@ public class CellText : MonoBehaviour
         GetComponent<TMP_Text>().text = this.resourceCount.ToString();
     }
 
-    public void newPos(int x, int y){
-        transform.position = new Vector3(x, y, 0);
-    }
-
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void newPos(int x, int y){
+        transform.position = new Vector3(x, y, 0);
+    }
+
+    public void updateText(int r){
+        this.resourceCount=r;
+        GetComponent<TMP_Text>().text = this.resourceCount.ToString();
     }
 }

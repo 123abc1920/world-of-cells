@@ -24,13 +24,35 @@ public class Cell : MonoBehaviour
         GetComponent<SpriteRenderer>().color=newColor;
     }
 
+    void Update()
+    {
+       
+    }
+
     public void newPos(int x, int y){
         transform.position = new Vector3(x, y, 1);
         pos=transform.position;
     }
 
-    void Update()
-    {
-       
+    public void getResource(){
+        if (this.resourceCount==0){
+            return;
+        }
+        GetComponent<SpriteRenderer>().color=Consts.emptyColor;
+        if (this.type==CellTypes.TREE){
+            Consts.game.tree-=this.resourceCount;
+            this.resourceCount=0;
+            return;
+        }
+        if (this.type==CellTypes.ROCK){
+            Consts.game.rock-=this.resourceCount;
+            this.resourceCount=0;
+            return;
+        }
+        if (this.type==CellTypes.WATER){
+            Consts.game.water-=this.resourceCount;
+            this.resourceCount=0;
+            return;
+        }
     }
 }
