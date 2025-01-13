@@ -13,17 +13,21 @@ public class Game
     public BlueEnemy blueEnemy;
     public FluidEnemy fluidEnemy;
 
+    public GameObject endGameDialog;
+
     public int stepCount=0;
     public int tree, rock, water;
 
     private System.Random random=new System.Random();
     private int[] toDestroy=new int[3];
 
-    public Game(Player p, RedEnemy re, BlueEnemy be, FluidEnemy fe, Cell[] c, CellText[] ct){
+    public Game(Player p, RedEnemy re, BlueEnemy be, FluidEnemy fe, Cell[] c, CellText[] ct, GameObject endGameDialog){
         this.player=p;
         this.redEnemy=re;
         this.blueEnemy=be;
         this.fluidEnemy=fe;
+
+        this.endGameDialog=endGameDialog;
 
         this.tree=this.random.Next(20, 80);
         this.rock=this.random.Next(20, 80);
@@ -33,6 +37,8 @@ public class Game
             this.cells[i]=c[i];
             this.texts[i]=ct[i];
         }
+
+        this.endGameDialog.SetActive(false);
 
         for (int j=0; j<3; j++)
         {
@@ -65,6 +71,11 @@ public class Game
                             }
 
                             Consts.game.stepCount++;
+                            if (this.tree<=0&&this.rock<=0&&this.water<=0){
+                                Consts.title.text="Вы победили!";
+                                Consts.message.text="Вы собрали необходимые ресурсы!";
+                                this.endGameDialog.SetActive(true);
+                            }
                             return;
                         }
                     }

@@ -1,5 +1,7 @@
 using UnityEngine;
 using System;
+using UnityEngine.UI;
+using TMPro;
 
 public class Consts{
 
@@ -15,6 +17,10 @@ public class Consts{
 
     public static int width=(int)Math.Round(Screen.height*0.0125f);
     public static int ONE_ROW = 10;
+
+    public static Image Image;
+    public static TMP_Text title;
+    public static TMP_Text message;
 
     public static Game game;
 

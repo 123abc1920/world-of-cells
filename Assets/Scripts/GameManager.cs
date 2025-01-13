@@ -15,6 +15,7 @@ public class click : MonoBehaviour
     public FluidEnemy fluidEnemy;
 
     public GameObject canvas;
+    public GameObject endGameDialog;
 
     private int width=(int)Math.Round(Screen.height*0.0125f);
     private int row=10;
@@ -78,7 +79,7 @@ public class click : MonoBehaviour
         fEnemy.cell=index;
         fEnemy.newPos(target.pos.x, target.pos.y);
         
-        Consts.game=new Game(p, rEnemy, bEnemy, fEnemy, cells, texts);
+        Consts.game=new Game(p, rEnemy, bEnemy, fEnemy, cells, texts, endGameDialog);
     }
 
 }
