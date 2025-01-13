@@ -22,6 +22,8 @@ public class Consts{
     public static TMP_Text title;
     public static TMP_Text message;
 
+    public static bool gameEnd=false;
+
     public static Game game;
 
 }

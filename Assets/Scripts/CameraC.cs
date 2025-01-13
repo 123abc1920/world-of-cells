@@ -70,6 +70,9 @@ public class CameraC : MonoBehaviour
             }
             if (touch.phase == TouchPhase.Stationary)
             {
+                if (Consts.gameEnd){
+                    
+                }
                 Consts.game.gameStep(start);
             }
         }

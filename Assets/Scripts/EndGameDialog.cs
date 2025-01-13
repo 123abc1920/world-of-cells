@@ -9,7 +9,6 @@ public class Dialog : MonoBehaviour
     public Image Image;
     public TMP_Text title;
     public TMP_Text message;
-    public Button btn;
 
     // Start is called before the first frame update
     void Start()
@@ -17,8 +16,6 @@ public class Dialog : MonoBehaviour
         Consts.Image=Image;
         Consts.title=title;
         Consts.message=message;
-
-        btn.onClick.AddListener(OnButtonClick);
     }
 
     // Update is called once per frame
@@ -27,7 +24,7 @@ public class Dialog : MonoBehaviour
         
     }
 
-    public void OnButtonClick(){
+    public void OnBnClick(){
         Debug.Log("click");
     }
 }
