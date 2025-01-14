@@ -26,7 +26,7 @@ public class click : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startNewGame();
+        startFirstGame();
     }
 
     // Update is called once per frame
@@ -35,9 +35,11 @@ public class click : MonoBehaviour
         
     }
 
-    public void startNewGame(){
+    public void startFirstGame(){
         Player p=Instantiate(player);
-        p.newPos(0, 0);
+        RedEnemy rEnemy=Instantiate(redEnemy);
+        BlueEnemy bEnemy=Instantiate(blueEnemy);
+        FluidEnemy fEnemy=Instantiate(fluidEnemy);
 
         Cell[] cells=new Cell[100];
         CellText[] texts=new CellText[100];
@@ -45,12 +47,8 @@ public class click : MonoBehaviour
             Cell c=Instantiate(cell);
             CellText t=Instantiate(cellText);
             c.newPos(x, y);
-            c.resourceCount=random.Next(1, 20);
-            c.type=Consts.types[random.Next(Consts.types.Length)];
             c.id=i;
-            c.isAlive=true;
 
-            t.resourceCount=c.resourceCount;
             t.newPos(x, y);
             if ((i+1)%col==0){
                 y-=width;
@@ -60,26 +58,9 @@ public class click : MonoBehaviour
             cells[i]=c;
             texts[i]=t;
         }
-
-        RedEnemy rEnemy=Instantiate(redEnemy);
-        int index=random.Next(100);
-        Cell target=cells[index];
-        rEnemy.cell=index;
-        rEnemy.newPos(target.pos.x, target.pos.y);
-
-        BlueEnemy bEnemy=Instantiate(blueEnemy);
-        index=random.Next(100);
-        target=cells[index];
-        bEnemy.cell=index;
-        bEnemy.newPos(target.pos.x, target.pos.y);
-
-        FluidEnemy fEnemy=Instantiate(fluidEnemy);
-        index=random.Next(100);
-        target=cells[index];
-        fEnemy.cell=index;
-        fEnemy.newPos(target.pos.x, target.pos.y);
         
         Consts.game=new Game(p, rEnemy, bEnemy, fEnemy, cells, texts, endGameDialog);
+        Consts.game.renewGame();
     }
 
 }

@@ -25,6 +25,6 @@ public class Dialog : MonoBehaviour
     }
 
     public void OnBnClick(){
-        Debug.Log("click");
+        Consts.game.renewGame();
     }
 }

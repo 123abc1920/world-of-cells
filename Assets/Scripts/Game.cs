@@ -29,21 +29,9 @@ public class Game
 
         this.endGameDialog=endGameDialog;
 
-        this.tree=this.random.Next(20, 80);
-        this.rock=this.random.Next(20, 80);
-        this.water=this.random.Next(20, 80);
-
         for (int i=0; i<100; i++){
             this.cells[i]=c[i];
             this.texts[i]=ct[i];
-        }
-
-        this.endGameDialog.SetActive(false);
-
-        for (int j=0; j<3; j++)
-        {
-            toDestroy[j]=random.Next(100);
-            this.cells[toDestroy[j]].setPreDestroy();
         }
     }
 
@@ -53,9 +41,7 @@ public class Game
                 if (cells[i].pos.x-Consts.width/2<=start.x&&start.x<cells[i].pos.x+Consts.width/2){
                     if (cells[i].pos.y+Consts.width/2>=start.y&&start.y>cells[i].pos.y-Consts.width/2){
                         if (cells[i].isAlive){
-                            this.texts[player.cell].showText();
                             player.cell=i;
-                            this.texts[player.cell].hideText();
 
                             player.newPos(cells[i].pos.x, cells[i].pos.y);
                             Consts.game.cells[i].getResource();
@@ -90,10 +76,7 @@ public class Game
         if (cells[index].isAlive){
             Cell newCell=Consts.game.cells[index];
             Consts.game.redEnemy.newPos(newCell.pos.x, newCell.pos.y);
-            
-            this.texts[Consts.game.redEnemy.cell].showText();
             Consts.game.redEnemy.cell=index;
-            this.texts[Consts.game.redEnemy.cell].hideText();
         }
 
         availableCells=getAvailableCells(Consts.game.blueEnemy.cell, Consts.game.blueEnemy.a);
@@ -101,10 +84,7 @@ public class Game
         if (cells[index].isAlive){
             Cell newCell=Consts.game.cells[index];
             Consts.game.blueEnemy.newPos(newCell.pos.x, newCell.pos.y);
-            
-            this.texts[Consts.game.blueEnemy.cell].showText();
             Consts.game.blueEnemy.cell=index;
-            this.texts[Consts.game.blueEnemy.cell].hideText();
         }
 
         availableCells=getAvailableCells(Consts.game.fluidEnemy.cell, Consts.game.fluidEnemy.a);
@@ -112,10 +92,7 @@ public class Game
         if (cells[index].isAlive){
             Cell newCell=Consts.game.cells[index];
             Consts.game.fluidEnemy.newPos(newCell.pos.x, newCell.pos.y);
-            
-            this.texts[Consts.game.fluidEnemy.cell].showText();
             Consts.game.fluidEnemy.cell=index;
-            this.texts[Consts.game.fluidEnemy.cell].hideText();
         }
     }
 
@@ -129,5 +106,46 @@ public class Game
             return new int[] {Math.Max(0, Math.Min(99, cell+a[0])), Math.Max(0, Math.Min(99, cell-a[0])), Math.Max(0, Math.Min(99, cell-a[1])), Math.Max(0, Math.Min(99, cell+a[1])), Math.Max(0, Math.Min(99, cell+a[2])), Math.Max(0, Math.Min(99, cell-a[2])), Math.Max(0, Math.Min(99, cell-a[3])), Math.Max(0, Math.Min(99, cell+a[3]))};
         }
         return new int[] {};
+    }
+
+    public void renewGame(){
+        for (int i=0; i<100; i++){
+            this.cells[i].restartCell();
+            this.texts[i].updateText(this.cells[i].resourceCount);
+        }
+
+        this.tree=this.random.Next(20, 80);
+        this.rock=this.random.Next(20, 80);
+        this.water=this.random.Next(20, 80);
+        this.stepCount=0;
+
+        int index=random.Next(100);
+        Cell target=cells[index];
+        player.cell=index;
+        this.cells[player.cell].getResource();
+        player.newPos(target.pos.x, target.pos.y);
+
+        index=random.Next(100);
+        target=cells[index];
+        redEnemy.cell=index;
+        redEnemy.newPos(target.pos.x, target.pos.y);
+
+        index=random.Next(100);
+        target=cells[index];
+        blueEnemy.cell=index;
+        blueEnemy.newPos(target.pos.x, target.pos.y);
+
+        index=random.Next(100);
+        target=cells[index];
+        fluidEnemy.cell=index;
+        fluidEnemy.newPos(target.pos.x, target.pos.y);
+
+        this.endGameDialog.SetActive(false);
+
+        for (int j=0; j<3; j++)
+        {
+            toDestroy[j]=random.Next(100);
+            this.cells[toDestroy[j]].setPreDestroy();
+        }
     }
 }

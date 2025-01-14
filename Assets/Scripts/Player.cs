@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.cell=0;
+        
     }
 
     // Update is called once per frame

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Cell : MonoBehaviour
 {
@@ -8,7 +9,11 @@ public class Cell : MonoBehaviour
     public CellTypes type;
     public Vector3 pos;
     public bool isAlive=true;
+    public bool isBridge=false;
+    public bool isHut=false;
     public int id;
+
+    private System.Random random=new System.Random();
 
     void Start()
     {
@@ -67,5 +72,26 @@ public class Cell : MonoBehaviour
             this.resourceCount=0;
             return;
         }
+    }
+
+    public void restartCell(){
+        this.isAlive=true;
+        this.isHut=false;
+        this.isBridge=false;
+
+        this.type=Consts.types[random.Next(Consts.types.Length)];
+        this.resourceCount=random.Next(1, 20);
+
+        Color newColor=Color.green;
+        if (this.type==CellTypes.ROCK){
+            newColor=Consts.rockColor;
+        }else if (this.type==CellTypes.WATER){
+            newColor=Consts.waterColor;
+        }else if (this.type==CellTypes.TREE){
+            newColor=Consts.treeColor;
+        }else if (this.type==CellTypes.BRIDGE){
+            newColor=Consts.bridgeColor;
+        }
+        GetComponent<SpriteRenderer>().color=newColor;
     }
 }

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using TMPro; 
 using UnityEngine.UI;
 
@@ -27,10 +26,6 @@ public class CellText : MonoBehaviour
 
     public void hideText(){
         GetComponent<TMP_Text>().text = "";
-    }
-
-    public void showText(){
-        GetComponent<TMP_Text>().text = this.resourceCount.ToString();
     }
 
     public void updateText(int r){
