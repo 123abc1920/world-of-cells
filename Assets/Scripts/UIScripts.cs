@@ -12,6 +12,10 @@ public class UIScripts : MonoBehaviour
     private Label rockLbl;
     private Label waterLbl;
 
+    private Button startBtn;
+    private Button skipBtn;
+    private Button buildBtn;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +26,12 @@ public class UIScripts : MonoBehaviour
         treeLbl = root.Q<Label>("treeLbl");
         rockLbl = root.Q<Label>("rockLbl");
         waterLbl = root.Q<Label>("waterLbl");
+
+        startBtn = root.Q<Button>("startBtn");
+        startBtn.RegisterCallback<ClickEvent>(startBtnAction);
+
+        skipBtn = root.Q<Button>("skipBtn");
+        skipBtn.RegisterCallback<ClickEvent>(skipBtnAction);
     }
 
     // Update is called once per frame
@@ -32,4 +42,13 @@ public class UIScripts : MonoBehaviour
         rockLbl.text = "Rock: "+Math.Max(0, Consts.game.rock);
         waterLbl.text = "Water: "+Math.Max(0, Consts.game.water);
     }
+
+    public void startBtnAction(ClickEvent e){
+        Consts.game.renewGame();
+    }
+
+    public void skipBtnAction(ClickEvent e){
+        Consts.game.skipStep();
+    }
+
 }

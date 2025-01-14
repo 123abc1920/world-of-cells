@@ -70,6 +70,25 @@ public class Game
         }
     }
 
+    public void skipStep(){
+        monsterStep();
+
+        for (int j=0; j<3; j++){
+            this.cells[toDestroy[j]].setDestroy();
+            toDestroy[j]=random.Next(100);
+            if (this.cells[toDestroy[j]].isAlive){
+                this.cells[toDestroy[j]].setPreDestroy();
+            }
+        }
+
+        Consts.game.stepCount++;
+        if (this.tree<=0&&this.rock<=0&&this.water<=0){
+            Consts.title.text="Вы победили!";
+            Consts.message.text="Вы собрали необходимые ресурсы!";
+            this.endGameDialog.SetActive(true);
+        }
+    }
+
     public void monsterStep(){
         int[] availableCells=getAvailableCells(Consts.game.redEnemy.cell, Consts.game.redEnemy.a);
         int index=availableCells[this.random.Next(availableCells.Length)];
