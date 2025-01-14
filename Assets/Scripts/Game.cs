@@ -40,7 +40,7 @@ public class Game
             if (Array.IndexOf(getAvailableCells(player.cell, player.a), i)!=-1){
                 if (cells[i].pos.x-Consts.width/2<=start.x&&start.x<cells[i].pos.x+Consts.width/2){
                     if (cells[i].pos.y+Consts.width/2>=start.y&&start.y>cells[i].pos.y-Consts.width/2){
-                        if (cells[i].isAlive){
+                        if (cells[i].isAlive||cells[i].isBridge){
                             player.cell=i;
                             player.newPos(cells[i].pos.x, cells[i].pos.y);
                             Consts.game.cells[i].getResource();
@@ -65,6 +65,23 @@ public class Game
                             
                             return;
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    public void build(Vector2 start){
+        for (int i=0; i<cells.Length; i++){
+            if (cells[i].pos.x-Consts.width/2<=start.x&&start.x<cells[i].pos.x+Consts.width/2){
+                if (cells[i].pos.y+Consts.width/2>=start.y&&start.y>cells[i].pos.y-Consts.width/2){
+                    if (Consts.buildBridge&&!cells[i].isAlive){
+                        this.cells[i].setBridge();
+                        return;
+                    }
+                    if (Consts.buildHut&&(cells[i].isAlive||cells[i].isBridge)){
+                        this.cells[i].setHut();
+                        return;
                     }
                 }
             }
@@ -120,11 +137,11 @@ public class Game
         int[] availableCells=getAvailableCells(Consts.game.redEnemy.cell, Consts.game.redEnemy.a);
         int index=availableCells[this.random.Next(availableCells.Length)];
         for (int i=0; i<availableCells.Length; i++){
-            if (Consts.game.player.cell==availableCells[i]){
+            if (Consts.game.player.cell==availableCells[i]&&!cells[Consts.game.player.cell].isHut){
                 index=Consts.game.player.cell;
             }
         }
-        if (cells[index].isAlive){
+        if (cells[index].isAlive||cells[index].isBridge){
             Cell newCell=Consts.game.cells[index];
             Consts.game.redEnemy.newPos(newCell.pos.x, newCell.pos.y);
             Consts.game.redEnemy.cell=index;
@@ -133,14 +150,14 @@ public class Game
         availableCells=getAvailableCells(Consts.game.blueEnemy.cell, Consts.game.blueEnemy.a);
         index=availableCells[this.random.Next(availableCells.Length)];
         for (int i=0; i<availableCells.Length; i++){
-            if (Consts.game.player.cell==availableCells[i]){
+            if (Consts.game.player.cell==availableCells[i]&&!cells[Consts.game.player.cell].isHut){
                 index=Consts.game.player.cell;
                 this.tree+=10;
                 this.water+=10;
                 this.rock+=10;
             }
         }
-        if (cells[index].isAlive){
+        if (cells[index].isAlive||cells[index].isBridge){
             Cell newCell=Consts.game.cells[index];
             Consts.game.blueEnemy.newPos(newCell.pos.x, newCell.pos.y);
             Consts.game.blueEnemy.cell=index;
@@ -148,7 +165,7 @@ public class Game
 
         availableCells=getAvailableCells(Consts.game.fluidEnemy.cell, Consts.game.fluidEnemy.a);
         index=availableCells[this.random.Next(availableCells.Length)];
-        if (cells[index].isAlive){
+        if (cells[index].isAlive||cells[index].isBridge){
             Cell newCell=Consts.game.cells[index];
             Consts.game.fluidEnemy.newPos(newCell.pos.x, newCell.pos.y);
             Consts.game.fluidEnemy.cell=index;

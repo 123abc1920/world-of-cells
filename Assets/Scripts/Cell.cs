@@ -27,6 +27,9 @@ public class Cell : MonoBehaviour
         }else if (this.type==CellTypes.BRIDGE){
             newColor=Consts.bridgeColor;
         }
+        if (this.resourceCount==0){
+            newColor=Consts.emptyColor;
+        }
         GetComponent<SpriteRenderer>().color=newColor;
     }
 
@@ -51,12 +54,33 @@ public class Cell : MonoBehaviour
         this.isAlive=false;
     }
 
+    public void setBridge(){
+        if (this.isHut){
+            return;
+        }
+        GetComponent<SpriteRenderer>().color=Consts.bridgeColor;
+        Consts.game.tree+=10;
+        Consts.game.water+=10;
+        Consts.game.rock+=10;
+        this.isBridge=true;
+        Consts.buildBridge=false;
+    }
+
+    public void setHut(){
+        GetComponent<SpriteRenderer>().color=Consts.hutColor;
+        Consts.game.tree+=10;
+        Consts.game.water+=10;
+        Consts.game.rock+=10;
+        this.isHut=true;
+        Consts.buildHut=false;
+    }
+
     public void getResource(){
+        GetComponent<SpriteRenderer>().color=Consts.emptyColor;
+        Consts.game.texts[id].updateText(0);
         if (this.resourceCount==0){
             return;
         }
-        GetComponent<SpriteRenderer>().color=Consts.emptyColor;
-        Consts.game.texts[id].updateText(0);
         if (this.type==CellTypes.TREE){
             Consts.game.tree-=this.resourceCount;
             this.resourceCount=0;

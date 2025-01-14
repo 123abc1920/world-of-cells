@@ -14,7 +14,8 @@ public class UIScripts : MonoBehaviour
 
     private Button startBtn;
     private Button skipBtn;
-    private Button buildBtn;
+    private Button bridgeBtn;
+    private Button hutBtn;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,12 @@ public class UIScripts : MonoBehaviour
 
         skipBtn = root.Q<Button>("skipBtn");
         skipBtn.RegisterCallback<ClickEvent>(skipBtnAction);
+
+        bridgeBtn=root.Q<Button>("bridgeBtn");
+        bridgeBtn.RegisterCallback<ClickEvent>(bridgeBtnAction);
+
+        hutBtn=root.Q<Button>("hutBtn");
+        hutBtn.RegisterCallback<ClickEvent>(hutBtnAction);
     }
 
     // Update is called once per frame
@@ -49,6 +56,14 @@ public class UIScripts : MonoBehaviour
 
     public void skipBtnAction(ClickEvent e){
         Consts.game.skipStep();
+    }
+
+    public void bridgeBtnAction(ClickEvent e){
+        Consts.buildBridge=!Consts.buildBridge;
+    }
+
+    public void hutBtnAction(ClickEvent e){
+        Consts.buildHut=!Consts.buildHut;
     }
 
 }

@@ -70,10 +70,11 @@ public class CameraC : MonoBehaviour
             }
             if (touch.phase == TouchPhase.Stationary)
             {
-                if (Consts.gameEnd){
-                    
+                if (Consts.buildBridge||Consts.buildHut){
+                    Consts.game.build(start);
+                }else{
+                    Consts.game.gameStep(start);
                 }
-                Consts.game.gameStep(start);
             }
         }
     }
