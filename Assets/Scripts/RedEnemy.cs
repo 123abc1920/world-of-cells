@@ -22,4 +22,5 @@ public class RedEnemy : MonoBehaviour
     public void newPos(float x, float y){
         transform.position = new Vector3(x, y, 1);
     }
+
 }

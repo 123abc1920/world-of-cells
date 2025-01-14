@@ -42,7 +42,6 @@ public class Game
                     if (cells[i].pos.y+Consts.width/2>=start.y&&start.y>cells[i].pos.y-Consts.width/2){
                         if (cells[i].isAlive){
                             player.cell=i;
-
                             player.newPos(cells[i].pos.x, cells[i].pos.y);
                             Consts.game.cells[i].getResource();
 
@@ -57,11 +56,13 @@ public class Game
                             }
 
                             Consts.game.stepCount++;
-                            if (this.tree<=0&&this.rock<=0&&this.water<=0){
-                                Consts.title.text="Вы победили!";
-                                Consts.message.text="Вы собрали необходимые ресурсы!";
-                                this.endGameDialog.SetActive(true);
+
+                            if (stepCount%5==0){
+                                fluidEnemy.type=Consts.types[random.Next(Consts.types.Length)];
                             }
+
+                            checkResult();
+                            
                             return;
                         }
                     }
@@ -82,16 +83,47 @@ public class Game
         }
 
         Consts.game.stepCount++;
+
+        if (stepCount%5==0){
+            fluidEnemy.type=Consts.types[random.Next(Consts.types.Length)];
+        }
+
+        checkResult();
+                            
+        return;
+    }
+
+    private void checkResult(){
+        if (redEnemy.cell==player.cell){
+            Consts.title.text="Вы проиграли.";
+            Consts.message.text="На вас напал красный монстр.";
+            this.endGameDialog.SetActive(true);
+            return;
+        }
+
+        if (!this.cells[player.cell].isAlive&&!this.cells[player.cell].isBridge&&!this.cells[player.cell].isHut){
+            Consts.title.text="Вы проиграли.";
+            Consts.message.text="Вас унесло в космос.";
+            this.endGameDialog.SetActive(true);
+            return;
+        }
+
         if (this.tree<=0&&this.rock<=0&&this.water<=0){
             Consts.title.text="Вы победили!";
             Consts.message.text="Вы собрали необходимые ресурсы!";
             this.endGameDialog.SetActive(true);
+            return;
         }
     }
 
     public void monsterStep(){
         int[] availableCells=getAvailableCells(Consts.game.redEnemy.cell, Consts.game.redEnemy.a);
         int index=availableCells[this.random.Next(availableCells.Length)];
+        for (int i=0; i<availableCells.Length; i++){
+            if (Consts.game.player.cell==availableCells[i]){
+                index=Consts.game.player.cell;
+            }
+        }
         if (cells[index].isAlive){
             Cell newCell=Consts.game.cells[index];
             Consts.game.redEnemy.newPos(newCell.pos.x, newCell.pos.y);
@@ -100,6 +132,14 @@ public class Game
 
         availableCells=getAvailableCells(Consts.game.blueEnemy.cell, Consts.game.blueEnemy.a);
         index=availableCells[this.random.Next(availableCells.Length)];
+        for (int i=0; i<availableCells.Length; i++){
+            if (Consts.game.player.cell==availableCells[i]){
+                index=Consts.game.player.cell;
+                this.tree+=10;
+                this.water+=10;
+                this.rock+=10;
+            }
+        }
         if (cells[index].isAlive){
             Cell newCell=Consts.game.cells[index];
             Consts.game.blueEnemy.newPos(newCell.pos.x, newCell.pos.y);
@@ -112,6 +152,9 @@ public class Game
             Cell newCell=Consts.game.cells[index];
             Consts.game.fluidEnemy.newPos(newCell.pos.x, newCell.pos.y);
             Consts.game.fluidEnemy.cell=index;
+        }
+        if (this.cells[Consts.game.fluidEnemy.cell].type==fluidEnemy.type){
+            this.cells[Consts.game.fluidEnemy.cell].resourceCount/=2;
         }
     }
 
@@ -145,19 +188,29 @@ public class Game
         player.newPos(target.pos.x, target.pos.y);
 
         index=random.Next(100);
+        while (index==player.cell){
+            index=random.Next(100);
+        }
         target=cells[index];
         redEnemy.cell=index;
         redEnemy.newPos(target.pos.x, target.pos.y);
 
         index=random.Next(100);
+        while (index==player.cell){
+            index=random.Next(100);
+        }
         target=cells[index];
         blueEnemy.cell=index;
         blueEnemy.newPos(target.pos.x, target.pos.y);
 
         index=random.Next(100);
+        while (index==player.cell){
+            index=random.Next(100);
+        }
         target=cells[index];
         fluidEnemy.cell=index;
         fluidEnemy.newPos(target.pos.x, target.pos.y);
+        fluidEnemy.type=Consts.types[random.Next(Consts.types.Length)];
 
         this.endGameDialog.SetActive(false);
 
