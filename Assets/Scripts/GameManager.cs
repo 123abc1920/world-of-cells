@@ -17,11 +17,9 @@ public class click : MonoBehaviour
     public GameObject canvas;
     public GameObject endGameDialog;
 
-    private int width=(int)Math.Round(Screen.height*0.0125f);
+    private int width=20;
     private int row=10;
     private int col=10;
-
-    private System.Random random=new System.Random();
 
     // Start is called before the first frame update
     void Start()

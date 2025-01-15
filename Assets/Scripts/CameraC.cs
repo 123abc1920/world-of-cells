@@ -48,22 +48,23 @@ public class CameraC : MonoBehaviour
             if (touch.phase == TouchPhase.Moved){
                 finish=Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, Camera.main.nearClipPlane));
                 float fx=-finish.x, sx=start.x, fy=-finish.y, sy=start.y;
-                if (transform.position.x<Screen.width*0.04f&&-finish.x+start.x<0){
+                if (transform.position.x<30&&-finish.x+start.x<0){
                     fx=0;
                     sx=0;
                 }
-                if (transform.position.x>col*width-Screen.width*0.07f&&-finish.x+start.x>0){
+                if (transform.position.x>209-50&&-finish.x+start.x>0){
                     fx=0;
                     sx=0;
                 }
-                if (transform.position.y>-Screen.height*0.025f&&-finish.y+start.y>0){
+                if (transform.position.y>-40&&-finish.y+start.y>0){
                     fy=0;
                     sy=0;
                 }
-                if (transform.position.y<-row*width+Screen.height*0.065f&&-finish.y+start.y<0){
+                if (transform.position.y<-209+104&&-finish.y+start.y<0){
                     fy=0;
                     sy=0;
                 }
+
                 transform.Translate(new Vector3(Mathf.Lerp(fx,sx, 0.5f),Mathf.Lerp(fy,sy, 0.5f), 0), Space.World);
                 start=finish;
                 return;
