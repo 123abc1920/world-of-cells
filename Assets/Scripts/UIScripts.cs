@@ -17,6 +17,8 @@ public class UIScripts : MonoBehaviour
     private Button bridgeBtn;
     private Button hutBtn;
 
+    private Color firstColor=new Color(0.74f, 0.74f, 0.74f, 1), activeColor=new Color(0.5f, 0.63f, 0.81f, 1);
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +41,8 @@ public class UIScripts : MonoBehaviour
 
         hutBtn=root.Q<Button>("hutBtn");
         hutBtn.RegisterCallback<ClickEvent>(hutBtnAction);
+
+        firstColor=hutBtn.style.backgroundColor.value;
     }
 
     // Update is called once per frame
@@ -48,6 +52,18 @@ public class UIScripts : MonoBehaviour
         treeLbl.text = "Tree: "+Math.Max(0, Consts.game.tree);
         rockLbl.text = "Rock: "+Math.Max(0, Consts.game.rock);
         waterLbl.text = "Water: "+Math.Max(0, Consts.game.water);
+
+        if (Consts.buildBridge){
+            bridgeBtn.style.backgroundColor=activeColor;
+        }else{
+            bridgeBtn.style.backgroundColor=firstColor;
+        }
+
+        if (Consts.buildHut){
+            hutBtn.style.backgroundColor=activeColor;
+        }else{
+            hutBtn.style.backgroundColor=firstColor;
+        }
     }
 
     public void startBtnAction(ClickEvent e){
