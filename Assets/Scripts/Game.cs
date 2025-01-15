@@ -14,6 +14,7 @@ public class Game
     public FluidEnemy fluidEnemy;
 
     public GameObject endGameDialog;
+    public GameObject cartDialog;
 
     public int stepCount=0;
     public int tree, rock, water;
@@ -21,13 +22,14 @@ public class Game
     private System.Random random=new System.Random();
     private int[] toDestroy=new int[3];
 
-    public Game(Player p, RedEnemy re, BlueEnemy be, FluidEnemy fe, Cell[] c, CellText[] ct, GameObject endGameDialog){
+    public Game(Player p, RedEnemy re, BlueEnemy be, FluidEnemy fe, Cell[] c, CellText[] ct, GameObject endGameDialog, GameObject cartDialog){
         this.player=p;
         this.redEnemy=re;
         this.blueEnemy=be;
         this.fluidEnemy=fe;
 
         this.endGameDialog=endGameDialog;
+        this.cartDialog=cartDialog;
 
         for (int i=0; i<100; i++){
             this.cells[i]=c[i];
@@ -59,6 +61,7 @@ public class Game
 
                             if (stepCount%5==0){
                                 fluidEnemy.type=Consts.types[random.Next(Consts.types.Length)];
+                                this.cartDialog.SetActive(true);
                             }
 
                             checkResult();
@@ -187,6 +190,11 @@ public class Game
         return new int[] {};
     }
 
+    public void getEvent(){
+        Debug.Log("gotted");
+        this.cartDialog.SetActive(false);
+    }
+
     public void renewGame(){
         for (int i=0; i<100; i++){
             this.cells[i].restartCell();
@@ -230,6 +238,7 @@ public class Game
         fluidEnemy.type=Consts.types[random.Next(Consts.types.Length)];
 
         this.endGameDialog.SetActive(false);
+        this.cartDialog.SetActive(false);
 
         for (int j=0; j<3; j++)
         {

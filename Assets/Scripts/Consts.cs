@@ -23,6 +23,10 @@ public class Consts{
     public static TMP_Text title;
     public static TMP_Text message;
 
+    public static Image eventImage;
+    public static TMP_Text eventTitle;
+    public static TMP_Text eventMessage;
+
     public static bool buildHut=false;
     public static bool buildBridge=false;
 

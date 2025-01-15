@@ -16,6 +16,7 @@ public class click : MonoBehaviour
 
     public GameObject canvas;
     public GameObject endGameDialog;
+    public GameObject cartDialog;
 
     private int width=20;
     private int row=10;
@@ -57,7 +58,7 @@ public class click : MonoBehaviour
             texts[i]=t;
         }
         
-        Consts.game=new Game(p, rEnemy, bEnemy, fEnemy, cells, texts, endGameDialog);
+        Consts.game=new Game(p, rEnemy, bEnemy, fEnemy, cells, texts, endGameDialog, cartDialog);
         Consts.game.renewGame();
     }
 
