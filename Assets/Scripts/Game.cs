@@ -16,6 +16,8 @@ public class Game
     public GameObject endGameDialog;
     public GameObject cartDialog;
 
+    public Event currentEvent;
+
     public int stepCount=0;
     public int tree, rock, water;
 
@@ -47,6 +49,8 @@ public class Game
                             player.newPos(cells[i].pos.x, cells[i].pos.y);
                             Consts.game.cells[i].getResource();
 
+                            Consts.game.stepCount++;
+
                             monsterStep();
 
                             for (int j=0; j<3; j++){
@@ -55,13 +59,6 @@ public class Game
                                 if (this.cells[toDestroy[j]].isAlive){
                                     this.cells[toDestroy[j]].setPreDestroy();
                                 }
-                            }
-
-                            Consts.game.stepCount++;
-
-                            if (stepCount%5==0){
-                                fluidEnemy.type=Consts.types[random.Next(Consts.types.Length)];
-                                this.cartDialog.SetActive(true);
                             }
 
                             checkResult();
@@ -92,6 +89,8 @@ public class Game
     }
 
     public void skipStep(){
+        Consts.game.stepCount++;
+
         monsterStep();
 
         for (int j=0; j<3; j++){
@@ -100,12 +99,6 @@ public class Game
             if (this.cells[toDestroy[j]].isAlive){
                 this.cells[toDestroy[j]].setPreDestroy();
             }
-        }
-
-        Consts.game.stepCount++;
-
-        if (stepCount%5==0){
-            fluidEnemy.type=Consts.types[random.Next(Consts.types.Length)];
         }
 
         checkResult();
@@ -176,6 +169,13 @@ public class Game
         if (this.cells[Consts.game.fluidEnemy.cell].type==fluidEnemy.type){
             this.cells[Consts.game.fluidEnemy.cell].resourceCount/=2;
         }
+
+        if (stepCount%5==0){
+            fluidEnemy.type=Consts.types[random.Next(Consts.types.Length)];
+            currentEvent=EventManager.events[EventManager.variances[random.Next(EventManager.variances.Length)]];
+            Consts.eventMessage.text=currentEvent.message;
+            this.cartDialog.SetActive(true);
+        }
     }
 
     public int[] getAvailableCells(int cell, int[] a) {
@@ -191,7 +191,7 @@ public class Game
     }
 
     public void getEvent(){
-        Debug.Log("gotted");
+        EventManager.eventAction(this.currentEvent.id);
         this.cartDialog.SetActive(false);
     }
 
