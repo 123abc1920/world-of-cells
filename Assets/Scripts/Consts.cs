@@ -33,6 +33,7 @@ public class Consts{
 
     public static bool MainMenuShown;
     public static bool SettingsShown;
+    public static bool CardsShown;
 
     public static Game game;
 

@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/AppsStyles/panel.uss?fileID=7433441132597879392&amp;guid=eecfca3464518614988a6337f69b8171&amp;type=3#panel" />
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:GroupBox name="GroupBox" style="width: 100%; height: 100%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px; align-self: center; justify-content: flex-start;">
+            <ui:Label tabindex="-1" text="Собранные карты" parse-escape-sequences="true" display-tooltip-when-elided="true" name="cardsLbl" style="-unity-font-definition: initial; -unity-font: url(&quot;project://database/Assets/Fonts/LCD5x8H/LCD5x8HRU.ttf?fileID=12800000&amp;guid=3267f06d4839a334295c8cd2f5324ab7&amp;type=3#LCD5x8HRU&quot;); font-size: 14%; color: rgb(255, 255, 255); -unity-text-align: upper-center; white-space: normal;" />
+            <ui:GroupBox style="width: auto; height: auto;">
+                <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1">
+                    <ui:ListView name="list" />
+                </ui:ScrollView>
+            </ui:GroupBox>
+            <ui:Button text="Закрыть" parse-escape-sequences="true" display-tooltip-when-elided="true" name="closeCards" style="width: auto; height: auto; justify-content: flex-start; bottom: auto; top: auto; -unity-font: url(&quot;project://database/Assets/Fonts/LCD5x8H/LCD5x8HRU.ttf?fileID=12800000&amp;guid=3267f06d4839a334295c8cd2f5324ab7&amp;type=3#LCD5x8HRU&quot;); -unity-font-definition: initial; font-size: 14%; flex-direction: column; flex-wrap: nowrap;" />
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>

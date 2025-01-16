@@ -28,6 +28,9 @@ public class MenuScript : MonoBehaviour
         settingsBtn = root.Q<Button>("settingsBtn");
         settingsBtn.RegisterCallback<ClickEvent>(settingsBtnAction);
 
+        cardsBtn = root.Q<Button>("cardsBtn");
+        cardsBtn.RegisterCallback<ClickEvent>(openCardsBtnAction);
+
         Consts.MainMenuShown=true;
     }
 
@@ -48,5 +51,10 @@ public class MenuScript : MonoBehaviour
     public void settingsBtnAction(ClickEvent e){
         Consts.MainMenuShown=false;
         Consts.SettingsShown=true;
+    }
+
+    public void openCardsBtnAction(ClickEvent e){
+        Consts.MainMenuShown=false;
+        Consts.CardsShown=true;
     }
 }
