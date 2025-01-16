@@ -16,7 +16,7 @@ public class UIScripts : MonoBehaviour
     private Button skipBtn;
     private Button bridgeBtn;
     private Button hutBtn;
-    private Button settingsBtn;
+    private Button menuBtn;
 
     private Color firstColor=new Color(0.74f, 0.74f, 0.74f, 1), activeColor=new Color(0.5f, 0.63f, 0.81f, 1);
 
@@ -43,8 +43,8 @@ public class UIScripts : MonoBehaviour
         hutBtn=root.Q<Button>("hutBtn");
         hutBtn.RegisterCallback<ClickEvent>(hutBtnAction);
 
-        settingsBtn=root.Q<Button>("settingsBtn");
-        settingsBtn.RegisterCallback<ClickEvent>(settingsBtnAction);
+        menuBtn=root.Q<Button>("menuBtn");
+        menuBtn.RegisterCallback<ClickEvent>(menuBtnAction);
 
         firstColor=hutBtn.style.backgroundColor.value;
     }
@@ -90,8 +90,8 @@ public class UIScripts : MonoBehaviour
         }
     }
 
-    public void settingsBtnAction(ClickEvent e){
-        Debug.Log("jjj");
+    public void menuBtnAction(ClickEvent e){
+        Scenes.OpenMenu();
     }
 
 }
