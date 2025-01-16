@@ -30,8 +30,6 @@ public class Consts{
     public static bool buildHut=false;
     public static bool buildBridge=false;
 
-    public static bool isDialog=false;
-
     public static Game game;
 
 }

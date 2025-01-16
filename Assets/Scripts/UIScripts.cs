@@ -16,6 +16,7 @@ public class UIScripts : MonoBehaviour
     private Button skipBtn;
     private Button bridgeBtn;
     private Button hutBtn;
+    private Button settingsBtn;
 
     private Color firstColor=new Color(0.74f, 0.74f, 0.74f, 1), activeColor=new Color(0.5f, 0.63f, 0.81f, 1);
 
@@ -41,6 +42,9 @@ public class UIScripts : MonoBehaviour
 
         hutBtn=root.Q<Button>("hutBtn");
         hutBtn.RegisterCallback<ClickEvent>(hutBtnAction);
+
+        settingsBtn=root.Q<Button>("settingsBtn");
+        settingsBtn.RegisterCallback<ClickEvent>(settingsBtnAction);
 
         firstColor=hutBtn.style.backgroundColor.value;
     }
@@ -75,11 +79,19 @@ public class UIScripts : MonoBehaviour
     }
 
     public void bridgeBtnAction(ClickEvent e){
-        Consts.buildBridge=!Consts.buildBridge;
+        if (!Consts.buildHut){
+            Consts.buildBridge=!Consts.buildBridge;
+        }
     }
 
     public void hutBtnAction(ClickEvent e){
-        Consts.buildHut=!Consts.buildHut;
+        if (!Consts.buildBridge){
+            Consts.buildHut=!Consts.buildHut;
+        }
+    }
+
+    public void settingsBtnAction(ClickEvent e){
+        Debug.Log("jjj");
     }
 
 }

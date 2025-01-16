@@ -127,6 +127,14 @@ public class Game
             this.endGameDialog.SetActive(true);
             return;
         }
+
+        if (random.Next(10)==5){
+            currentEvent=EventManager.events[EventManager.variances[random.Next(EventManager.variances.Length)]];
+            Consts.eventMessage.text=currentEvent.message;
+            Consts.eventMessage.ForceMeshUpdate();
+            this.cartDialog.SetActive(true);
+            return;
+        }
     }
 
     public void monsterStep(){
@@ -172,10 +180,6 @@ public class Game
 
         if (stepCount%5==0){
             fluidEnemy.type=Consts.types[random.Next(Consts.types.Length)];
-            currentEvent=EventManager.events[EventManager.variances[random.Next(EventManager.variances.Length)]];
-            Consts.eventMessage.text=currentEvent.message;
-            Consts.eventMessage.ForceMeshUpdate();
-            this.cartDialog.SetActive(true);
         }
     }
 
