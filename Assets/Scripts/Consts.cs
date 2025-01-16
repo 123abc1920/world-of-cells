@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.UIElements;
 
 public class Consts{
 
@@ -19,16 +20,19 @@ public class Consts{
     public static int width=(int)Math.Round(Screen.height*0.0125f);
     public static int ONE_ROW = 10;
 
-    public static Image Image;
+    public static UnityEngine.UI.Image Image;
     public static TMP_Text title;
     public static TMP_Text message;
 
-    public static Image eventImage;
+    public static UnityEngine.UI.Image eventImage;
     public static TMP_Text eventTitle;
     public static TMP_Text eventMessage;
 
     public static bool buildHut=false;
     public static bool buildBridge=false;
+
+    public static bool MainMenuShown;
+    public static bool SettingsShown;
 
     public static Game game;
 

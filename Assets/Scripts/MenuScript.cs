@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using System;
 
 public class MenuScript : MonoBehaviour
 {
@@ -13,25 +12,41 @@ public class MenuScript : MonoBehaviour
     private Button cardsBtn;
     private Button storyBtn;
 
+    private VisualElement root;
+
     // Start is called before the first frame update
     void Start()
     {
         var uiDocument = GetComponent<UIDocument>();
-        var root = uiDocument.rootVisualElement;
+        root = uiDocument.rootVisualElement;
 
         gameTitle = root.Q<Label>("gameTitle");
 
         playBtn = root.Q<Button>("playBtn");
         playBtn.RegisterCallback<ClickEvent>(playBtnAction);
+
+        settingsBtn = root.Q<Button>("settingsBtn");
+        settingsBtn.RegisterCallback<ClickEvent>(settingsBtnAction);
+
+        Consts.MainMenuShown=true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Consts.MainMenuShown){
+            root.style.display = DisplayStyle.Flex;
+        }else{
+            root.style.display = DisplayStyle.None;
+        }
     }
 
     public void playBtnAction(ClickEvent e){
         Scenes.OpenGame();
+    }
+
+    public void settingsBtnAction(ClickEvent e){
+        Consts.MainMenuShown=false;
+        Consts.SettingsShown=true;
     }
 }
