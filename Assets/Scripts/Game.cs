@@ -174,6 +174,7 @@ public class Game
             fluidEnemy.type=Consts.types[random.Next(Consts.types.Length)];
             currentEvent=EventManager.events[EventManager.variances[random.Next(EventManager.variances.Length)]];
             Consts.eventMessage.text=currentEvent.message;
+            Consts.eventMessage.ForceMeshUpdate();
             this.cartDialog.SetActive(true);
         }
     }
