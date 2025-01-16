@@ -38,43 +38,45 @@ public class CameraC : MonoBehaviour
         float padLeft=Screen.width*0.1f;
         float padRight=padLeft;
 
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began)
+        if (!Consts.game.endGameDialog.activeSelf&&!Consts.game.cartDialog.activeSelf){
+            if (Input.touchCount > 0)
             {
-                start = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, Camera.main.nearClipPlane));
-            }
-            if (touch.phase == TouchPhase.Moved){
-                finish=Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, Camera.main.nearClipPlane));
-                float fx=-finish.x, sx=start.x, fy=-finish.y, sy=start.y;
-                if (transform.position.x<30&&-finish.x+start.x<0){
-                    fx=0;
-                    sx=0;
+                Touch touch = Input.GetTouch(0);
+                if (touch.phase == TouchPhase.Began)
+                {
+                    start = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, Camera.main.nearClipPlane));
                 }
-                if (transform.position.x>209-50&&-finish.x+start.x>0){
-                    fx=0;
-                    sx=0;
-                }
-                if (transform.position.y>-40&&-finish.y+start.y>0){
-                    fy=0;
-                    sy=0;
-                }
-                if (transform.position.y<-209+104&&-finish.y+start.y<0){
-                    fy=0;
-                    sy=0;
-                }
+                if (touch.phase == TouchPhase.Moved){
+                    finish=Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, Camera.main.nearClipPlane));
+                    float fx=-finish.x, sx=start.x, fy=-finish.y, sy=start.y;
+                    if (transform.position.x<30&&-finish.x+start.x<0){
+                        fx=0;
+                        sx=0;
+                    }
+                    if (transform.position.x>209-50&&-finish.x+start.x>0){
+                        fx=0;
+                        sx=0;
+                    }
+                    if (transform.position.y>-40&&-finish.y+start.y>0){
+                        fy=0;
+                        sy=0;
+                    }
+                    if (transform.position.y<-209+104&&-finish.y+start.y<0){
+                        fy=0;
+                        sy=0;
+                    }
 
-                transform.Translate(new Vector3(Mathf.Lerp(fx,sx, 0.5f),Mathf.Lerp(fy,sy, 0.5f), 0), Space.World);
-                start=finish;
-                return;
-            }
-            if (touch.phase == TouchPhase.Stationary)
-            {
-                if (Consts.buildBridge||Consts.buildHut){
-                    Consts.game.build(start);
-                }else{
-                    Consts.game.gameStep(start);
+                    transform.Translate(new Vector3(Mathf.Lerp(fx,sx, 0.5f),Mathf.Lerp(fy,sy, 0.5f), 0), Space.World);
+                    start=finish;
+                    return;
+                }
+                if (touch.phase == TouchPhase.Stationary)
+                {
+                    if (Consts.buildBridge||Consts.buildHut){
+                        Consts.game.build(start);
+                    }else{
+                        Consts.game.gameStep(start);
+                    }
                 }
             }
         }
