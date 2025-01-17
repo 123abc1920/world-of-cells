@@ -38,7 +38,7 @@ public class CameraC : MonoBehaviour
         float padLeft=Screen.width*0.1f;
         float padRight=padLeft;
 
-        if (!Consts.game.endGameDialog.activeSelf&&!Consts.game.cartDialog.activeSelf){
+        if (!Consts.EndShown&&!Consts.OneCardShown){
             if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0);

@@ -35,6 +35,12 @@ public class Consts{
     public static bool SettingsShown;
     public static bool CardsShown;
 
+    public static bool OneCardShown;
+    public static string eventText;
+    public static bool EndShown;
+    public static string titleText;
+    public static string textText;
+
     public static Game game;
 
 }

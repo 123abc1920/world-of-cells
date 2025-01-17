@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UIElements;
 
 public class Game
 {
@@ -13,9 +14,6 @@ public class Game
     public BlueEnemy blueEnemy;
     public FluidEnemy fluidEnemy;
 
-    public GameObject endGameDialog;
-    public GameObject cartDialog;
-
     public Event currentEvent;
 
     public int stepCount=0;
@@ -24,14 +22,11 @@ public class Game
     private System.Random random=new System.Random();
     private int[] toDestroy=new int[3];
 
-    public Game(Player p, RedEnemy re, BlueEnemy be, FluidEnemy fe, Cell[] c, CellText[] ct, GameObject endGameDialog, GameObject cartDialog){
+    public Game(Player p, RedEnemy re, BlueEnemy be, FluidEnemy fe, Cell[] c, CellText[] ct){
         this.player=p;
         this.redEnemy=re;
         this.blueEnemy=be;
         this.fluidEnemy=fe;
-
-        this.endGameDialog=endGameDialog;
-        this.cartDialog=cartDialog;
 
         for (int i=0; i<100; i++){
             this.cells[i]=c[i];
@@ -108,31 +103,30 @@ public class Game
 
     private void checkResult(){
         if (redEnemy.cell==player.cell){
-            Consts.title.text="Вы проиграли.";
-            Consts.message.text="На вас напал красный монстр.";
-            this.endGameDialog.SetActive(true);
+            Consts.titleText="Вы проиграли.";
+            Consts.textText="На вас напал красный монстр.";
+            Consts.EndShown=true;
             return;
         }
 
         if (!this.cells[player.cell].isAlive&&!this.cells[player.cell].isBridge&&!this.cells[player.cell].isHut){
-            Consts.title.text="Вы проиграли.";
-            Consts.message.text="Вас унесло в космос.";
-            this.endGameDialog.SetActive(true);
+            Consts.titleText="Вы проиграли.";
+            Consts.textText="Вас унесло в космос.";
+            Consts.EndShown=true;
             return;
         }
 
         if (this.tree<=0&&this.rock<=0&&this.water<=0){
-            Consts.title.text="Вы победили!";
-            Consts.message.text="Вы собрали необходимые ресурсы!";
-            this.endGameDialog.SetActive(true);
+            Consts.titleText="Вы победили!";
+            Consts.textText="Вы собрали необходимые ресурсы!";
+            Consts.EndShown=true;
             return;
         }
 
         if (random.Next(10)==5){
             currentEvent=EventManager.events[EventManager.variances[random.Next(EventManager.variances.Length)]];
-            Consts.eventMessage.text=currentEvent.message;
-            Consts.eventMessage.ForceMeshUpdate();
-            this.cartDialog.SetActive(true);
+            Consts.OneCardShown=true;
+            Consts.eventText=currentEvent.message;
             return;
         }
     }
@@ -197,7 +191,6 @@ public class Game
 
     public void getEvent(){
         EventManager.eventAction(this.currentEvent.id);
-        this.cartDialog.SetActive(false);
     }
 
     public void renewGame(){
@@ -241,9 +234,6 @@ public class Game
         fluidEnemy.cell=index;
         fluidEnemy.newPos(target.pos.x, target.pos.y);
         fluidEnemy.type=Consts.types[random.Next(Consts.types.Length)];
-
-        this.endGameDialog.SetActive(false);
-        this.cartDialog.SetActive(false);
 
         for (int j=0; j<3; j++)
         {
