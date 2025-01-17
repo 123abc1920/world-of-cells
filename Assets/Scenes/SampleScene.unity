@@ -237,9 +237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40324376383e4e3479ff73045832b6f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 2103023428}
-  title: {fileID: 2130617422}
-  text: {fileID: 660382567}
 --- !u!1 &215433090
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,9 +625,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcba25784e610e747858acc729956929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Image: {fileID: 1504861095}
-  title: {fileID: 349653648}
-  message: {fileID: 511427903}
 --- !u!114 &269182854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1115,8 +1109,7 @@ MonoBehaviour:
   blueEnemy: {fileID: 6743525731041344917, guid: be0024d179bb5c44a8dfb24013012c0e, type: 3}
   fluidEnemy: {fileID: -5868111930159657639, guid: ca094df5b39361647aec61ff02e06286, type: 3}
   canvas: {fileID: 0}
-  endGameDialog: {fileID: 269182852}
-  CardDialog: {fileID: 479767861}
+  camera: {fileID: 519420031}
 --- !u!4 &509196249
 Transform:
   m_ObjectHideFlags: 0

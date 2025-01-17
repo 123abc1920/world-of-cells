@@ -18,8 +18,7 @@ public class CameraC : MonoBehaviour
     public Vector2 finish;
     private float delta=0.5f;
     void Update()
-    { 
-
+    {
         if (!Consts.EndShown&&!Consts.OneCardShown){
             if (Input.touchCount > 0)
             {

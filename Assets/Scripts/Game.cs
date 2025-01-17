@@ -240,5 +240,7 @@ public class Game
             toDestroy[j]=random.Next(100);
             this.cells[toDestroy[j]].setPreDestroy();
         }
+
+        
     }
 }
