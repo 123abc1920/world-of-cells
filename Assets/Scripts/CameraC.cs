@@ -5,12 +5,7 @@ using System;
 
 public class CameraC : MonoBehaviour
 {
-    private static Vector2 vector;
     private static Vector3 pos;
-
-    private int width=(int)Math.Round(Screen.height*0.0125f);
-    private int row=10;
-    private int col=10;
 
     // Start is called before the first frame update
     void Start()
@@ -18,25 +13,12 @@ public class CameraC : MonoBehaviour
         pos=transform.position;
     }
 
-    public static void translate(Vector2 v){
-        vector=v;
-    }
-
-    public static Vector3 getPos(){
-        return pos;
-    }
-
     // Update is called once per frame
     public Vector2 start;
     public Vector2 finish;
+    private float delta=0.5f;
     void Update()
     { 
-        Resolution[] resolutions = Screen.resolutions;
-        float padTop=Screen.height*0.25f;
-        float padBottom=Screen.height*0.1f;
-
-        float padLeft=Screen.width*0.1f;
-        float padRight=padLeft;
 
         if (!Consts.EndShown&&!Consts.OneCardShown){
             if (Input.touchCount > 0)
@@ -72,10 +54,13 @@ public class CameraC : MonoBehaviour
                 }
                 if (touch.phase == TouchPhase.Stationary)
                 {
-                    if (Consts.buildBridge||Consts.buildHut){
-                        Consts.game.build(start);
-                    }else{
-                        Consts.game.gameStep(start);
+                    if (Time.time-Consts.lastClick>=delta){
+                        if (Consts.buildBridge||Consts.buildHut){
+                            Consts.game.build(start);
+                        }else{
+                            Consts.game.gameStep(start);
+                        }
+                        Consts.lastClick=Time.time;
                     }
                 }
             }

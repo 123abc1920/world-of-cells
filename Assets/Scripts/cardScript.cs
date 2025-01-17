@@ -38,5 +38,8 @@ public class cardScript : MonoBehaviour
 
     public void closeCardBtnAction(ClickEvent e){
         Consts.OneCardShown=false;
+        if (Scenes.getActiveScene().Equals("SampleScene")){
+            Consts.game.getEvent();
+        }
     }
 }

@@ -14,4 +14,8 @@ public class Scenes : MonoBehaviour
     {
         SceneManager.LoadScene("SampleScene");
     }
+
+    public static string getActiveScene(){
+        return SceneManager.GetActiveScene().name;
+    }
 }

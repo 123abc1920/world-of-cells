@@ -20,14 +20,6 @@ public class Consts{
     public static int width=(int)Math.Round(Screen.height*0.0125f);
     public static int ONE_ROW = 10;
 
-    public static UnityEngine.UI.Image Image;
-    public static TMP_Text title;
-    public static TMP_Text message;
-
-    public static UnityEngine.UI.Image eventImage;
-    public static TMP_Text eventTitle;
-    public static TMP_Text eventMessage;
-
     public static bool buildHut=false;
     public static bool buildBridge=false;
 
@@ -40,6 +32,8 @@ public class Consts{
     public static bool EndShown;
     public static string titleText;
     public static string textText;
+
+    public static float lastClick=0;
 
     public static Game game;
 

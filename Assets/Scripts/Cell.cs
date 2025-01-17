@@ -17,20 +17,7 @@ public class Cell : MonoBehaviour
 
     void Start()
     {
-        Color newColor=Color.green;
-        if (this.type==CellTypes.ROCK){
-            newColor=Consts.rockColor;
-        }else if (this.type==CellTypes.WATER){
-            newColor=Consts.waterColor;
-        }else if (this.type==CellTypes.TREE){
-            newColor=Consts.treeColor;
-        }else if (this.type==CellTypes.BRIDGE){
-            newColor=Consts.bridgeColor;
-        }
-        if (this.resourceCount==0){
-            newColor=Consts.emptyColor;
-        }
-        GetComponent<SpriteRenderer>().color=newColor;
+
     }
 
     void Update()
