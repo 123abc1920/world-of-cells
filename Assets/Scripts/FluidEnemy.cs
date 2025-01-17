@@ -7,6 +7,7 @@ public class FluidEnemy : MonoBehaviour
     public int cell;
     public int[] a={1, Consts.ONE_ROW};
     public CellTypes type;
+    public bool isAlive=true;
 
     // Start is called before the first frame update
     void Start()

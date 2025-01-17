@@ -46,6 +46,9 @@ public class Cell : MonoBehaviour
             return;
         }
         GetComponent<SpriteRenderer>().color=Consts.bridgeColor;
+        if (!this.isAlive){
+            GetComponent<SpriteRenderer>().color=Consts.destroyColor;
+        }
         Consts.game.tree+=10;
         Consts.game.water+=10;
         Consts.game.rock+=10;

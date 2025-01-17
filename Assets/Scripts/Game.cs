@@ -47,15 +47,7 @@ public class Game
                             Consts.game.stepCount++;
 
                             monsterStep();
-
-                            for (int j=0; j<3; j++){
-                                this.cells[toDestroy[j]].setDestroy();
-                                toDestroy[j]=random.Next(100);
-                                if (this.cells[toDestroy[j]].isAlive){
-                                    this.cells[toDestroy[j]].setPreDestroy();
-                                }
-                            }
-
+                            desroyCells();
                             checkResult();
                             
                             return;
@@ -87,7 +79,13 @@ public class Game
         Consts.game.stepCount++;
 
         monsterStep();
+        desroyCells();
+        checkResult();
+                            
+        return;
+    }
 
+    public void desroyCells(){
         for (int j=0; j<3; j++){
             this.cells[toDestroy[j]].setDestroy();
             toDestroy[j]=random.Next(100);
@@ -95,10 +93,6 @@ public class Game
                 this.cells[toDestroy[j]].setPreDestroy();
             }
         }
-
-        checkResult();
-                            
-        return;
     }
 
     private void checkResult(){
@@ -132,48 +126,63 @@ public class Game
     }
 
     public void monsterStep(){
-        int[] availableCells=getAvailableCells(Consts.game.redEnemy.cell, Consts.game.redEnemy.a);
-        int index=availableCells[this.random.Next(availableCells.Length)];
-        for (int i=0; i<availableCells.Length; i++){
-            if (Consts.game.player.cell==availableCells[i]&&!cells[Consts.game.player.cell].isHut){
-                index=Consts.game.player.cell;
+        if (!cells[redEnemy.cell].isAlive&&!cells[redEnemy.cell].isBridge){
+            redEnemy.isAlive=false;
+        }
+        if (!cells[blueEnemy.cell].isAlive&&!cells[blueEnemy.cell].isBridge){
+            blueEnemy.isAlive=false;
+        }
+        if (!cells[fluidEnemy.cell].isAlive&&!cells[fluidEnemy.cell].isBridge){
+            fluidEnemy.isAlive=false;
+        }
+
+        if (redEnemy.isAlive){
+            int[] availableCells=getAvailableCells(Consts.game.redEnemy.cell, Consts.game.redEnemy.a);
+            int index=availableCells[this.random.Next(availableCells.Length)];
+            for (int i=0; i<availableCells.Length; i++){
+                if (Consts.game.player.cell==availableCells[i]&&!cells[Consts.game.player.cell].isHut){
+                    index=Consts.game.player.cell;
+                }
+            }
+            if (cells[index].isAlive||cells[index].isBridge){
+                Cell newCell=Consts.game.cells[index];
+                Consts.game.redEnemy.newPos(newCell.pos.x, newCell.pos.y);
+                Consts.game.redEnemy.cell=index;
             }
         }
-        if (cells[index].isAlive||cells[index].isBridge){
-            Cell newCell=Consts.game.cells[index];
-            Consts.game.redEnemy.newPos(newCell.pos.x, newCell.pos.y);
-            Consts.game.redEnemy.cell=index;
-        }
 
-        availableCells=getAvailableCells(Consts.game.blueEnemy.cell, Consts.game.blueEnemy.a);
-        index=availableCells[this.random.Next(availableCells.Length)];
-        for (int i=0; i<availableCells.Length; i++){
-            if (Consts.game.player.cell==availableCells[i]&&!cells[Consts.game.player.cell].isHut){
-                index=Consts.game.player.cell;
-                this.tree+=10;
-                this.water+=10;
-                this.rock+=10;
+        if (blueEnemy.isAlive){
+            int[] availableCells=getAvailableCells(Consts.game.blueEnemy.cell, Consts.game.blueEnemy.a);
+            int index=availableCells[this.random.Next(availableCells.Length)];
+            for (int i=0; i<availableCells.Length; i++){
+                if (Consts.game.player.cell==availableCells[i]&&!cells[Consts.game.player.cell].isHut){
+                    index=Consts.game.player.cell;
+                    this.tree+=10;
+                    this.water+=10;
+                    this.rock+=10;
+                }
+            }
+            if (cells[index].isAlive||cells[index].isBridge){
+                Cell newCell=Consts.game.cells[index];
+                Consts.game.blueEnemy.newPos(newCell.pos.x, newCell.pos.y);
+                Consts.game.blueEnemy.cell=index;
             }
         }
-        if (cells[index].isAlive||cells[index].isBridge){
-            Cell newCell=Consts.game.cells[index];
-            Consts.game.blueEnemy.newPos(newCell.pos.x, newCell.pos.y);
-            Consts.game.blueEnemy.cell=index;
-        }
 
-        availableCells=getAvailableCells(Consts.game.fluidEnemy.cell, Consts.game.fluidEnemy.a);
-        index=availableCells[this.random.Next(availableCells.Length)];
-        if (cells[index].isAlive||cells[index].isBridge){
-            Cell newCell=Consts.game.cells[index];
-            Consts.game.fluidEnemy.newPos(newCell.pos.x, newCell.pos.y);
-            Consts.game.fluidEnemy.cell=index;
-        }
-        if (this.cells[Consts.game.fluidEnemy.cell].type==fluidEnemy.type){
-            this.cells[Consts.game.fluidEnemy.cell].resourceCount/=2;
-        }
-
-        if (stepCount%5==0){
-            fluidEnemy.type=Consts.types[random.Next(Consts.types.Length)];
+        if (fluidEnemy.isAlive){
+            int[] availableCells=getAvailableCells(Consts.game.fluidEnemy.cell, Consts.game.fluidEnemy.a);
+            int index=availableCells[this.random.Next(availableCells.Length)];
+            if (cells[index].isAlive||cells[index].isBridge){
+                Cell newCell=Consts.game.cells[index];
+                Consts.game.fluidEnemy.newPos(newCell.pos.x, newCell.pos.y);
+                Consts.game.fluidEnemy.cell=index;
+            }
+            if (this.cells[Consts.game.fluidEnemy.cell].type==fluidEnemy.type){
+                this.cells[Consts.game.fluidEnemy.cell].resourceCount/=2;
+            }
+            if (stepCount%5==0){
+                fluidEnemy.type=Consts.types[random.Next(Consts.types.Length)];
+            }
         }
     }
 
@@ -240,7 +249,5 @@ public class Game
             toDestroy[j]=random.Next(100);
             this.cells[toDestroy[j]].setPreDestroy();
         }
-
-        
     }
 }
