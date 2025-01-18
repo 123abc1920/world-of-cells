@@ -37,11 +37,12 @@ public class SettingsScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        langBtn.text=LanguageManager.L.LanguageBtn;
+        langBtn.text = LanguageManager.L.LanguageBtn;
         settingsTitle.text = LanguageManager.L.SettingsTitle;
         backBtn.text = LanguageManager.L.Close;
         settingsTitle.text = LanguageManager.L.SettingsTitle;
         progressLbl.text = string.Format(LanguageManager.L.ProgressLbl, ((double)EventManager.collection.Count / EventManager.events.Length) * 100);
+        progressBtn.text = LanguageManager.L.ProgressBtn;
     }
 
     public void backBtnAction(ClickEvent e)

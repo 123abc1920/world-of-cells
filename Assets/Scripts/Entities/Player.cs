@@ -9,29 +9,35 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void newPos(float x, float y){
+    public void newPos(float x, float y)
+    {
         transform.position = new Vector3(x, y, 1);
     }
 
-    public List<int> getAvailableCells() {
-        List<int> result=new List<int> ();
-        int[] a={1, Consts.ONE_ROW, -1, -Consts.ONE_ROW};
+    public List<int> getAvailableCells()
+    {
+        List<int> result = new List<int>();
+        int[] a = { 1, Consts.ONE_ROW, -1, -Consts.ONE_ROW };
 
-        for (int i=0; i<a.Length; i++){
-            int index=this.cell+a[i];
+        for (int i = 0; i < a.Length; i++)
+        {
+            int index = this.cell + a[i];
 
-            if (Consts.game.cells[index].isAlive&&index<100&&index>=0){
-                if (cell%10==0&&index%10!=9){
-                    if (cell%10==9&&index%10!=0){
+            if (index < 100 && index >= 0 && Consts.game.cells[index].isAlive)
+            {
+                if (!(cell % 10 == 0 && index % 10 == 9))
+                {
+                    if (!(cell % 10 == 9 && index % 10 == 0))
+                    {
                         result.Add(index);
                     }
                 }

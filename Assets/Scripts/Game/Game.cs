@@ -82,6 +82,9 @@ public class Game
                     if (Consts.buildHut && (cells[i].isAlive || cells[i].isBridge))
                     {
                         this.cells[i].setHut();
+                        this.cells[i].resourceCount = 0;
+                        this.texts[i].updateText(0);
+                        this.texts[i].hideText();
                         return;
                     }
                 }
@@ -150,22 +153,25 @@ public class Game
 
     public void monsterStep()
     {
-        if (!cells[redEnemy.cell].isAlive && !cells[redEnemy.cell].isBridge)
+        if (!cells[redEnemy.cell].isAlive && !cells[redEnemy.cell].isBridge && redEnemy.isAlive)
         {
             redEnemy.isAlive = false;
+            redEnemy.hideEnemy();
         }
-        if (!cells[blueEnemy.cell].isAlive && !cells[blueEnemy.cell].isBridge)
+        if (!cells[blueEnemy.cell].isAlive && !cells[blueEnemy.cell].isBridge && blueEnemy.isAlive)
         {
             blueEnemy.isAlive = false;
+            blueEnemy.hideEnemy();
         }
-        if (!cells[fluidEnemy.cell].isAlive && !cells[fluidEnemy.cell].isBridge)
+        if (!cells[fluidEnemy.cell].isAlive && !cells[fluidEnemy.cell].isBridge && fluidEnemy.isAlive)
         {
             fluidEnemy.isAlive = false;
+            fluidEnemy.hideEnemy();
         }
 
         if (redEnemy.isAlive)
         {
-            List<int> availableCells = Enemy.getAvailableCells(Consts.game.redEnemy.cell, Consts.game.redEnemy.a);
+            List<int> availableCells = Enemy.getAvailableCells(Consts.game.redEnemy.cell, new int[] { 1, Consts.ONE_ROW, Consts.ONE_ROW - 1, Consts.ONE_ROW + 1, -1, -Consts.ONE_ROW, -Consts.ONE_ROW + 1, -Consts.ONE_ROW - 1 });
             if (availableCells.Count > 0)
             {
                 int index = availableCells[this.random.Next(availableCells.Count)];
@@ -173,7 +179,7 @@ public class Game
                 {
                     if (Consts.game.player.cell == availableCells[i] && !cells[Consts.game.player.cell].isHut)
                     {
-                        index = Consts.game.player.cell;
+                        index = availableCells[i];
                     }
                 }
                 if (cells[index].isAlive || cells[index].isBridge)
@@ -187,7 +193,7 @@ public class Game
 
         if (blueEnemy.isAlive)
         {
-            List<int> availableCells = Enemy.getAvailableCells(Consts.game.blueEnemy.cell, Consts.game.blueEnemy.a);
+            List<int> availableCells = Enemy.getAvailableCells(Consts.game.blueEnemy.cell, new int[] { 1, Consts.ONE_ROW, -1, -Consts.ONE_ROW });
             if (availableCells.Count > 0)
             {
                 int index = availableCells[this.random.Next(availableCells.Count)];
@@ -195,7 +201,7 @@ public class Game
                 {
                     if (Consts.game.player.cell == availableCells[i] && !cells[Consts.game.player.cell].isHut)
                     {
-                        index = Consts.game.player.cell;
+                        index = availableCells[i];
                         this.tree += 10;
                         this.water += 10;
                         this.rock += 10;
@@ -212,10 +218,17 @@ public class Game
 
         if (fluidEnemy.isAlive)
         {
-            List<int> availableCells = Enemy.getAvailableCells(Consts.game.fluidEnemy.cell, Consts.game.fluidEnemy.a);
+            List<int> availableCells = Enemy.getAvailableCells(Consts.game.fluidEnemy.cell, new int[] { 1, Consts.ONE_ROW, -1, -Consts.ONE_ROW });
             if (availableCells.Count > 0)
             {
                 int index = availableCells[this.random.Next(availableCells.Count)];
+                for (int i = 0; i < availableCells.Count; i++)
+                {
+                    if (cells[availableCells[i]].type == fluidEnemy.type && cells[availableCells[i]].resourceCount != 0 && !cells[Consts.game.player.cell].isHut)
+                    {
+                        index = availableCells[i];
+                    }
+                }
                 if (cells[index].isAlive || cells[index].isBridge)
                 {
                     Cell newCell = Consts.game.cells[index];
@@ -224,9 +237,10 @@ public class Game
                 }
                 if (this.cells[Consts.game.fluidEnemy.cell].type == fluidEnemy.type)
                 {
-                    this.cells[Consts.game.fluidEnemy.cell].resourceCount /= 2;
+                    this.cells[Consts.game.fluidEnemy.cell].resourceCount = 0;
+                    this.texts[Consts.game.fluidEnemy.cell].updateText(this.cells[Consts.game.fluidEnemy.cell].resourceCount);
                 }
-                if (stepCount % 5 == 0)
+                if (random.Next(5) == 1)
                 {
                     fluidEnemy.type = Consts.types[random.Next(Consts.types.Length)];
                 }

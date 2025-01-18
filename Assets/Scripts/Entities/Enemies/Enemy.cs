@@ -12,10 +12,12 @@ public class Enemy
         {
             int index = cell + a[i];
 
-            if (Consts.game.cells[index].isAlive && index < 100 && index >= 0 && !Consts.game.cells[index].isPreAlive && !Consts.game.cells[index].isHut)
+            if (index < 100 && index >= 0 && Consts.game.cells[index].isPreAlive && !Consts.game.cells[index].isHut && Consts.game.cells[index].isAlive)
             {
-                if (cell%10==0&&index%10!=9){
-                    if (cell%10==9&&index%10!=0){
+                if (!(cell % 10 == 0 && index % 10 == 9))
+                {
+                    if (!(cell % 10 == 9 && index % 10 == 0))
+                    {
                         result.Add(index);
                     }
                 }

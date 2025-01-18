@@ -24,7 +24,7 @@ public class Russian : Language
 
         Tree = "Дерево: ";
         Water = "Вода: ";
-        Rock = "камни: ";
+        Rock = "Камни: ";
         Steps = "Шаги: ";
         StartNewGame = "Начать заново";
         SkipStep = "Пропустить шаг";
