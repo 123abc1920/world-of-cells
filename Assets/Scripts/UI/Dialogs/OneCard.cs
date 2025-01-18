@@ -23,6 +23,7 @@ public class cardScript : MonoBehaviour
 
         closeCardBtn = root.Q<Button>("closeCardBtn");
         closeCardBtn.RegisterCallback<ClickEvent>(closeCardBtnAction);
+        closeCardBtn.text=LanguageManager.L.Ok;
     }
 
     // Update is called once per frame

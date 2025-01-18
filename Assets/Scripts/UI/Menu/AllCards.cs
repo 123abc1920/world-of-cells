@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -28,10 +24,12 @@ public class CardsUi : MonoBehaviour
         root.style.display = DisplayStyle.None;
 
         cardsLbl = root.Q<Label>("cardsLbl");
+        cardsLbl.text=LanguageManager.L.CardsTitle;
         getLbl = root.Q<Label>("getLbl");
 
         closeCards = root.Q<Button>("closeCards");
         closeCards.RegisterCallback<ClickEvent>(closeCardsAction);
+        closeCards.text=LanguageManager.L.Close;
 
         list1 = root.Q<ListView>("list1");
         list2 = root.Q<ListView>("list2");
@@ -93,8 +91,6 @@ public class CardsUi : MonoBehaviour
 
         list1.itemsSource = left;
         list2.itemsSource = right;
-
-        Consts.SettingsShown = false;
     }
 
     // Update is called once per frame
@@ -103,7 +99,7 @@ public class CardsUi : MonoBehaviour
         if (Consts.CardsShown)
         {
             root.style.display = DisplayStyle.Flex;
-            getLbl.text = "Вы собрали: " + ((double)EventManager.collection.Count / EventManager.events.Length) * 100 + "%";
+            getLbl.text = string.Format(LanguageManager.L.ProgressTitle, ((double)EventManager.collection.Count / EventManager.events.Length) * 100);
         }
         else
         {

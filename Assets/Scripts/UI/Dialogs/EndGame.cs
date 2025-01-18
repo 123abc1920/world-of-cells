@@ -23,6 +23,7 @@ public class endGameScript : MonoBehaviour
         text = root.Q<Label>("text");
 
         closeBtn = root.Q<Button>("closeBtn");
+        closeBtn.text=LanguageManager.L.StartNewGame;
         closeBtn.RegisterCallback<ClickEvent>(closeBtnAction);
     }
 

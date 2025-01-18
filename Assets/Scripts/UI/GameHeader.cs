@@ -18,7 +18,7 @@ public class UIScripts : MonoBehaviour
     private Button hutBtn;
     private Button menuBtn;
 
-    private Color firstColor=new Color(0.74f, 0.74f, 0.74f, 1), activeColor=new Color(0.5f, 0.63f, 0.81f, 1);
+    private Color firstColor = new Color(0.74f, 0.74f, 0.74f, 1), activeColor = new Color(0.5f, 0.63f, 0.81f, 1);
 
     // Start is called before the first frame update
     void Start()
@@ -33,64 +33,82 @@ public class UIScripts : MonoBehaviour
 
         startBtn = root.Q<Button>("startBtn");
         startBtn.RegisterCallback<ClickEvent>(startBtnAction);
+        startBtn.text=LanguageManager.L.StartNewGame;
 
         skipBtn = root.Q<Button>("skipBtn");
         skipBtn.RegisterCallback<ClickEvent>(skipBtnAction);
+        skipBtn.text=LanguageManager.L.SkipStep;
 
-        bridgeBtn=root.Q<Button>("bridgeBtn");
+        bridgeBtn = root.Q<Button>("bridgeBtn");
         bridgeBtn.RegisterCallback<ClickEvent>(bridgeBtnAction);
+        bridgeBtn.text=LanguageManager.L.BuildBridge;
 
-        hutBtn=root.Q<Button>("hutBtn");
+        hutBtn = root.Q<Button>("hutBtn");
         hutBtn.RegisterCallback<ClickEvent>(hutBtnAction);
+        hutBtn.text=LanguageManager.L.BuildHut;
 
-        menuBtn=root.Q<Button>("menuBtn");
+        menuBtn = root.Q<Button>("menuBtn");
         menuBtn.RegisterCallback<ClickEvent>(menuBtnAction);
+        menuBtn.text=LanguageManager.L.BackToMenu;
 
-        firstColor=hutBtn.style.backgroundColor.value;
+        firstColor = hutBtn.style.backgroundColor.value;
     }
 
     // Update is called once per frame
     void Update()
     {
-        stepsLbl.text="Steps: "+Consts.game.stepCount;
-        treeLbl.text = "Tree: "+Math.Max(0, Consts.game.tree);
-        rockLbl.text = "Rock: "+Math.Max(0, Consts.game.rock);
-        waterLbl.text = "Water: "+Math.Max(0, Consts.game.water);
+        stepsLbl.text = LanguageManager.L.Steps + Consts.game.stepCount;
+        treeLbl.text = LanguageManager.L.Tree + Math.Max(0, Consts.game.tree);
+        rockLbl.text = LanguageManager.L.Rock + Math.Max(0, Consts.game.rock);
+        waterLbl.text = LanguageManager.L.Water + Math.Max(0, Consts.game.water);
 
-        if (Consts.buildBridge){
-            bridgeBtn.style.backgroundColor=activeColor;
-        }else{
-            bridgeBtn.style.backgroundColor=firstColor;
+        if (Consts.buildBridge)
+        {
+            bridgeBtn.style.backgroundColor = activeColor;
+        }
+        else
+        {
+            bridgeBtn.style.backgroundColor = firstColor;
         }
 
-        if (Consts.buildHut){
-            hutBtn.style.backgroundColor=activeColor;
-        }else{
-            hutBtn.style.backgroundColor=firstColor;
+        if (Consts.buildHut)
+        {
+            hutBtn.style.backgroundColor = activeColor;
+        }
+        else
+        {
+            hutBtn.style.backgroundColor = firstColor;
         }
     }
 
-    public void startBtnAction(ClickEvent e){
+    public void startBtnAction(ClickEvent e)
+    {
         Consts.game.renewGame();
     }
 
-    public void skipBtnAction(ClickEvent e){
+    public void skipBtnAction(ClickEvent e)
+    {
         Consts.game.skipStep();
     }
 
-    public void bridgeBtnAction(ClickEvent e){
-        if (!Consts.buildHut){
-            Consts.buildBridge=!Consts.buildBridge;
+    public void bridgeBtnAction(ClickEvent e)
+    {
+        if (!Consts.buildHut)
+        {
+            Consts.buildBridge = !Consts.buildBridge;
         }
     }
 
-    public void hutBtnAction(ClickEvent e){
-        if (!Consts.buildBridge){
-            Consts.buildHut=!Consts.buildHut;
+    public void hutBtnAction(ClickEvent e)
+    {
+        if (!Consts.buildBridge)
+        {
+            Consts.buildHut = !Consts.buildHut;
         }
     }
 
-    public void menuBtnAction(ClickEvent e){
+    public void menuBtnAction(ClickEvent e)
+    {
         Scenes.OpenMenu();
     }
 

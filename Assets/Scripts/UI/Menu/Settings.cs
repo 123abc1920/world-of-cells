@@ -11,6 +11,7 @@ public class SettingsScript : MonoBehaviour
 
     private Button backBtn;
     private Button progressBtn;
+    private Button langBtn;
 
     private VisualElement root;
     // Start is called before the first frame update
@@ -19,11 +20,9 @@ public class SettingsScript : MonoBehaviour
         var uiDocument = GetComponent<UIDocument>();
         root = uiDocument.rootVisualElement;
 
-        root.style.display = DisplayStyle.None;
-
         settingsTitle = root.Q<Label>("settingsTitle");
+
         progressLbl = root.Q<Label>("progressLbl");
-        progressLbl.text = "Прогресс: " + ((double)EventManager.collection.Count / EventManager.events.Length) * 100 + "% карт";
 
         backBtn = root.Q<Button>("backBtn");
         backBtn.RegisterCallback<ClickEvent>(backBtnAction);
@@ -31,32 +30,33 @@ public class SettingsScript : MonoBehaviour
         progressBtn = root.Q<Button>("progressBtn");
         progressBtn.RegisterCallback<ClickEvent>(resetBtnAction);
 
-        Consts.SettingsShown = false;
+        langBtn = root.Q<Button>("langBtn");
+        langBtn.RegisterCallback<ClickEvent>(changeLangBtnAction);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Consts.SettingsShown)
-        {
-            root.style.display = DisplayStyle.Flex;
-        }
-        else
-        {
-            root.style.display = DisplayStyle.None;
-        }
+        langBtn.text=LanguageManager.L.LanguageBtn;
+        settingsTitle.text = LanguageManager.L.SettingsTitle;
+        backBtn.text = LanguageManager.L.Close;
+        settingsTitle.text = LanguageManager.L.SettingsTitle;
+        progressLbl.text = string.Format(LanguageManager.L.ProgressLbl, ((double)EventManager.collection.Count / EventManager.events.Length) * 100);
     }
 
     public void backBtnAction(ClickEvent e)
     {
-        Consts.MainMenuShown = true;
-        Consts.SettingsShown = false;
+        Scenes.OpenMenu();
     }
 
     private void resetBtnAction(ClickEvent e)
     {
         EventManager.collection.Clear();
         DataScript.SaveData(EventManager.collection);
-        progressLbl.text = "Прогресс: " + ((double)EventManager.collection.Count / EventManager.events.Length) * 100 + "% карт";
+    }
+
+    private void changeLangBtnAction(ClickEvent e)
+    {
+        LanguageManager.getNextLang();
     }
 }

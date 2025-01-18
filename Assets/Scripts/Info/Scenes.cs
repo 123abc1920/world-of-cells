@@ -15,7 +15,13 @@ public class Scenes : MonoBehaviour
         SceneManager.LoadScene("SampleScene");
     }
 
-    public static string getActiveScene(){
+    public static void OpenSettings()
+    {
+        SceneManager.LoadScene("SettingsScene");
+    }
+
+    public static string getActiveScene()
+    {
         return SceneManager.GetActiveScene().name;
     }
 }

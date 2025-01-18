@@ -21,15 +21,19 @@ public class MenuScript : MonoBehaviour
         root = uiDocument.rootVisualElement;
 
         gameTitle = root.Q<Label>("gameTitle");
+        gameTitle.text=LanguageManager.L.Title;
 
         playBtn = root.Q<Button>("playBtn");
         playBtn.RegisterCallback<ClickEvent>(playBtnAction);
+        playBtn.text=LanguageManager.L.Play;
 
         settingsBtn = root.Q<Button>("settingsBtn");
         settingsBtn.RegisterCallback<ClickEvent>(settingsBtnAction);
+        settingsBtn.text=LanguageManager.L.Settings;
 
         cardsBtn = root.Q<Button>("cardsBtn");
         cardsBtn.RegisterCallback<ClickEvent>(openCardsBtnAction);
+        cardsBtn.text=LanguageManager.L.Cards;
 
         Consts.MainMenuShown=true;
     }
@@ -49,8 +53,7 @@ public class MenuScript : MonoBehaviour
     }
 
     public void settingsBtnAction(ClickEvent e){
-        Consts.MainMenuShown=false;
-        Consts.SettingsShown=true;
+        Scenes.OpenSettings();
     }
 
     public void openCardsBtnAction(ClickEvent e){

@@ -24,7 +24,6 @@ public class Consts{
     public static bool buildBridge=false;
 
     public static bool MainMenuShown;
-    public static bool SettingsShown;
     public static bool CardsShown;
 
     public static bool OneCardShown;
