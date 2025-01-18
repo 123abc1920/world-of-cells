@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -7,6 +8,7 @@ using UnityEngine.UIElements;
 public class CardsUi : MonoBehaviour
 {
     private Label cardsLbl;
+    private Label getLbl;
 
     private Button closeCards;
 
@@ -26,6 +28,7 @@ public class CardsUi : MonoBehaviour
         root.style.display = DisplayStyle.None;
 
         cardsLbl = root.Q<Label>("cardsLbl");
+        getLbl = root.Q<Label>("getLbl");
 
         closeCards = root.Q<Button>("closeCards");
         closeCards.RegisterCallback<ClickEvent>(closeCardsAction);
@@ -53,19 +56,27 @@ public class CardsUi : MonoBehaviour
         {
             var currentEvent = left[index];
             var btn = element.Q<Button>("btn");
-            btn.text = currentEvent.message;
-            btn.RegisterCallback<ClickEvent>(evt => {
-                openCard(currentEvent);
-            });
+            if (EventManager.collection.Contains(currentEvent.id)){
+                btn.text = currentEvent.message;
+                btn.RegisterCallback<ClickEvent>(evt => {
+                    openCard(currentEvent);
+                });
+            }else{
+                btn.text = "Еще не открыто!";
+            }
         };
         list2.bindItem = (element, index) =>
         {
             var currentEvent = right[index];
             var btn = element.Q<Button>("btn");
-            btn.text = currentEvent.message;
-            btn.RegisterCallback<ClickEvent>(evt => {
-                openCard(currentEvent);
-            });
+            if (EventManager.collection.Contains(currentEvent.id)){
+                btn.text = currentEvent.message;
+                btn.RegisterCallback<ClickEvent>(evt => {
+                    openCard(currentEvent);
+                });
+            }else{
+                btn.text = "Еще не открыто!";
+            }
         };
 
         list1.itemsSource=left;
@@ -79,6 +90,7 @@ public class CardsUi : MonoBehaviour
     {
         if (Consts.CardsShown){
             root.style.display = DisplayStyle.Flex;
+            getLbl.text="Вы собрали: "+((double) EventManager.collection.Count/EventManager.events.Length)*100+"%";
         }else{
             root.style.display = DisplayStyle.None;
         }

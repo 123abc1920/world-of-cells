@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EventManager
@@ -9,7 +10,11 @@ public class EventManager
 
     public static int[] variances=new int[10];
 
+    public static List<int> collection;
+
     static EventManager(){
+        collection=DataScript.LoadData();
+
         events[0]=new Event("Вы упали в яму. Часть собранных ресурсов утрачена.", 0, 5);
         events[1]=new Event("Вы оказались в лесу. Количество дерева увеличено.", 1, 2);
         events[2]=new Event("Вы нашли клад. Количество ресурсов увеличено.", 2, 2);
@@ -25,6 +30,10 @@ public class EventManager
     }
 
     public static void eventAction(int index){
+        if (!collection.Contains(index)){
+            collection.Add(index);
+            DataScript.SaveData(collection);
+        }
         if (index==0){
             Consts.game.tree+=10;
             Consts.game.water+=10;

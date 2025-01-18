@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/AppsStyles/panel.uss?fileID=7433441132597879392&amp;guid=eecfca3464518614988a6337f69b8171&amp;type=3#panel" />
     <ui:VisualElement style="flex-grow: 1; padding-top: 5%; padding-right: 5%; padding-bottom: 5%; padding-left: 5%;">
-        <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btn" style="width: 100%; height: 100%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; background-image: none;" />
+        <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btn" style="width: 100%; height: 100%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; background-image: none; min-width: 100%; min-height: 100%; white-space: normal; -unity-font: url(&quot;project://database/Assets/Fonts/LCD5x8H/LCD5x8HRU.ttf?fileID=12800000&amp;guid=3267f06d4839a334295c8cd2f5324ab7&amp;type=3#LCD5x8HRU&quot;); -unity-font-definition: initial; max-height: 100%;" />
     </ui:VisualElement>
 </ui:UXML>
