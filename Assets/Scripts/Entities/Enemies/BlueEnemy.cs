@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardList : MonoBehaviour
+public class BlueEnemy : MonoBehaviour
 {
+    public int cell;
+    public int[] a={1, Consts.ONE_ROW, -1, -Consts.ONE_ROW};
+    public bool isAlive=true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +18,9 @@ public class CardList : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void newPos(float x, float y){
+        transform.position = new Vector3(x, y, 1);
     }
 }

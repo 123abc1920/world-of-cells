@@ -9,6 +9,7 @@ public class Cell : MonoBehaviour
     public CellTypes type;
     public Vector3 pos;
     public bool isAlive=true;
+    public bool isPreAlive=true;
     public bool isBridge=false;
     public bool isHut=false;
     public int id;
@@ -31,7 +32,10 @@ public class Cell : MonoBehaviour
     }
 
     public void setPreDestroy(){
-        GetComponent<SpriteRenderer>().color=Consts.destroyColor;
+        if (this.isAlive){
+            GetComponent<SpriteRenderer>().color=Consts.destroyColor;
+        }
+        this.isPreAlive=false;
     }
 
     public void setDestroy(){
@@ -39,14 +43,16 @@ public class Cell : MonoBehaviour
         Consts.game.texts[id].hideText();
         Consts.game.texts[id].resourceCount=0;
         this.isAlive=false;
+        this.isPreAlive=true;
     }
 
     public void setBridge(){
         if (this.isHut){
             return;
         }
+        this.isAlive=true;
         GetComponent<SpriteRenderer>().color=Consts.bridgeColor;
-        if (!this.isAlive){
+        if (this.isPreAlive){
             GetComponent<SpriteRenderer>().color=Consts.destroyColor;
         }
         Consts.game.tree+=10;

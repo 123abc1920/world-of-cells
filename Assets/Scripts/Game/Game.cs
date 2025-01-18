@@ -36,7 +36,7 @@ public class Game
 
     public void gameStep(Vector2 start){
         for (int i=0; i<cells.Length; i++){
-            if (Array.IndexOf(getAvailableCells(player.cell, player.a), i)!=-1){
+            if (this.player.getAvailableCells().Contains(i)){
                 if (cells[i].pos.x-Consts.width/2<=start.x&&start.x<cells[i].pos.x+Consts.width/2){
                     if (cells[i].pos.y+Consts.width/2>=start.y&&start.y>cells[i].pos.y-Consts.width/2){
                         if (cells[i].isAlive||cells[i].isBridge){
@@ -103,7 +103,7 @@ public class Game
             return;
         }
 
-        if (!this.cells[player.cell].isAlive&&!this.cells[player.cell].isBridge&&!this.cells[player.cell].isHut){
+        if (!this.cells[player.cell].isAlive&&!this.cells[player.cell].isBridge){
             Consts.titleText="Вы проиграли.";
             Consts.textText="Вас унесло в космос.";
             Consts.EndShown=true;
@@ -137,65 +137,59 @@ public class Game
         }
 
         if (redEnemy.isAlive){
-            int[] availableCells=getAvailableCells(Consts.game.redEnemy.cell, Consts.game.redEnemy.a);
-            int index=availableCells[this.random.Next(availableCells.Length)];
-            for (int i=0; i<availableCells.Length; i++){
-                if (Consts.game.player.cell==availableCells[i]&&!cells[Consts.game.player.cell].isHut){
-                    index=Consts.game.player.cell;
+            List<int> availableCells=Enemy.getAvailableCells(Consts.game.redEnemy.cell, Consts.game.redEnemy.a);
+            if (availableCells.Count>0){
+                int index=availableCells[this.random.Next(availableCells.Count)];
+                for (int i=0; i<availableCells.Count; i++){
+                    if (Consts.game.player.cell==availableCells[i]&&!cells[Consts.game.player.cell].isHut){
+                        index=Consts.game.player.cell;
+                    }
                 }
-            }
-            if (cells[index].isAlive||cells[index].isBridge){
-                Cell newCell=Consts.game.cells[index];
-                Consts.game.redEnemy.newPos(newCell.pos.x, newCell.pos.y);
-                Consts.game.redEnemy.cell=index;
+                if (cells[index].isAlive||cells[index].isBridge){
+                    Cell newCell=Consts.game.cells[index];
+                    Consts.game.redEnemy.newPos(newCell.pos.x, newCell.pos.y);
+                    Consts.game.redEnemy.cell=index;
+                }
             }
         }
 
         if (blueEnemy.isAlive){
-            int[] availableCells=getAvailableCells(Consts.game.blueEnemy.cell, Consts.game.blueEnemy.a);
-            int index=availableCells[this.random.Next(availableCells.Length)];
-            for (int i=0; i<availableCells.Length; i++){
-                if (Consts.game.player.cell==availableCells[i]&&!cells[Consts.game.player.cell].isHut){
-                    index=Consts.game.player.cell;
-                    this.tree+=10;
-                    this.water+=10;
-                    this.rock+=10;
+            List<int> availableCells=Enemy.getAvailableCells(Consts.game.blueEnemy.cell, Consts.game.blueEnemy.a);
+            if (availableCells.Count>0){
+                int index=availableCells[this.random.Next(availableCells.Count)];
+                for (int i=0; i<availableCells.Count; i++){
+                    if (Consts.game.player.cell==availableCells[i]&&!cells[Consts.game.player.cell].isHut){
+                        index=Consts.game.player.cell;
+                        this.tree+=10;
+                        this.water+=10;
+                        this.rock+=10;
+                    }
                 }
-            }
-            if (cells[index].isAlive||cells[index].isBridge){
-                Cell newCell=Consts.game.cells[index];
-                Consts.game.blueEnemy.newPos(newCell.pos.x, newCell.pos.y);
-                Consts.game.blueEnemy.cell=index;
+                if (cells[index].isAlive||cells[index].isBridge){
+                    Cell newCell=Consts.game.cells[index];
+                    Consts.game.blueEnemy.newPos(newCell.pos.x, newCell.pos.y);
+                    Consts.game.blueEnemy.cell=index;
+                }
             }
         }
 
         if (fluidEnemy.isAlive){
-            int[] availableCells=getAvailableCells(Consts.game.fluidEnemy.cell, Consts.game.fluidEnemy.a);
-            int index=availableCells[this.random.Next(availableCells.Length)];
-            if (cells[index].isAlive||cells[index].isBridge){
-                Cell newCell=Consts.game.cells[index];
-                Consts.game.fluidEnemy.newPos(newCell.pos.x, newCell.pos.y);
-                Consts.game.fluidEnemy.cell=index;
-            }
-            if (this.cells[Consts.game.fluidEnemy.cell].type==fluidEnemy.type){
-                this.cells[Consts.game.fluidEnemy.cell].resourceCount/=2;
-            }
-            if (stepCount%5==0){
-                fluidEnemy.type=Consts.types[random.Next(Consts.types.Length)];
+            List<int> availableCells=Enemy.getAvailableCells(Consts.game.fluidEnemy.cell, Consts.game.fluidEnemy.a);
+            if (availableCells.Count>0){
+                int index=availableCells[this.random.Next(availableCells.Count)];
+                if (cells[index].isAlive||cells[index].isBridge){
+                    Cell newCell=Consts.game.cells[index];
+                    Consts.game.fluidEnemy.newPos(newCell.pos.x, newCell.pos.y);
+                    Consts.game.fluidEnemy.cell=index;
+                }
+                if (this.cells[Consts.game.fluidEnemy.cell].type==fluidEnemy.type){
+                    this.cells[Consts.game.fluidEnemy.cell].resourceCount/=2;
+                }
+                if (stepCount%5==0){
+                    fluidEnemy.type=Consts.types[random.Next(Consts.types.Length)];
+                }
             }
         }
-    }
-
-    public int[] getAvailableCells(int cell, int[] a) {
-        if (a.Length==2)
-        {
-            return new int[] {Math.Max(0, Math.Min(99, cell+a[0])), Math.Max(0, Math.Min(99, cell-a[0])), Math.Max(0, Math.Min(99, cell-a[1])), Math.Max(0, Math.Min(99, cell+a[1]))};
-        }
-        if (a.Length==4)
-        {
-            return new int[] {Math.Max(0, Math.Min(99, cell+a[0])), Math.Max(0, Math.Min(99, cell-a[0])), Math.Max(0, Math.Min(99, cell-a[1])), Math.Max(0, Math.Min(99, cell+a[1])), Math.Max(0, Math.Min(99, cell+a[2])), Math.Max(0, Math.Min(99, cell-a[2])), Math.Max(0, Math.Min(99, cell-a[3])), Math.Max(0, Math.Min(99, cell+a[3]))};
-        }
-        return new int[] {};
     }
 
     public void getEvent(){
