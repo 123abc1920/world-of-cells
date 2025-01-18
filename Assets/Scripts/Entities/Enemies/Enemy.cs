@@ -14,7 +14,11 @@ public class Enemy
 
             if (Consts.game.cells[index].isAlive && index < 100 && index >= 0 && !Consts.game.cells[index].isPreAlive && !Consts.game.cells[index].isHut)
             {
-                result.Add(index);
+                if (cell%10==0&&index%10!=9){
+                    if (cell%10==9&&index%10!=0){
+                        result.Add(index);
+                    }
+                }
             }
         }
 

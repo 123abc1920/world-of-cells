@@ -30,7 +30,11 @@ public class Player : MonoBehaviour
             int index=this.cell+a[i];
 
             if (Consts.game.cells[index].isAlive&&index<100&&index>=0){
-                result.Add(index);
+                if (cell%10==0&&index%10!=9){
+                    if (cell%10==9&&index%10!=0){
+                        result.Add(index);
+                    }
+                }
             }
         }
 

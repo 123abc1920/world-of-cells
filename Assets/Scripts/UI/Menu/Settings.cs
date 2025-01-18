@@ -7,8 +7,10 @@ using UnityEngine.UIElements;
 public class SettingsScript : MonoBehaviour
 {
     private Label settingsTitle;
+    private Label progressLbl;
 
     private Button backBtn;
+    private Button progressBtn;
 
     private VisualElement root;
     // Start is called before the first frame update
@@ -20,25 +22,41 @@ public class SettingsScript : MonoBehaviour
         root.style.display = DisplayStyle.None;
 
         settingsTitle = root.Q<Label>("settingsTitle");
+        progressLbl = root.Q<Label>("progressLbl");
+        progressLbl.text = "Прогресс: " + ((double)EventManager.collection.Count / EventManager.events.Length) * 100 + "% карт";
 
         backBtn = root.Q<Button>("backBtn");
         backBtn.RegisterCallback<ClickEvent>(backBtnAction);
 
-        Consts.SettingsShown=false;
+        progressBtn = root.Q<Button>("progressBtn");
+        progressBtn.RegisterCallback<ClickEvent>(resetBtnAction);
+
+        Consts.SettingsShown = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Consts.SettingsShown){
+        if (Consts.SettingsShown)
+        {
             root.style.display = DisplayStyle.Flex;
-        }else{
+        }
+        else
+        {
             root.style.display = DisplayStyle.None;
         }
     }
 
-    public void backBtnAction(ClickEvent e){
-        Consts.MainMenuShown=true;
-        Consts.SettingsShown=false;
+    public void backBtnAction(ClickEvent e)
+    {
+        Consts.MainMenuShown = true;
+        Consts.SettingsShown = false;
+    }
+
+    private void resetBtnAction(ClickEvent e)
+    {
+        EventManager.collection.Clear();
+        DataScript.SaveData(EventManager.collection);
+        progressLbl.text = "Прогресс: " + ((double)EventManager.collection.Count / EventManager.events.Length) * 100 + "% карт";
     }
 }

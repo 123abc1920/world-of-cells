@@ -39,15 +39,19 @@ public class CardsUi : MonoBehaviour
         list1.makeItem = () => listItem.CloneTree();
         list2.makeItem = () => listItem.CloneTree();
 
-        Event[] left=new Event[EventManager.events.Length/2];
-        Event[] right=new Event[EventManager.events.Length/2];
+        Event[] left = new Event[EventManager.events.Length / 2];
+        Event[] right = new Event[EventManager.events.Length / 2];
 
-        int j=0;
-        for (int i=0; i<EventManager.events.Length; i++){
-            if (i%2==0){
-                left[j]=EventManager.events[i];
-            }else{
-                right[j]=EventManager.events[i];
+        int j = 0;
+        for (int i = 0; i < EventManager.events.Length; i++)
+        {
+            if (i % 2 == 0)
+            {
+                left[j] = EventManager.events[i];
+            }
+            else
+            {
+                right[j] = EventManager.events[i];
                 j++;
             }
         }
@@ -56,12 +60,16 @@ public class CardsUi : MonoBehaviour
         {
             var currentEvent = left[index];
             var btn = element.Q<Button>("btn");
-            if (EventManager.collection.Contains(currentEvent.id)){
+            if (EventManager.collection.Contains(currentEvent.id))
+            {
                 btn.text = currentEvent.message;
-                btn.RegisterCallback<ClickEvent>(evt => {
+                btn.RegisterCallback<ClickEvent>(evt =>
+                {
                     openCard(currentEvent);
                 });
-            }else{
+            }
+            else
+            {
                 btn.text = "Еще не открыто!";
             }
         };
@@ -69,40 +77,49 @@ public class CardsUi : MonoBehaviour
         {
             var currentEvent = right[index];
             var btn = element.Q<Button>("btn");
-            if (EventManager.collection.Contains(currentEvent.id)){
+            if (EventManager.collection.Contains(currentEvent.id))
+            {
                 btn.text = currentEvent.message;
-                btn.RegisterCallback<ClickEvent>(evt => {
+                btn.RegisterCallback<ClickEvent>(evt =>
+                {
                     openCard(currentEvent);
                 });
-            }else{
+            }
+            else
+            {
                 btn.text = "Еще не открыто!";
             }
         };
 
-        list1.itemsSource=left;
-        list2.itemsSource=right;
+        list1.itemsSource = left;
+        list2.itemsSource = right;
 
-        Consts.SettingsShown=false;
+        Consts.SettingsShown = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Consts.CardsShown){
+        if (Consts.CardsShown)
+        {
             root.style.display = DisplayStyle.Flex;
-            getLbl.text="Вы собрали: "+((double) EventManager.collection.Count/EventManager.events.Length)*100+"%";
-        }else{
+            getLbl.text = "Вы собрали: " + ((double)EventManager.collection.Count / EventManager.events.Length) * 100 + "%";
+        }
+        else
+        {
             root.style.display = DisplayStyle.None;
         }
     }
 
-    public void closeCardsAction(ClickEvent e){
-        Consts.MainMenuShown=true;
-        Consts.CardsShown=false;
+    public void closeCardsAction(ClickEvent e)
+    {
+        Consts.MainMenuShown = true;
+        Consts.CardsShown = false;
     }
 
-    public void openCard(Event e){
-        Consts.OneCardShown=true;
-        Consts.eventText=e.message;
+    public void openCard(Event e)
+    {
+        Consts.OneCardShown = true;
+        Consts.eventText = e.message;
     }
 }
