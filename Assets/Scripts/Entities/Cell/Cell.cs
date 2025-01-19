@@ -16,6 +16,12 @@ public class Cell : MonoBehaviour
 
     private System.Random random = new System.Random();
 
+    public Sprite treeSprite;
+    public Sprite waterSprite;
+    public Sprite rockSprite;
+    public Sprite hutSprite;
+    public Sprite bridgeSprite;
+
     void Start()
     {
 
@@ -57,7 +63,7 @@ public class Cell : MonoBehaviour
             return;
         }
         this.isAlive = true;
-        GetComponent<SpriteRenderer>().color = Consts.bridgeColor;
+        GetComponent<SpriteRenderer>().sprite = bridgeSprite;
         if (!this.isPreAlive)
         {
             GetComponent<SpriteRenderer>().color = Consts.destroyColor;
@@ -71,7 +77,7 @@ public class Cell : MonoBehaviour
 
     public void setHut()
     {
-        GetComponent<SpriteRenderer>().color = Consts.hutColor;
+        GetComponent<SpriteRenderer>().sprite = hutSprite;
         Consts.game.tree += 10;
         Consts.game.water += 10;
         Consts.game.rock += 10;
@@ -119,20 +125,15 @@ public class Cell : MonoBehaviour
         Color newColor = Color.green;
         if (this.type == CellTypes.ROCK)
         {
-            newColor = Consts.rockColor;
+            GetComponent<SpriteRenderer>().sprite = rockSprite;
         }
         else if (this.type == CellTypes.WATER)
         {
-            newColor = Consts.waterColor;
+            GetComponent<SpriteRenderer>().sprite = waterSprite;
         }
         else if (this.type == CellTypes.TREE)
         {
-            newColor = Consts.treeColor;
+            GetComponent<SpriteRenderer>().sprite = treeSprite;
         }
-        else if (this.type == CellTypes.BRIDGE)
-        {
-            newColor = Consts.bridgeColor;
-        }
-        GetComponent<SpriteRenderer>().color = newColor;
     }
 }

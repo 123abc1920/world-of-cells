@@ -102,7 +102,15 @@ MonoBehaviour:
   type: 0
   pos: {x: 0, y: 0, z: 0}
   isAlive: 0
+  isPreAlive: 1
+  isBridge: 0
+  isHut: 0
   id: 0
+  treeSprite: {fileID: 21300000, guid: f3b0e385f055fd6428d09f4450121bf9, type: 3}
+  waterSprite: {fileID: 21300000, guid: 58ca5a83395845346b61244c51926226, type: 3}
+  rockSprite: {fileID: 21300000, guid: ec2c960361ebaef489d9065352e7dae6, type: 3}
+  hutSprite: {fileID: 21300000, guid: 51e31d13f8b77cd4a82d8cc0dad659a8, type: 3}
+  bridgeSprite: {fileID: 21300000, guid: 288e7e293a1c16e409526a8606fddb0c, type: 3}
 --- !u!61 &6063745558122419829
 BoxCollider2D:
   m_ObjectHideFlags: 0
