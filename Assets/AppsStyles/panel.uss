@@ -3,3 +3,10 @@
     text-overflow: ellipsis;
     white-space: normal;
 }
+
+.unity-button:pressed {
+    border-color: transparent;
+    background-image: url("project://database/Assets/Sprites/btnFocused.png?fileID=21300000&guid=461159a12fd8bab499596e35417ee111&type=3#btnFocused");
+    background-size: contain;
+    -unity-background-scale-mode: stretch-to-fill;
+}

@@ -24,12 +24,12 @@ public class CardsUi : MonoBehaviour
         root.style.display = DisplayStyle.None;
 
         cardsLbl = root.Q<Label>("cardsLbl");
-        cardsLbl.text=LanguageManager.L.CardsTitle;
+        cardsLbl.text = LanguageManager.L.CardsTitle;
         getLbl = root.Q<Label>("getLbl");
 
         closeCards = root.Q<Button>("closeCards");
         closeCards.RegisterCallback<ClickEvent>(closeCardsAction);
-        closeCards.text=LanguageManager.L.Close;
+        closeCards.text = LanguageManager.L.Close;
 
         list1 = root.Q<ListView>("list1");
         list2 = root.Q<ListView>("list2");
@@ -58,34 +58,32 @@ public class CardsUi : MonoBehaviour
         {
             var currentEvent = left[index];
             var btn = element.Q<Button>("btn");
+            var art = element.Q<GroupBox>("art");
             if (EventManager.collection.Contains(currentEvent.id))
             {
-                btn.text = currentEvent.message;
+                Sprite sp = Resources.Load<Sprite>("Sprites/events");
+                StyleBackground styleBackground = new StyleBackground(sp);
+                art.style.backgroundImage = styleBackground;
                 btn.RegisterCallback<ClickEvent>(evt =>
                 {
                     openCard(currentEvent);
                 });
-            }
-            else
-            {
-                btn.text = "Еще не открыто!";
             }
         };
         list2.bindItem = (element, index) =>
         {
             var currentEvent = right[index];
             var btn = element.Q<Button>("btn");
+            var art = element.Q<GroupBox>("art");
             if (EventManager.collection.Contains(currentEvent.id))
             {
-                btn.text = currentEvent.message;
+                Sprite sp = Resources.Load<Sprite>("Sprites/events");
+                StyleBackground styleBackground = new StyleBackground(sp);
+                art.style.backgroundImage = styleBackground;
                 btn.RegisterCallback<ClickEvent>(evt =>
                 {
                     openCard(currentEvent);
                 });
-            }
-            else
-            {
-                btn.text = "Еще не открыто!";
             }
         };
 

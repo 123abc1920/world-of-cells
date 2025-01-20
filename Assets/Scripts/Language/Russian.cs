@@ -12,7 +12,7 @@ public class Russian : Language
         Story = "История";
 
         SettingsTitle = "Настройки";
-        ProgressLbl = "Прогресс: {0}";
+        ProgressLbl = "Прогресс: {0}%";
         ProgressBtn = "Сброс";
         SoundLbl = "Звук";
         SoundBtn = "Btn";
