@@ -8,6 +8,8 @@ public class SettingsScript : MonoBehaviour
 {
     private Label settingsTitle;
     private Label progressLbl;
+    private Label langLbl;
+    private Label soundLbl;
 
     private Button backBtn;
     private Button progressBtn;
@@ -21,8 +23,9 @@ public class SettingsScript : MonoBehaviour
         root = uiDocument.rootVisualElement;
 
         settingsTitle = root.Q<Label>("settingsTitle");
-
         progressLbl = root.Q<Label>("progressLbl");
+        langLbl = root.Q<Label>("langLbl");
+        soundLbl = root.Q<Label>("soundLbl");
 
         backBtn = root.Q<Button>("backBtn");
         backBtn.RegisterCallback<ClickEvent>(backBtnAction);
@@ -38,6 +41,8 @@ public class SettingsScript : MonoBehaviour
     void Update()
     {
         langBtn.text = LanguageManager.L.LanguageBtn;
+        langLbl.text = LanguageManager.L.LanguageLbl;
+        soundLbl.text = LanguageManager.L.SoundLbl;
         settingsTitle.text = LanguageManager.L.SettingsTitle;
         backBtn.text = LanguageManager.L.Close;
         settingsTitle.text = LanguageManager.L.SettingsTitle;

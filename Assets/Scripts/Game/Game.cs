@@ -74,7 +74,7 @@ public class Game
             {
                 if (cells[i].pos.y + Consts.width / 2 >= start.y && start.y > cells[i].pos.y - Consts.width / 2)
                 {
-                    if (Consts.buildBridge && !cells[i].isAlive)
+                    if (Consts.buildBridge && !cells[i].isAlive && !cells[i].isHut)
                     {
                         this.cells[i].setBridge();
                         return;
@@ -120,24 +120,24 @@ public class Game
     {
         if (redEnemy.cell == player.cell)
         {
-            Consts.titleText = "Вы проиграли.";
-            Consts.textText = "На вас напал красный монстр.";
+            Consts.titleText = LanguageManager.L.LoseTxt;
+            Consts.textText = LanguageManager.L.RedEnd;
             Consts.EndShown = true;
             return;
         }
 
         if (!this.cells[player.cell].isAlive && !this.cells[player.cell].isBridge)
         {
-            Consts.titleText = "Вы проиграли.";
-            Consts.textText = "Вас унесло в космос.";
+            Consts.titleText = LanguageManager.L.LoseTxt;
+            Consts.textText = LanguageManager.L.CosmosEnd;
             Consts.EndShown = true;
             return;
         }
 
         if (this.tree <= 0 && this.rock <= 0 && this.water <= 0)
         {
-            Consts.titleText = "Вы победили!";
-            Consts.textText = "Вы собрали необходимые ресурсы!";
+            Consts.titleText = LanguageManager.L.WinEnd;
+            Consts.textText = LanguageManager.L.WinTxt;
             Consts.EndShown = true;
             return;
         }
@@ -146,7 +146,7 @@ public class Game
         {
             currentEvent = EventManager.events[EventManager.variances[random.Next(EventManager.variances.Length)]];
             Consts.OneCardShown = true;
-            Consts.eventText = currentEvent.message;
+            Consts.eventText = LanguageManager.L.Events[currentEvent.id];
             return;
         }
     }

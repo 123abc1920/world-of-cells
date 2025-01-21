@@ -114,6 +114,6 @@ public class CardsUi : MonoBehaviour
     public void openCard(Event e)
     {
         Consts.OneCardShown = true;
-        Consts.eventText = e.message;
+        Consts.eventText = LanguageManager.L.Events[e.id];
     }
 }

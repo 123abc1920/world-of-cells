@@ -58,11 +58,8 @@ public class Cell : MonoBehaviour
 
     public void setBridge()
     {
-        if (this.isHut)
-        {
-            return;
-        }
         this.isAlive = true;
+        GetComponent<SpriteRenderer>().color = Color.white;
         GetComponent<SpriteRenderer>().sprite = bridgeSprite;
         if (!this.isPreAlive)
         {
@@ -122,7 +119,7 @@ public class Cell : MonoBehaviour
         this.type = Consts.types[random.Next(Consts.types.Length)];
         this.resourceCount = random.Next(1, 20);
 
-        Color newColor = Color.green;
+        GetComponent<SpriteRenderer>().color = Color.white;
         if (this.type == CellTypes.ROCK)
         {
             GetComponent<SpriteRenderer>().sprite = rockSprite;

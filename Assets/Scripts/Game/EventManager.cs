@@ -15,10 +15,10 @@ public class EventManager
     static EventManager(){
         collection=DataScript.LoadData();
 
-        events[0]=new Event("Вы упали в яму. Часть собранных ресурсов утрачена.", 0, 5);
-        events[1]=new Event("Вы оказались в лесу. Количество дерева увеличено.", 1, 2);
-        events[2]=new Event("Вы нашли клад. Количество ресурсов увеличено.", 2, 2);
-        events[3]=new Event("Вы встретили магических существ. Они делятся с вами ресурсами.", 3, 1);
+        events[0]=new Event(0, 5);
+        events[1]=new Event(1, 2);
+        events[2]=new Event(2, 2);
+        events[3]=new Event(3, 1);
 
         int k=0;
         for (int i=0; i<events.Length; i++){

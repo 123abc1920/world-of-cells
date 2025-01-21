@@ -21,43 +21,52 @@ public class MenuScript : MonoBehaviour
         root = uiDocument.rootVisualElement;
 
         gameTitle = root.Q<Label>("gameTitle");
-        gameTitle.text=LanguageManager.L.Title;
+        gameTitle.text = LanguageManager.L.Title;
 
         playBtn = root.Q<Button>("playBtn");
         playBtn.RegisterCallback<ClickEvent>(playBtnAction);
-        playBtn.text=LanguageManager.L.Play;
+        playBtn.text = LanguageManager.L.Play;
 
         settingsBtn = root.Q<Button>("settingsBtn");
         settingsBtn.RegisterCallback<ClickEvent>(settingsBtnAction);
-        settingsBtn.text=LanguageManager.L.Settings;
+        settingsBtn.text = LanguageManager.L.Settings;
 
         cardsBtn = root.Q<Button>("cardsBtn");
         cardsBtn.RegisterCallback<ClickEvent>(openCardsBtnAction);
-        cardsBtn.text=LanguageManager.L.Cards;
+        cardsBtn.text = LanguageManager.L.Cards;
 
-        Consts.MainMenuShown=true;
+        storyBtn = root.Q<Button>("storyBtn");
+        storyBtn.text = LanguageManager.L.Story;
+
+        Consts.MainMenuShown = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Consts.MainMenuShown){
+        if (Consts.MainMenuShown)
+        {
             root.style.display = DisplayStyle.Flex;
-        }else{
+        }
+        else
+        {
             root.style.display = DisplayStyle.None;
         }
     }
 
-    public void playBtnAction(ClickEvent e){
+    public void playBtnAction(ClickEvent e)
+    {
         Scenes.OpenGame();
     }
 
-    public void settingsBtnAction(ClickEvent e){
+    public void settingsBtnAction(ClickEvent e)
+    {
         Scenes.OpenSettings();
     }
 
-    public void openCardsBtnAction(ClickEvent e){
-        Consts.MainMenuShown=false;
-        Consts.CardsShown=true;
+    public void openCardsBtnAction(ClickEvent e)
+    {
+        Consts.MainMenuShown = false;
+        Consts.CardsShown = true;
     }
 }

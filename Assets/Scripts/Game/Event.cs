@@ -1,11 +1,9 @@
 public class Event
 {
-    public string message;
     public int id;
     public int periodicity;
 
-    public Event(string message, int id, int periodicity){
-        this.message=message;
+    public Event(int id, int periodicity){
         this.id=id;
         this.periodicity=periodicity;
     }

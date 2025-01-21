@@ -18,7 +18,7 @@ public class UIScripts : MonoBehaviour
     private Button hutBtn;
     private Button menuBtn;
 
-    private Color firstColor = new Color(0.74f, 0.74f, 0.74f, 1), activeColor = new Color(0.5f, 0.63f, 0.81f, 1);
+    private Color activeColor = new Color(0f, 1f, 1f, 1);
 
     // Start is called before the first frame update
     void Start()
@@ -33,25 +33,23 @@ public class UIScripts : MonoBehaviour
 
         startBtn = root.Q<Button>("startBtn");
         startBtn.RegisterCallback<ClickEvent>(startBtnAction);
-        startBtn.text=LanguageManager.L.StartNewGame;
+        startBtn.text = LanguageManager.L.StartNewGame;
 
         skipBtn = root.Q<Button>("skipBtn");
         skipBtn.RegisterCallback<ClickEvent>(skipBtnAction);
-        skipBtn.text=LanguageManager.L.SkipStep;
+        skipBtn.text = LanguageManager.L.SkipStep;
 
         bridgeBtn = root.Q<Button>("bridgeBtn");
         bridgeBtn.RegisterCallback<ClickEvent>(bridgeBtnAction);
-        bridgeBtn.text=LanguageManager.L.BuildBridge;
+        bridgeBtn.text = LanguageManager.L.BuildBridge;
 
         hutBtn = root.Q<Button>("hutBtn");
         hutBtn.RegisterCallback<ClickEvent>(hutBtnAction);
-        hutBtn.text=LanguageManager.L.BuildHut;
+        hutBtn.text = LanguageManager.L.BuildHut;
 
         menuBtn = root.Q<Button>("menuBtn");
         menuBtn.RegisterCallback<ClickEvent>(menuBtnAction);
-        menuBtn.text=LanguageManager.L.BackToMenu;
-
-        firstColor = hutBtn.style.backgroundColor.value;
+        menuBtn.text = LanguageManager.L.BackToMenu;
     }
 
     // Update is called once per frame
@@ -64,20 +62,20 @@ public class UIScripts : MonoBehaviour
 
         if (Consts.buildBridge)
         {
-            bridgeBtn.style.backgroundColor = activeColor;
+            bridgeBtn.style.unityBackgroundImageTintColor = activeColor;
         }
         else
         {
-            bridgeBtn.style.backgroundColor = firstColor;
+            bridgeBtn.style.unityBackgroundImageTintColor = Color.white;
         }
 
         if (Consts.buildHut)
         {
-            hutBtn.style.backgroundColor = activeColor;
+            hutBtn.style.unityBackgroundImageTintColor = activeColor;
         }
         else
         {
-            hutBtn.style.backgroundColor = firstColor;
+            hutBtn.style.unityBackgroundImageTintColor = Color.white;
         }
     }
 

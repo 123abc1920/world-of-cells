@@ -20,7 +20,7 @@ public abstract class Language
 
     public string CardsTitle;
     public string ProgressTitle;
-    
+
     public string Tree;
     public string Water;
     public string Rock;
@@ -34,4 +34,12 @@ public abstract class Language
     public string Ok;
     public string Close;
     public string Start;
+
+    public string WinTxt;
+    public string LoseTxt;
+    public string RedEnd;
+    public string CosmosEnd;
+    public string WinEnd;
+
+    public string[] Events = new string[EventManager.events.Length];
 }
