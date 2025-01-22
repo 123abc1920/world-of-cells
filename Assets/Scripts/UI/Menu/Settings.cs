@@ -79,6 +79,7 @@ public class SettingsScript : MonoBehaviour
     private void changeLangBtnAction(ClickEvent e)
     {
         LanguageManager.getNextLang();
+        PlayerPrefs.SetInt("lang", LanguageManager.getLanguage());
     }
 
     private void voiceBtnAction(ClickEvent e)
@@ -89,12 +90,22 @@ public class SettingsScript : MonoBehaviour
         {
             audio.Stop();
             Consts.audio = true;
+            PlayerPrefs.SetInt("sound", 1);
         }
         else
         {
             audio.Play();
             Consts.audio = false;
+            PlayerPrefs.SetInt("sound", 0);
         }
-        Debug.Log(Consts.audio);
+
+        if (audio.isPlaying)
+        {
+            PlayerPrefs.SetInt("sound", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("sound", 0);
+        }
     }
 }

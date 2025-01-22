@@ -1,9 +1,20 @@
 using System;
+using UnityEngine;
 
 public class LanguageManager
 {
     private static Language[] languages = { new English(), new Russian() };
-    public static Language L = languages[1];
+    public static Language L;
+
+    public static void setLanguage(int i)
+    {
+        L = languages[i];
+    }
+
+    public static int getLanguage()
+    {
+        return Array.IndexOf(languages, LanguageManager.L);
+    }
 
     public static void getNextLang()
     {

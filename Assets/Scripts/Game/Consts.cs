@@ -35,7 +35,7 @@ public class Consts
 
     public static float lastClick = 0;
 
-    public static bool audio = false;
+    public static bool audio;
 
     public static Game game;
 
