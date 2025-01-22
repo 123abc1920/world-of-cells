@@ -14,6 +14,7 @@ public class SettingsScript : MonoBehaviour
     private Button backBtn;
     private Button progressBtn;
     private Button langBtn;
+    private Button voiceBtn;
 
     private VisualElement root;
     // Start is called before the first frame update
@@ -35,6 +36,9 @@ public class SettingsScript : MonoBehaviour
 
         langBtn = root.Q<Button>("langBtn");
         langBtn.RegisterCallback<ClickEvent>(changeLangBtnAction);
+
+        voiceBtn = root.Q<Button>("voiceBtn");
+        voiceBtn.RegisterCallback<ClickEvent>(voiceBtnAction);
     }
 
     // Update is called once per frame
@@ -48,6 +52,17 @@ public class SettingsScript : MonoBehaviour
         settingsTitle.text = LanguageManager.L.SettingsTitle;
         progressLbl.text = string.Format(LanguageManager.L.ProgressLbl, ((double)EventManager.collection.Count / EventManager.events.Length) * 100);
         progressBtn.text = LanguageManager.L.ProgressBtn;
+
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("music");
+        AudioSource audio = objs[0].GetComponent<AudioSource>();
+        if (audio.isPlaying)
+        {
+            voiceBtn.text = LanguageManager.L.SoundBtnOn;
+        }
+        else
+        {
+            voiceBtn.text = LanguageManager.L.SoundBtnOff;
+        }
     }
 
     public void backBtnAction(ClickEvent e)
@@ -64,5 +79,22 @@ public class SettingsScript : MonoBehaviour
     private void changeLangBtnAction(ClickEvent e)
     {
         LanguageManager.getNextLang();
+    }
+
+    private void voiceBtnAction(ClickEvent e)
+    {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("music");
+        AudioSource audio = objs[0].GetComponent<AudioSource>();
+        if (audio.isPlaying)
+        {
+            audio.Stop();
+            Consts.audio = true;
+        }
+        else
+        {
+            audio.Play();
+            Consts.audio = false;
+        }
+        Debug.Log(Consts.audio);
     }
 }

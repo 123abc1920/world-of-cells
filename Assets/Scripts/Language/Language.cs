@@ -14,7 +14,8 @@ public abstract class Language
     public string ProgressLbl;
     public string ProgressBtn;
     public string SoundLbl;
-    public string SoundBtn;
+    public string SoundBtnOn;
+    public string SoundBtnOff;
     public string LanguageLbl;
     public string LanguageBtn;
 

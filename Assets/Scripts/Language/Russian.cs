@@ -16,7 +16,8 @@ public class Russian : Language
         ProgressLbl = "Прогресс: {0}%";
         ProgressBtn = "Сброс";
         SoundLbl = "Звук";
-        SoundBtn = "Btn";
+        SoundBtnOn = "Вкл";
+        SoundBtnOff = "Выкл";
         LanguageLbl = "Язык";
         LanguageBtn = "Рус";
 

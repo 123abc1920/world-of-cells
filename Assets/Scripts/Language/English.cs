@@ -16,7 +16,8 @@ public class English : Language
         ProgressLbl = "Progress: {0}%";
         ProgressBtn = "Reset";
         SoundLbl = "Sound";
-        SoundBtn = "Btn";
+        SoundBtnOn = "On";
+        SoundBtnOff = "Off";
         LanguageLbl = "Language";
         LanguageBtn = "Eng";
 
