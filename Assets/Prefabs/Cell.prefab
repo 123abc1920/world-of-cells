@@ -111,6 +111,14 @@ MonoBehaviour:
   rockSprite: {fileID: 21300000, guid: ec2c960361ebaef489d9065352e7dae6, type: 3}
   hutSprite: {fileID: 21300000, guid: 51e31d13f8b77cd4a82d8cc0dad659a8, type: 3}
   bridgeSprite: {fileID: 21300000, guid: 288e7e293a1c16e409526a8606fddb0c, type: 3}
+  treeDestroySprite: {fileID: 21300000, guid: df3d383d92d032149b47427f0f7f6d3a, type: 3}
+  waterDestroySprite: {fileID: 21300000, guid: 2f7f3a3431db854418712498a11dfd71, type: 3}
+  rockDestroySprite: {fileID: 21300000, guid: 86019d0387527f84094346f2f1e08c8d, type: 3}
+  hutDestroySprite: {fileID: 21300000, guid: 50ce19d70f5ed85489e9f31795db9403, type: 3}
+  bridgeDestroySprite: {fileID: 21300000, guid: 1ec292bce43057543894ccea6e5e0e96, type: 3}
+  treeEmptySprite: {fileID: 21300000, guid: 9a770ea7976c1c74197f0a3c9bd75877, type: 3}
+  waterEmptySprite: {fileID: 21300000, guid: 0bda793b36b25884ab50fbfa6b26fcea, type: 3}
+  rockEmptySprite: {fileID: 21300000, guid: 8184a00e4a79faa428b6d9f7081e4924, type: 3}
 --- !u!61 &6063745558122419829
 BoxCollider2D:
   m_ObjectHideFlags: 0

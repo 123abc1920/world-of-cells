@@ -17,29 +17,32 @@ public class cardScript : MonoBehaviour
         var uiDocument = GetComponent<UIDocument>();
         root = uiDocument.rootVisualElement;
 
-        root.style.display = DisplayStyle.None;
-
         eventMessage = root.Q<Label>("eventMessage");
 
         closeCardBtn = root.Q<Button>("closeCardBtn");
         closeCardBtn.RegisterCallback<ClickEvent>(closeCardBtnAction);
-        closeCardBtn.text=LanguageManager.L.Ok;
+        closeCardBtn.text = LanguageManager.L.Ok;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Consts.OneCardShown){
-            eventMessage.text=Consts.eventText;
+        if (Consts.OneCardShown)
+        {
+            eventMessage.text = Consts.eventText;
             root.style.display = DisplayStyle.Flex;
-        }else{
+        }
+        else
+        {
             root.style.display = DisplayStyle.None;
         }
     }
 
-    public void closeCardBtnAction(ClickEvent e){
-        Consts.OneCardShown=false;
-        if (Scenes.getActiveScene().Equals("SampleScene")){
+    public void closeCardBtnAction(ClickEvent e)
+    {
+        Consts.OneCardShown = false;
+        if (Scenes.getActiveScene().Equals("SampleScene"))
+        {
             Consts.game.getEvent();
         }
     }

@@ -21,8 +21,6 @@ public class CardsUi : MonoBehaviour
         var uiDocument = GetComponent<UIDocument>();
         root = uiDocument.rootVisualElement;
 
-        root.style.display = DisplayStyle.None;
-
         cardsLbl = root.Q<Label>("cardsLbl");
         cardsLbl.text = LanguageManager.L.CardsTitle;
         getLbl = root.Q<Label>("getLbl");

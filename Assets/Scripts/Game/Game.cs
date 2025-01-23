@@ -258,12 +258,13 @@ public class Game
         for (int i = 0; i < 100; i++)
         {
             this.cells[i].restartCell();
+            this.texts[i].hidden = false;
             this.texts[i].updateText(this.cells[i].resourceCount);
         }
 
-        this.tree = this.random.Next(20, 80);
-        this.rock = this.random.Next(20, 80);
-        this.water = this.random.Next(20, 80);
+        this.tree = this.random.Next(20, 60);
+        this.rock = this.random.Next(20, 60);
+        this.water = this.random.Next(20, 60);
         this.stepCount = 0;
 
         int index = random.Next(100);

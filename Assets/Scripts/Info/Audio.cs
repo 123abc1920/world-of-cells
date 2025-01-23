@@ -13,14 +13,6 @@ public class Audio : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        else
-        {
-            AudioSource audio = objs[0].GetComponent<AudioSource>();
-            if (!Consts.audio)
-            {
-                audio.Stop();
-            }
-        }
 
         DontDestroyOnLoad(this.gameObject);
     }
