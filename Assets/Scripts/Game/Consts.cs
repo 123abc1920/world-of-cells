@@ -18,7 +18,7 @@ public class Consts
     public static Color emptyColor = new Color(0.82f, 0.78f, 0.72f, 1);
     public static Color transparentColor = new Color(0.82f, 0.78f, 0.72f, 0);
 
-    public static int width = 20;
+    public static int width = 19;
     public static int ONE_ROW = 10;
 
     public static bool buildHut = false;

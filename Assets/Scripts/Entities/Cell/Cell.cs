@@ -114,7 +114,7 @@ public class Cell : MonoBehaviour
     public void getResource()
     {
         Consts.game.texts[id].updateText(0);
-        if (this.resourceCount == 0)
+        if (this.resourceCount == 0 || this.isBridge || this.isHut)
         {
             return;
         }
