@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using System;
+using UnityEngine.AdaptivePerformance;
 
 public class CardsUi : MonoBehaviour
 {
@@ -35,8 +37,18 @@ public class CardsUi : MonoBehaviour
         list1.makeItem = () => listItem.CloneTree();
         list2.makeItem = () => listItem.CloneTree();
 
-        Event[] left = new Event[EventManager.events.Length / 2];
+        Event[] left;
+        if (EventManager.events.Length % 2 == 0)
+        {
+            left = new Event[EventManager.events.Length / 2];
+        }
+        else
+        {
+            left = new Event[EventManager.events.Length / 2 + 1];
+        }
         Event[] right = new Event[EventManager.events.Length / 2];
+
+        
 
         int j = 0;
         for (int i = 0; i < EventManager.events.Length; i++)
@@ -95,7 +107,7 @@ public class CardsUi : MonoBehaviour
         if (Consts.CardsShown)
         {
             root.style.display = DisplayStyle.Flex;
-            getLbl.text = string.Format(LanguageManager.L.ProgressTitle, ((double)EventManager.collection.Count / EventManager.events.Length) * 100);
+            getLbl.text = string.Format(LanguageManager.L.ProgressTitle, Math.Truncate(((double)EventManager.collection.Count / EventManager.events.Length) * 100));
         }
         else
         {

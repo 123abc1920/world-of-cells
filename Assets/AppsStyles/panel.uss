@@ -11,3 +11,10 @@
     -unity-background-scale-mode: stretch-to-fill;
     -unity-background-image-tint-color: rgb(0, 255, 255);
 }
+
+.unity-scroller {
+    overflow: hidden;
+    visibility: hidden;
+    display: none;
+    max-width: 0;
+}

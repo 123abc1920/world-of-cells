@@ -250,7 +250,7 @@ public class Game
 
     public void getEvent()
     {
-        EventManager.eventAction(this.currentEvent.id);
+        EventManager.eventAction(this.currentEvent);
     }
 
     public void renewGame()
