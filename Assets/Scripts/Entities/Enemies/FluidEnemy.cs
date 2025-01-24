@@ -41,7 +41,7 @@ public class FluidEnemy : MonoBehaviour
 
     public void newPos(float x, float y)
     {
-        transform.position = new Vector3(x, y, 1);
+        transform.position = new Vector3(x, y + 10, 1);
     }
 
     public void hideEnemy()
