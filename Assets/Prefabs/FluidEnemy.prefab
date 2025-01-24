@@ -101,3 +101,6 @@ MonoBehaviour:
   a: 010000000a000000
   type: 0
   isAlive: 1
+  waterSprite: {fileID: 21300000, guid: 70c7d1bd9a15c6d4cbb04ded6827fdb8, type: 3}
+  treeSprite: {fileID: 21300000, guid: c88dcd7998269904abcbee8cafde2542, type: 3}
+  rockSprite: {fileID: 21300000, guid: 8737446c38cb0ca4299d35adbb0fc626, type: 3}

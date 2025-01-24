@@ -8,9 +8,10 @@ public class FluidEnemy : MonoBehaviour
     public int[] a = { 1, Consts.ONE_ROW, -1, -Consts.ONE_ROW };
     public CellTypes type;
     public bool isAlive = true;
-    private Color waterColor = new Color(0.16f, 0.32f, 0.5f, 1);
-    private Color rockColor = new Color(0.24f, 0.21f, 0.21f, 1);
-    private Color treeColor = new Color(0.25f, 0.43f, 0.11f, 1);
+
+    public Sprite waterSprite;
+    public Sprite treeSprite;
+    public Sprite rockSprite;
 
     // Start is called before the first frame update
     void Start()
@@ -25,15 +26,15 @@ public class FluidEnemy : MonoBehaviour
         {
             if (this.type == CellTypes.TREE)
             {
-                GetComponent<SpriteRenderer>().color = treeColor;
+                GetComponent<SpriteRenderer>().sprite = treeSprite;
             }
             if (this.type == CellTypes.ROCK)
             {
-                GetComponent<SpriteRenderer>().color = rockColor;
+                GetComponent<SpriteRenderer>().sprite = rockSprite;
             }
             if (this.type == CellTypes.WATER)
             {
-                GetComponent<SpriteRenderer>().color = waterColor;
+                GetComponent<SpriteRenderer>().sprite = waterSprite;
             }
         }
     }
