@@ -29,9 +29,11 @@ public class Consts
 
     public static bool OneCardShown;
     public static string eventText;
+    public static Sprite eventSprite;
     public static bool EndShown;
     public static string titleText;
     public static string textText;
+    public static Sprite spriteText;
 
     public static float lastClick = 0;
 

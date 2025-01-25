@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -50,7 +51,7 @@ public class SettingsScript : MonoBehaviour
         settingsTitle.text = LanguageManager.L.SettingsTitle;
         backBtn.text = LanguageManager.L.Close;
         settingsTitle.text = LanguageManager.L.SettingsTitle;
-        progressLbl.text = string.Format(LanguageManager.L.ProgressLbl, ((double)EventManager.collection.Count / EventManager.events.Length) * 100);
+        progressLbl.text = string.Format(LanguageManager.L.ProgressLbl, Math.Truncate(((double)EventManager.collection.Count / EventManager.events.Length) * 100));
         progressBtn.text = LanguageManager.L.ProgressBtn;
 
         GameObject[] objs = GameObject.FindGameObjectsWithTag("music");

@@ -64,15 +64,33 @@ public class EventManager
         });
         events[4] = new Event(4, 3, () =>
         {
-
+            foreach (Cell c in Consts.game.cells)
+            {
+                if (c.type == CellTypes.WATER && c.isAlive && !c.isBridge && !c.isHut)
+                {
+                    c.refreshCell();
+                }
+            }
         });
         events[5] = new Event(5, 3, () =>
         {
-
+            foreach (Cell c in Consts.game.cells)
+            {
+                if (c.type == CellTypes.ROCK && c.isAlive && !c.isBridge && !c.isHut)
+                {
+                    c.refreshCell();
+                }
+            }
         });
         events[6] = new Event(6, 3, () =>
         {
-
+            foreach (Cell c in Consts.game.cells)
+            {
+                if (c.type == CellTypes.TREE && c.isAlive && !c.isBridge && !c.isHut)
+                {
+                    c.refreshCell();
+                }
+            }
         });
     }
 }

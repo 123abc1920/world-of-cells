@@ -122,6 +122,7 @@ public class Game
         {
             Consts.titleText = LanguageManager.L.LoseTxt;
             Consts.textText = LanguageManager.L.RedEnd;
+            Consts.spriteText = Resources.Load<Sprite>("Sprites/events");
             Consts.EndShown = true;
             return;
         }
@@ -130,14 +131,16 @@ public class Game
         {
             Consts.titleText = LanguageManager.L.LoseTxt;
             Consts.textText = LanguageManager.L.CosmosEnd;
+            Consts.spriteText = Resources.Load<Sprite>("Sprites/events");
             Consts.EndShown = true;
             return;
         }
 
         if (this.tree <= 0 && this.rock <= 0 && this.water <= 0)
         {
-            Consts.titleText = LanguageManager.L.WinEnd;
-            Consts.textText = LanguageManager.L.WinTxt;
+            Consts.titleText = LanguageManager.L.WinTxt;
+            Consts.textText = LanguageManager.L.WinEnd;
+            Consts.spriteText = Resources.Load<Sprite>("Sprites/win");
             Consts.EndShown = true;
             return;
         }

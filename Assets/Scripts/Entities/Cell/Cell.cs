@@ -6,6 +6,7 @@ using System;
 public class Cell : MonoBehaviour
 {
     public int resourceCount;
+    public int maxCount;
     public CellTypes type;
     public Vector3 pos;
     public bool isAlive = true;
@@ -141,6 +142,24 @@ public class Cell : MonoBehaviour
         }
     }
 
+    public void refreshCell()
+    {
+        this.resourceCount = Math.Min(this.resourceCount + 10, this.maxCount);
+        Consts.game.texts[this.id].updateText(this.resourceCount);
+        if (this.type == CellTypes.ROCK)
+        {
+            GetComponent<SpriteRenderer>().sprite = rockSprite;
+        }
+        else if (this.type == CellTypes.WATER)
+        {
+            GetComponent<SpriteRenderer>().sprite = waterSprite;
+        }
+        else if (this.type == CellTypes.TREE)
+        {
+            GetComponent<SpriteRenderer>().sprite = treeSprite;
+        }
+    }
+
     public void restartCell()
     {
         this.isAlive = true;
@@ -149,6 +168,7 @@ public class Cell : MonoBehaviour
 
         this.type = Consts.types[random.Next(Consts.types.Length)];
         this.resourceCount = random.Next(1, 20);
+        this.maxCount = this.resourceCount;
 
         GetComponent<SpriteRenderer>().color = Color.white;
         if (this.type == CellTypes.ROCK)
