@@ -7,6 +7,7 @@ public class BlueEnemy : MonoBehaviour
     public int cell;
     public int[] a = { 1, Consts.ONE_ROW, -1, -Consts.ONE_ROW };
     public bool isAlive = true;
+    public bool canMove = true;
 
     // Start is called before the first frame update
     void Start()

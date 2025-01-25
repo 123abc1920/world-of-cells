@@ -48,8 +48,10 @@ public class English : Language
         Events[1] = "You are in the forest. The quantity of wood was increased.";
         Events[2] = "You found a treasure. The quantity of resources was increased.";
         Events[3] = "You met magical creatures. They shared resources with you.";
-        Events[4] = "Идет дождь. Реки наполнились водой.";
-        Events[5] = "Начался сильный ветер. Под песком оказалось много камней.";
-        Events[6] = "Выдалось несколько солнечных дней. Вырастают новые деревья.";
+        Events[4] = "It is raining. The rivres filled with water.";
+        Events[5] = "The strong wind started blowing. There were a lot of rocks under the sand.";
+        Events[6] = "There were several sunny days. New trees grown.";
+        Events[7] = "Вас опутали растения. Вам приходится пропустить нексолько ходов, прежде чем вы сможете выбраться.";
+        Events[8] = "Послышалась музыка. Похоже, монстры уснули и не будут двигаться какое-то время.";
     }
 }

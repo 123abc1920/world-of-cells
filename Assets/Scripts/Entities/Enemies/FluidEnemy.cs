@@ -8,6 +8,7 @@ public class FluidEnemy : MonoBehaviour
     public int[] a = { 1, Consts.ONE_ROW, -1, -Consts.ONE_ROW };
     public CellTypes type;
     public bool isAlive = true;
+    public bool canMove = true;
 
     public Sprite waterSprite;
     public Sprite treeSprite;

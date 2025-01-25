@@ -19,6 +19,8 @@ public class Game
     public int stepCount = 0;
     public int tree, rock, water;
 
+    public List<Effect> effects = new List<Effect>();
+
     private System.Random random = new System.Random();
     private int[] toDestroy = new int[3];
 
@@ -54,6 +56,7 @@ public class Game
 
                             Consts.game.stepCount++;
 
+                            effectsDoing();
                             monsterStep();
                             desroyCells();
                             checkResult();
@@ -96,6 +99,7 @@ public class Game
     {
         Consts.game.stepCount++;
 
+        effectsDoing();
         monsterStep();
         desroyCells();
         checkResult();
@@ -114,6 +118,16 @@ public class Game
                 this.cells[toDestroy[j]].setPreDestroy();
             }
         }
+    }
+
+    public void effectsDoing()
+    {
+        foreach (Effect e in this.effects)
+        {
+            e.effect();
+        }
+
+        this.effects.RemoveAll(n => n.getLonging() == 0);
     }
 
     private void checkResult()
@@ -172,7 +186,7 @@ public class Game
             fluidEnemy.hideEnemy();
         }
 
-        if (redEnemy.isAlive)
+        if (redEnemy.isAlive && redEnemy.canMove)
         {
             List<int> availableCells = Enemy.getAvailableCells(Consts.game.redEnemy.cell, new int[] { 1, Consts.ONE_ROW, Consts.ONE_ROW - 1, Consts.ONE_ROW + 1, -1, -Consts.ONE_ROW, -Consts.ONE_ROW + 1, -Consts.ONE_ROW - 1 });
             if (availableCells.Count > 0)
@@ -194,7 +208,7 @@ public class Game
             }
         }
 
-        if (blueEnemy.isAlive)
+        if (blueEnemy.isAlive && blueEnemy.canMove)
         {
             List<int> availableCells = Enemy.getAvailableCells(Consts.game.blueEnemy.cell, new int[] { 1, Consts.ONE_ROW, -1, -Consts.ONE_ROW });
             if (availableCells.Count > 0)
@@ -219,7 +233,7 @@ public class Game
             }
         }
 
-        if (fluidEnemy.isAlive)
+        if (fluidEnemy.isAlive && fluidEnemy.canMove)
         {
             List<int> availableCells = Enemy.getAvailableCells(Consts.game.fluidEnemy.cell, new int[] { 1, Consts.ONE_ROW, -1, -Consts.ONE_ROW });
             if (availableCells.Count > 0)

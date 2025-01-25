@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class EventManager
 {
-    public static Event[] events = new Event[7];
+    public static Event[] events = new Event[9];
 
-    public static int[] variances = new int[20];
+    public static int[] variances = new int[25];
 
     public static List<int> collection;
+
+    private static System.Random random = new System.Random();
 
     static EventManager()
     {
@@ -91,6 +93,14 @@ public class EventManager
                     c.refreshCell();
                 }
             }
+        });
+        events[7] = new Event(7, 3, () =>
+        {
+            Consts.game.effects.Add(new SleepEffectPlayer(random.Next(2, 5)));
+        });
+        events[8] = new Event(8, 2, () =>
+        {
+            Consts.game.effects.Add(new SleepEffectMonsters(random.Next(2, 5)));
         });
     }
 }
