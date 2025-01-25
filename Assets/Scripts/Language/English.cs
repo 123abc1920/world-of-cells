@@ -51,7 +51,7 @@ public class English : Language
         Events[4] = "It is raining. The rivres filled with water.";
         Events[5] = "The strong wind started blowing. There were a lot of rocks under the sand.";
         Events[6] = "There were several sunny days. New trees grown.";
-        Events[7] = "Вас опутали растения. Вам приходится пропустить нексолько ходов, прежде чем вы сможете выбраться.";
-        Events[8] = "Послышалась музыка. Похоже, монстры уснули и не будут двигаться какое-то время.";
+        Events[7] = "You are entangled by plants. You have to skip several moves before you can get out.";
+        Events[8] = "The music was started. It looks like the monsters have fallen asleep and can't move for a while.";
     }
 }
