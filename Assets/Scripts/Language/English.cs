@@ -11,6 +11,7 @@ public class English : Language
         Settings = "Settings";
         Cards = "Cards";
         Story = "Story";
+        HowToPlay = "How To Play";
 
         SettingsTitle = "Settings";
         ProgressLbl = "Progress: {0}%";
@@ -21,12 +22,18 @@ public class English : Language
         LanguageLbl = "Language";
         LanguageBtn = "Eng";
 
+        PlayerInfo = "There are you. You find yourself on an unfamiliar planet.";
+        GoalInfo = "Numbers - quantity of resources - are generated every game. You have to collect these resources to win.";
+        EnemiesInfo = "There are enemies. Red can move to all of 8 cells around him. He attacks immediately. Blue moves only to cells which have common sides. He steals 10 resources each step if he attacks. The third type of monster changes its appearance and empties the cells.";
+        HutBridgeInfo = "Houses and bridges are a special type of cells. You have to spend resources to build them. Bridges help to get over the destroyed cells. Houses shelter from enemies.";
+        CardsInfo = "Sometimes events can be shown when you step into cell. Events can influence on quatity of resources or apply effects.";
+
         CardsTitle = "Collected Cards";
         ProgressTitle = "You collected {0}% of cards";
 
-        Tree = "Tree: ";
-        Water = "Water: ";
-        Rock = "Rock: ";
+        Tree = "Tree: {0}/{0}";
+        Water = "Water: {0}/{0}";
+        Rock = "Rock: {0}/{0}";
         Steps = "Steps: ";
         StartNewGame = "Start new game";
         SkipStep = "Skip step";

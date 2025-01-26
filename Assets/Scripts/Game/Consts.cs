@@ -26,6 +26,7 @@ public class Consts
 
     public static bool MainMenuShown;
     public static bool CardsShown;
+    public static bool HowToPlayShown;
 
     public static bool OneCardShown;
     public static string eventText;

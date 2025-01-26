@@ -18,6 +18,7 @@ public class Game
 
     public int stepCount = 0;
     public int tree, rock, water;
+    public int yourtree, yourrock, yourwater;
 
     public List<Effect> effects = new List<Effect>();
 
@@ -145,12 +146,12 @@ public class Game
         {
             Consts.titleText = LanguageManager.L.LoseTxt;
             Consts.textText = LanguageManager.L.CosmosEnd;
-            Consts.spriteText = Resources.Load<Sprite>("Sprites/events");
+            Consts.spriteText = Resources.Load<Sprite>("Sprites/lostInCosmos");
             Consts.EndShown = true;
             return;
         }
 
-        if (this.tree <= 0 && this.rock <= 0 && this.water <= 0)
+        if (this.tree <= this.yourtree && this.rock <= this.yourrock && this.water <= this.yourwater)
         {
             Consts.titleText = LanguageManager.L.WinTxt;
             Consts.textText = LanguageManager.L.WinEnd;

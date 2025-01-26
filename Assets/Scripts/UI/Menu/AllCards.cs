@@ -48,8 +48,6 @@ public class CardsUi : MonoBehaviour
         }
         Event[] right = new Event[EventManager.events.Length / 2];
 
-        
-
         int j = 0;
         for (int i = 0; i < EventManager.events.Length; i++)
         {

@@ -9,6 +9,7 @@ public abstract class Language
     public string Settings;
     public string Cards;
     public string Story;
+    public string HowToPlay;
 
     public string SettingsTitle;
     public string ProgressLbl;
@@ -18,6 +19,12 @@ public abstract class Language
     public string SoundBtnOff;
     public string LanguageLbl;
     public string LanguageBtn;
+
+    public string PlayerInfo;
+    public string GoalInfo;
+    public string EnemiesInfo;
+    public string HutBridgeInfo;
+    public string CardsInfo;
 
     public string CardsTitle;
     public string ProgressTitle;
