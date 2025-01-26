@@ -220,9 +220,9 @@ public class Game
                     if (Consts.game.player.cell == availableCells[i] && !cells[Consts.game.player.cell].isHut)
                     {
                         index = availableCells[i];
-                        this.tree += 10;
-                        this.water += 10;
-                        this.rock += 10;
+                        this.yourtree -= 10;
+                        this.yourwater -= 10;
+                        this.yourrock -= 10;
                     }
                 }
                 if (cells[index].isAlive || cells[index].isBridge)
@@ -284,6 +284,9 @@ public class Game
         this.rock = this.random.Next(20, 60);
         this.water = this.random.Next(20, 60);
         this.stepCount = 0;
+        this.yourtree = 0;
+        this.yourrock = 0;
+        this.yourwater = 0;
 
         int index = random.Next(100);
         Cell target = cells[index];

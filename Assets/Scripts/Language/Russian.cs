@@ -31,9 +31,9 @@ public class Russian : Language
         CardsTitle = "Собранные Карты";
         ProgressTitle = "Вы собрали {0}% карт";
 
-        Tree = "Дерево: {0}/{0}";
-        Water = "Вода: {0}/{0}";
-        Rock = "Камни: {0}/{0}";
+        Tree = "Дерево: {0}/";
+        Water = "Вода: {0}/";
+        Rock = "Камни: {0}/";
         Steps = "Шаги: ";
         StartNewGame = "Начать заново";
         SkipStep = "Пропустить шаг";

@@ -31,9 +31,9 @@ public class English : Language
         CardsTitle = "Collected Cards";
         ProgressTitle = "You collected {0}% of cards";
 
-        Tree = "Tree: {0}/{0}";
-        Water = "Water: {0}/{0}";
-        Rock = "Rock: {0}/{0}";
+        Tree = "Tree: {0}/";
+        Water = "Water: {0}/";
+        Rock = "Rock: {0}/";
         Steps = "Steps: ";
         StartNewGame = "Start new game";
         SkipStep = "Skip step";

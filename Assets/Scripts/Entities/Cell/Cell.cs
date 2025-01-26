@@ -95,9 +95,9 @@ public class Cell : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().sprite = bridgeDestroySprite;
         }
-        Consts.game.tree += 10;
-        Consts.game.water += 10;
-        Consts.game.rock += 10;
+        Consts.game.yourtree -= 10;
+        Consts.game.yourwater -= 10;
+        Consts.game.yourrock -= 10;
         this.isBridge = true;
         Consts.buildBridge = false;
     }
@@ -105,9 +105,9 @@ public class Cell : MonoBehaviour
     public void setHut()
     {
         GetComponent<SpriteRenderer>().sprite = hutSprite;
-        Consts.game.tree += 10;
-        Consts.game.water += 10;
-        Consts.game.rock += 10;
+        Consts.game.yourtree -= 10;
+        Consts.game.yourwater -= 10;
+        Consts.game.yourrock -= 10;
         this.isHut = true;
         Consts.buildHut = false;
     }
@@ -121,21 +121,21 @@ public class Cell : MonoBehaviour
         }
         if (this.type == CellTypes.TREE)
         {
-            Consts.game.tree -= this.resourceCount;
+            Consts.game.yourtree += this.resourceCount;
             GetComponent<SpriteRenderer>().sprite = treeEmptySprite;
             this.resourceCount = 0;
             return;
         }
         if (this.type == CellTypes.ROCK)
         {
-            Consts.game.rock -= this.resourceCount;
+            Consts.game.yourrock += this.resourceCount;
             GetComponent<SpriteRenderer>().sprite = rockEmptySprite;
             this.resourceCount = 0;
             return;
         }
         if (this.type == CellTypes.WATER)
         {
-            Consts.game.water -= this.resourceCount;
+            Consts.game.yourwater += this.resourceCount;
             GetComponent<SpriteRenderer>().sprite = waterEmptySprite;
             this.resourceCount = 0;
             return;

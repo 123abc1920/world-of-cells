@@ -56,9 +56,9 @@ public class UIScripts : MonoBehaviour
     void Update()
     {
         stepsLbl.text = LanguageManager.L.Steps + Consts.game.stepCount;
-        treeLbl.text = LanguageManager.L.Tree + Math.Max(0, Consts.game.tree);
-        rockLbl.text = LanguageManager.L.Rock + Math.Max(0, Consts.game.rock);
-        waterLbl.text = LanguageManager.L.Water + Math.Max(0, Consts.game.water);
+        treeLbl.text = string.Format(LanguageManager.L.Tree, Consts.game.yourtree) + Consts.game.tree;
+        rockLbl.text = string.Format(LanguageManager.L.Rock, Consts.game.yourrock) + Consts.game.rock;
+        waterLbl.text = string.Format(LanguageManager.L.Water, Consts.game.yourwater) + Consts.game.water;
 
         if (Consts.buildBridge)
         {

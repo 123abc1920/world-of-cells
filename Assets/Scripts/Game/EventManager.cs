@@ -44,25 +44,25 @@ public class EventManager
     {
         events[0] = new Event(0, 5, () =>
         {
-            Consts.game.tree += 10;
-            Consts.game.water += 10;
-            Consts.game.rock += 10;
+            Consts.game.yourtree -= 10;
+            Consts.game.yourwater -= 10;
+            Consts.game.yourrock -= 10;
         });
         events[1] = new Event(1, 2, () =>
         {
-            Consts.game.tree -= 10;
+            Consts.game.yourtree += 10;
         });
         events[2] = new Event(2, 2, () =>
         {
-            Consts.game.tree -= 10;
-            Consts.game.water -= 10;
-            Consts.game.rock -= 10;
+            Consts.game.yourtree += 10;
+            Consts.game.yourwater += 10;
+            Consts.game.yourrock += 10;
         });
         events[3] = new Event(3, 2, () =>
         {
-            Consts.game.tree -= 15;
-            Consts.game.water -= 15;
-            Consts.game.rock -= 15;
+            Consts.game.yourtree += 15;
+            Consts.game.yourwater += 15;
+            Consts.game.yourrock += 15;
         });
         events[4] = new Event(4, 3, () =>
         {
