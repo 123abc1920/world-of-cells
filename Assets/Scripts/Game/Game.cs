@@ -137,7 +137,7 @@ public class Game
         {
             Consts.titleText = LanguageManager.L.LoseTxt;
             Consts.textText = LanguageManager.L.RedEnd;
-            Consts.spriteText = Resources.Load<Sprite>("Sprites/events");
+            Consts.spriteText = Resources.Load<Sprite>("Sprites/redEnemyEnd");
             Consts.EndShown = true;
             return;
         }

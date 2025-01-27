@@ -22,7 +22,7 @@ public class English : Language
         LanguageLbl = "Language";
         LanguageBtn = "Eng";
 
-        PlayerInfo = "There are you. You find yourself on an unfamiliar planet.";
+        PlayerInfo = "There are you. You find yourself on an unfamiliar planet. Meteorites are constantly falling on it and destroying it, so you need to leave as soon as possible.";
         GoalInfo = "Numbers - quantity of resources - are generated every game. You have to collect these resources to win.";
         EnemiesInfo = "There are enemies. Red can move to all of 8 cells around him. He attacks immediately. Blue moves only to cells which have common sides. He steals 10 resources each step if he attacks. The third type of monster changes its appearance and empties the cells.";
         HutBridgeInfo = "Houses and bridges are a special type of cells. You have to spend resources to build them. Bridges help to get over the destroyed cells. Houses shelter from enemies.";
