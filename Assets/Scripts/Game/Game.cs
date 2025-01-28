@@ -164,6 +164,7 @@ public class Game
         {
             currentEvent = EventManager.events[EventManager.variances[random.Next(EventManager.variances.Length)]];
             Consts.OneCardShown = true;
+            Consts.eventSprite = Resources.Load<Sprite>("Sprites/event" + currentEvent.id);
             Consts.eventText = LanguageManager.L.Events[currentEvent.id];
             return;
         }

@@ -40,7 +40,77 @@ public class Cell : MonoBehaviour
 
     void Update()
     {
+        if (this.isAlive)
+        {
+            GetComponent<SpriteRenderer>().color = Color.white;
+            if (this.resourceCount != 0)
+            {
+                if (this.type == CellTypes.ROCK)
+                {
+                    GetComponent<SpriteRenderer>().sprite = rockSprite;
+                }
+                else if (this.type == CellTypes.WATER)
+                {
+                    GetComponent<SpriteRenderer>().sprite = waterSprite;
+                }
+                else if (this.type == CellTypes.TREE)
+                {
+                    GetComponent<SpriteRenderer>().sprite = treeSprite;
+                }
+            }
+            else
+            {
+                if (this.type == CellTypes.TREE)
+                {
+                    GetComponent<SpriteRenderer>().sprite = treeEmptySprite;
+                }
+                if (this.type == CellTypes.ROCK)
+                {
+                    GetComponent<SpriteRenderer>().sprite = rockEmptySprite;
+                }
+                if (this.type == CellTypes.WATER)
+                {
+                    GetComponent<SpriteRenderer>().sprite = waterEmptySprite;
+                }
+            }
 
+            if (this.isBridge)
+            {
+                GetComponent<SpriteRenderer>().sprite = bridgeSprite;
+            }
+            if (this.isHut)
+            {
+                GetComponent<SpriteRenderer>().sprite = hutSprite;
+            }
+        }
+        if (!this.isPreAlive)
+        {
+            if (this.type == CellTypes.TREE)
+            {
+                GetComponent<SpriteRenderer>().sprite = treeDestroySprite;
+            }
+            if (this.type == CellTypes.ROCK)
+            {
+                GetComponent<SpriteRenderer>().sprite = rockDestroySprite;
+            }
+            if (this.type == CellTypes.WATER)
+            {
+                GetComponent<SpriteRenderer>().sprite = waterDestroySprite;
+            }
+
+            if (this.isBridge)
+            {
+                GetComponent<SpriteRenderer>().sprite = bridgeDestroySprite;
+            }
+            if (this.isHut)
+            {
+                GetComponent<SpriteRenderer>().sprite = hutDestroySprite;
+            }
+        }
+        if (!this.isAlive)
+        {
+            GetComponent<SpriteRenderer>().color = Consts.transparentColor;
+        }
     }
 
     public void newPos(int x, int y)
@@ -51,35 +121,11 @@ public class Cell : MonoBehaviour
 
     public void setPreDestroy()
     {
-        if (this.isAlive)
-        {
-            if (this.type == CellTypes.ROCK)
-            {
-                GetComponent<SpriteRenderer>().sprite = rockDestroySprite;
-            }
-            else if (this.type == CellTypes.WATER)
-            {
-                GetComponent<SpriteRenderer>().sprite = waterDestroySprite;
-            }
-            else if (this.type == CellTypes.TREE)
-            {
-                GetComponent<SpriteRenderer>().sprite = treeDestroySprite;
-            }
-            if (this.isBridge)
-            {
-                GetComponent<SpriteRenderer>().sprite = bridgeDestroySprite;
-            }
-            if (this.isHut)
-            {
-                GetComponent<SpriteRenderer>().sprite = hutDestroySprite;
-            }
-        }
         this.isPreAlive = false;
     }
 
     public void setDestroy()
     {
-        GetComponent<SpriteRenderer>().color = Consts.transparentColor;
         Consts.game.texts[id].hideText();
         Consts.game.texts[id].resourceCount = 0;
         this.isAlive = false;
@@ -89,12 +135,6 @@ public class Cell : MonoBehaviour
     public void setBridge()
     {
         this.isAlive = true;
-        GetComponent<SpriteRenderer>().color = Color.white;
-        GetComponent<SpriteRenderer>().sprite = bridgeSprite;
-        if (!this.isPreAlive)
-        {
-            GetComponent<SpriteRenderer>().sprite = bridgeDestroySprite;
-        }
         Consts.game.yourtree -= 10;
         Consts.game.yourwater -= 10;
         Consts.game.yourrock -= 10;
@@ -104,7 +144,6 @@ public class Cell : MonoBehaviour
 
     public void setHut()
     {
-        GetComponent<SpriteRenderer>().sprite = hutSprite;
         Consts.game.yourtree -= 10;
         Consts.game.yourwater -= 10;
         Consts.game.yourrock -= 10;
@@ -122,21 +161,18 @@ public class Cell : MonoBehaviour
         if (this.type == CellTypes.TREE)
         {
             Consts.game.yourtree += this.resourceCount;
-            GetComponent<SpriteRenderer>().sprite = treeEmptySprite;
             this.resourceCount = 0;
             return;
         }
         if (this.type == CellTypes.ROCK)
         {
             Consts.game.yourrock += this.resourceCount;
-            GetComponent<SpriteRenderer>().sprite = rockEmptySprite;
             this.resourceCount = 0;
             return;
         }
         if (this.type == CellTypes.WATER)
         {
             Consts.game.yourwater += this.resourceCount;
-            GetComponent<SpriteRenderer>().sprite = waterEmptySprite;
             this.resourceCount = 0;
             return;
         }
@@ -146,23 +182,12 @@ public class Cell : MonoBehaviour
     {
         this.resourceCount = Math.Min(this.resourceCount + 10, this.maxCount);
         Consts.game.texts[this.id].updateText(this.resourceCount);
-        if (this.type == CellTypes.ROCK)
-        {
-            GetComponent<SpriteRenderer>().sprite = rockSprite;
-        }
-        else if (this.type == CellTypes.WATER)
-        {
-            GetComponent<SpriteRenderer>().sprite = waterSprite;
-        }
-        else if (this.type == CellTypes.TREE)
-        {
-            GetComponent<SpriteRenderer>().sprite = treeSprite;
-        }
     }
 
     public void restartCell()
     {
         this.isAlive = true;
+        this.isPreAlive = true;
         this.isHut = false;
         this.isBridge = false;
 
@@ -171,17 +196,5 @@ public class Cell : MonoBehaviour
         this.maxCount = this.resourceCount;
 
         GetComponent<SpriteRenderer>().color = Color.white;
-        if (this.type == CellTypes.ROCK)
-        {
-            GetComponent<SpriteRenderer>().sprite = rockSprite;
-        }
-        else if (this.type == CellTypes.WATER)
-        {
-            GetComponent<SpriteRenderer>().sprite = waterSprite;
-        }
-        else if (this.type == CellTypes.TREE)
-        {
-            GetComponent<SpriteRenderer>().sprite = treeSprite;
-        }
     }
 }

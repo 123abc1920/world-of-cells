@@ -73,6 +73,7 @@ public class EventManager
                     c.refreshCell();
                 }
             }
+            Consts.game.cells[Consts.game.player.cell].getResource();
         });
         events[5] = new Event(5, 3, () =>
         {
@@ -83,6 +84,7 @@ public class EventManager
                     c.refreshCell();
                 }
             }
+            Consts.game.cells[Consts.game.player.cell].getResource();
         });
         events[6] = new Event(6, 3, () =>
         {
@@ -93,6 +95,7 @@ public class EventManager
                     c.refreshCell();
                 }
             }
+            Consts.game.cells[Consts.game.player.cell].getResource();
         });
         events[7] = new Event(7, 3, () =>
         {

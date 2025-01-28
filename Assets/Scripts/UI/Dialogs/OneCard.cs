@@ -19,6 +19,8 @@ public class cardScript : MonoBehaviour
 
         eventMessage = root.Q<Label>("eventMessage");
 
+        eventImg = root.Q<VisualElement>("eventImg");
+
         closeCardBtn = root.Q<Button>("closeCardBtn");
         closeCardBtn.RegisterCallback<ClickEvent>(closeCardBtnAction);
         closeCardBtn.text = LanguageManager.L.Ok;
@@ -30,6 +32,8 @@ public class cardScript : MonoBehaviour
         if (Consts.OneCardShown)
         {
             eventMessage.text = Consts.eventText;
+            StyleBackground styleBackground = new StyleBackground(Consts.eventSprite);
+            eventImg.style.backgroundImage = styleBackground;
             root.style.display = DisplayStyle.Flex;
         }
         else

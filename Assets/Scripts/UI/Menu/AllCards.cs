@@ -123,5 +123,6 @@ public class CardsUi : MonoBehaviour
     {
         Consts.OneCardShown = true;
         Consts.eventText = LanguageManager.L.Events[e.id];
+        Consts.eventSprite = Resources.Load<Sprite>("Sprites/event" + e.id);
     }
 }
