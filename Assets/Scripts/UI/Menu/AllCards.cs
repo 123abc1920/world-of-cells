@@ -69,7 +69,7 @@ public class CardsUi : MonoBehaviour
             var art = element.Q<GroupBox>("art");
             if (EventManager.collection.Contains(currentEvent.id))
             {
-                Sprite sp = Resources.Load<Sprite>("Sprites/events");
+                Sprite sp = Resources.Load<Sprite>("Sprites/event" + currentEvent.id);
                 StyleBackground styleBackground = new StyleBackground(sp);
                 art.style.backgroundImage = styleBackground;
                 btn.RegisterCallback<ClickEvent>(evt =>
@@ -85,7 +85,7 @@ public class CardsUi : MonoBehaviour
             var art = element.Q<GroupBox>("art");
             if (EventManager.collection.Contains(currentEvent.id))
             {
-                Sprite sp = Resources.Load<Sprite>("Sprites/events");
+                Sprite sp = Resources.Load<Sprite>("Sprites/event" + currentEvent.id);
                 StyleBackground styleBackground = new StyleBackground(sp);
                 art.style.backgroundImage = styleBackground;
                 btn.RegisterCallback<ClickEvent>(evt =>
