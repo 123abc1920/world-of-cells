@@ -9,13 +9,6 @@ public class Consts
 
     public static CellTypes[] types = { CellTypes.TREE, CellTypes.ROCK, CellTypes.WATER };
 
-    public static Color waterColor = new Color(0.31f, 0.6f, 0.77f, 1);
-    public static Color treeColor = new Color(0.32f, 0.72f, 0.33f, 1);
-    public static Color rockColor = new Color(0.38f, 0.38f, 0.38f, 1);
-    public static Color bridgeColor = new Color(0.68f, 0.57f, 0.29f, 1);
-    public static Color hutColor = new Color(0.57f, 0.89f, 0.82f, 1);
-    public static Color destroyColor = new Color(0.7f, 0.24f, 0.32f, 1);
-    public static Color emptyColor = new Color(0.82f, 0.78f, 0.72f, 1);
     public static Color transparentColor = new Color(0.82f, 0.78f, 0.72f, 0);
 
     public static int width = 19;

@@ -98,5 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cell: 0
-  a: 010000000a000000
+  a: 010000000a000000fffffffff6ffffff
   isAlive: 1
+  canMove: 1

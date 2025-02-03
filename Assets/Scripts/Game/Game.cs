@@ -14,8 +14,6 @@ public class Game
     public BlueEnemy blueEnemy;
     public FluidEnemy fluidEnemy;
 
-    public Event currentEvent;
-
     public int stepCount = 0;
     public int tree, rock, water;
     public int yourtree, yourrock, yourwater;
@@ -24,6 +22,7 @@ public class Game
 
     private System.Random random = new System.Random();
     private int[] toDestroy = new int[3];
+    private Event currentEvent;
 
     public Game(Player p, RedEnemy re, BlueEnemy be, FluidEnemy fe, Cell[] c, CellText[] ct)
     {
@@ -87,8 +86,6 @@ public class Game
                     {
                         this.cells[i].setHut();
                         this.cells[i].resourceCount = 0;
-                        this.texts[i].updateText(0);
-                        this.texts[i].hideText();
                         return;
                     }
                 }
@@ -133,15 +130,6 @@ public class Game
 
     private void checkResult()
     {
-        if (redEnemy.cell == player.cell)
-        {
-            Consts.titleText = LanguageManager.L.LoseTxt;
-            Consts.textText = LanguageManager.L.RedEnd;
-            Consts.spriteText = Resources.Load<Sprite>("Sprites/redEnemyEnd");
-            Consts.EndShown = true;
-            return;
-        }
-
         if (!this.cells[player.cell].isAlive && !this.cells[player.cell].isBridge)
         {
             Consts.titleText = LanguageManager.L.LoseTxt;
@@ -175,22 +163,19 @@ public class Game
         if (!cells[redEnemy.cell].isAlive && !cells[redEnemy.cell].isBridge && redEnemy.isAlive)
         {
             redEnemy.isAlive = false;
-            redEnemy.hideEnemy();
         }
         if (!cells[blueEnemy.cell].isAlive && !cells[blueEnemy.cell].isBridge && blueEnemy.isAlive)
         {
             blueEnemy.isAlive = false;
-            blueEnemy.hideEnemy();
         }
         if (!cells[fluidEnemy.cell].isAlive && !cells[fluidEnemy.cell].isBridge && fluidEnemy.isAlive)
         {
             fluidEnemy.isAlive = false;
-            fluidEnemy.hideEnemy();
         }
 
         if (redEnemy.isAlive && redEnemy.canMove)
         {
-            List<int> availableCells = Enemy.getAvailableCells(Consts.game.redEnemy.cell, new int[] { 1, Consts.ONE_ROW, Consts.ONE_ROW - 1, Consts.ONE_ROW + 1, -1, -Consts.ONE_ROW, -Consts.ONE_ROW + 1, -Consts.ONE_ROW - 1 });
+            List<int> availableCells = redEnemy.getAvailableCells();
             if (availableCells.Count > 0)
             {
                 int index = availableCells[this.random.Next(availableCells.Count)];
@@ -208,11 +193,12 @@ public class Game
                     Consts.game.redEnemy.cell = index;
                 }
             }
+            redEnemy.effect();
         }
 
         if (blueEnemy.isAlive && blueEnemy.canMove)
         {
-            List<int> availableCells = Enemy.getAvailableCells(Consts.game.blueEnemy.cell, new int[] { 1, Consts.ONE_ROW, -1, -Consts.ONE_ROW });
+            List<int> availableCells = blueEnemy.getAvailableCells();
             if (availableCells.Count > 0)
             {
                 int index = availableCells[this.random.Next(availableCells.Count)];
@@ -221,9 +207,6 @@ public class Game
                     if (Consts.game.player.cell == availableCells[i] && !cells[Consts.game.player.cell].isHut)
                     {
                         index = availableCells[i];
-                        this.yourtree -= 10;
-                        this.yourwater -= 10;
-                        this.yourrock -= 10;
                     }
                 }
                 if (cells[index].isAlive || cells[index].isBridge)
@@ -232,12 +215,13 @@ public class Game
                     Consts.game.blueEnemy.newPos(newCell.pos.x, newCell.pos.y);
                     Consts.game.blueEnemy.cell = index;
                 }
+                blueEnemy.effect();
             }
         }
 
         if (fluidEnemy.isAlive && fluidEnemy.canMove)
         {
-            List<int> availableCells = Enemy.getAvailableCells(Consts.game.fluidEnemy.cell, new int[] { 1, Consts.ONE_ROW, -1, -Consts.ONE_ROW });
+            List<int> availableCells = fluidEnemy.getAvailableCells();
             if (availableCells.Count > 0)
             {
                 int index = availableCells[this.random.Next(availableCells.Count)];
@@ -254,15 +238,7 @@ public class Game
                     Consts.game.fluidEnemy.newPos(newCell.pos.x, newCell.pos.y);
                     Consts.game.fluidEnemy.cell = index;
                 }
-                if (this.cells[Consts.game.fluidEnemy.cell].type == fluidEnemy.type)
-                {
-                    this.cells[Consts.game.fluidEnemy.cell].resourceCount = 0;
-                    this.texts[Consts.game.fluidEnemy.cell].updateText(this.cells[Consts.game.fluidEnemy.cell].resourceCount);
-                }
-                if (random.Next(5) == 1)
-                {
-                    fluidEnemy.type = Consts.types[random.Next(Consts.types.Length)];
-                }
+                fluidEnemy.effect();
             }
         }
     }
@@ -277,8 +253,6 @@ public class Game
         for (int i = 0; i < 100; i++)
         {
             this.cells[i].restartCell();
-            this.texts[i].hidden = false;
-            this.texts[i].updateText(this.cells[i].resourceCount);
         }
 
         this.tree = this.random.Next(20, 60);
@@ -290,38 +264,29 @@ public class Game
         this.yourwater = 0;
 
         int index = random.Next(100);
-        Cell target = cells[index];
-        player.cell = index;
+        player.renew(index);
         this.cells[player.cell].getResource();
-        player.newPos(target.pos.x, target.pos.y);
 
         index = random.Next(100);
         while (index == player.cell)
         {
             index = random.Next(100);
         }
-        target = cells[index];
-        redEnemy.cell = index;
-        redEnemy.newPos(target.pos.x, target.pos.y);
+        redEnemy.renew(index);
 
         index = random.Next(100);
         while (index == player.cell)
         {
             index = random.Next(100);
         }
-        target = cells[index];
-        blueEnemy.cell = index;
-        blueEnemy.newPos(target.pos.x, target.pos.y);
+        blueEnemy.renew(index);
 
         index = random.Next(100);
         while (index == player.cell)
         {
             index = random.Next(100);
         }
-        target = cells[index];
-        fluidEnemy.cell = index;
-        fluidEnemy.newPos(target.pos.x, target.pos.y);
-        fluidEnemy.type = Consts.types[random.Next(Consts.types.Length)];
+        fluidEnemy.renew(index);
 
         for (int j = 0; j < 3; j++)
         {

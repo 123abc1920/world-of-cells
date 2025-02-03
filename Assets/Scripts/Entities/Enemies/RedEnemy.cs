@@ -5,7 +5,7 @@ using UnityEngine;
 public class RedEnemy : MonoBehaviour
 {
     public int cell;
-    public int[] a = { 1, Consts.ONE_ROW, Consts.ONE_ROW - 1, Consts.ONE_ROW + 1, -1, -Consts.ONE_ROW, -Consts.ONE_ROW + 1, -Consts.ONE_ROW - 1 };
+    private int[] a = { 1, Consts.ONE_ROW, Consts.ONE_ROW - 1, Consts.ONE_ROW + 1, -1, -Consts.ONE_ROW, -Consts.ONE_ROW + 1, -Consts.ONE_ROW - 1 };
     public bool isAlive = true;
     public bool canMove = true;
 
@@ -18,7 +18,14 @@ public class RedEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (this.isAlive)
+        {
+            GetComponent<SpriteRenderer>().color = Color.white;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().color = Consts.transparentColor;
+        }
     }
 
     public void newPos(float x, float y)
@@ -26,9 +33,46 @@ public class RedEnemy : MonoBehaviour
         transform.position = new Vector3(x, y + 12, 1);
     }
 
-    public void hideEnemy()
+    public List<int> getAvailableCells()
     {
-        GetComponent<SpriteRenderer>().color = Consts.transparentColor;
+        List<int> result = new List<int>();
+
+        for (int i = 0; i < a.Length; i++)
+        {
+            int index = cell + a[i];
+
+            if (index < 100 && index >= 0 && Consts.game.cells[index].isPreAlive && !Consts.game.cells[index].isHut && Consts.game.cells[index].isAlive)
+            {
+                if (!(cell % 10 == 0 && index % 10 == 9))
+                {
+                    if (!(cell % 10 == 9 && index % 10 == 0))
+                    {
+                        result.Add(index);
+                    }
+                }
+            }
+        }
+
+        return result;
     }
 
+    public void effect()
+    {
+        if (this.cell == Consts.game.player.cell)
+        {
+            Consts.titleText = LanguageManager.L.LoseTxt;
+            Consts.textText = LanguageManager.L.RedEnd;
+            Consts.spriteText = Resources.Load<Sprite>("Sprites/redEnemyEnd");
+            Consts.EndShown = true;
+        }
+    }
+
+    public void renew(int index)
+    {
+        Cell target = Consts.game.cells[index];
+        this.cell = index;
+        this.newPos(target.pos.x, target.pos.y);
+        this.isAlive = true;
+        this.canMove = true;
+    }
 }

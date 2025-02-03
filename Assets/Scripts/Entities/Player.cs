@@ -47,4 +47,10 @@ public class Player : MonoBehaviour
 
         return result;
     }
+
+    public void renew(int index){
+        Cell target = Consts.game.cells[index];
+        this.cell = index;
+        this.newPos(target.pos.x, target.pos.y);
+    }
 }

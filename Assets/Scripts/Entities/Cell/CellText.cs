@@ -6,39 +6,29 @@ using UnityEngine.UI;
 
 public class CellText : MonoBehaviour
 {
-    public int resourceCount;
-    public bool hidden = false;
+    public int id;
 
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<TMP_Text>().text = this.resourceCount.ToString();
+        GetComponent<TMP_Text>().text = Consts.game.cells[this.id].resourceCount.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (!Consts.game.cells[this.id].isAlive || Consts.game.cells[this.id].isBridge || Consts.game.cells[this.id].isHut)
+        {
+            GetComponent<TMP_Text>().text = "";
+        }
+        else
+        {
+            GetComponent<TMP_Text>().text = Consts.game.cells[this.id].resourceCount.ToString();
+        }
     }
 
     public void newPos(int x, int y)
     {
         transform.position = new Vector3(x, y, 0);
-    }
-
-    public void hideText()
-    {
-        GetComponent<TMP_Text>().text = "";
-        hidden = true;
-    }
-
-    public void updateText(int r)
-    {
-        this.resourceCount = r;
-        if (this.hidden)
-        {
-            return;
-        }
-        GetComponent<TMP_Text>().text = this.resourceCount.ToString();
     }
 }

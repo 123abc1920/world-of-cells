@@ -126,8 +126,6 @@ public class Cell : MonoBehaviour
 
     public void setDestroy()
     {
-        Consts.game.texts[id].hideText();
-        Consts.game.texts[id].resourceCount = 0;
         this.isAlive = false;
         this.isPreAlive = true;
     }
@@ -153,7 +151,6 @@ public class Cell : MonoBehaviour
 
     public void getResource()
     {
-        Consts.game.texts[id].updateText(0);
         if (this.resourceCount == 0 || this.isBridge || this.isHut)
         {
             return;
@@ -181,7 +178,6 @@ public class Cell : MonoBehaviour
     public void refreshCell()
     {
         this.resourceCount = Math.Min(this.resourceCount + 10, this.maxCount);
-        Consts.game.texts[this.id].updateText(this.resourceCount);
     }
 
     public void restartCell()
