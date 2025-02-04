@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     public int cell;
     public bool canMove = true;
+    public bool semiTransparent = false;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +17,14 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (semiTransparent)
+        {
+            GetComponent<SpriteRenderer>().color = Consts.semiTransparentColor;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().color = Color.white;
+        }
     }
 
     public void newPos(float x, float y)
@@ -48,7 +56,8 @@ public class Player : MonoBehaviour
         return result;
     }
 
-    public void renew(int index){
+    public void renew(int index)
+    {
         Cell target = Consts.game.cells[index];
         this.cell = index;
         this.newPos(target.pos.x, target.pos.y);

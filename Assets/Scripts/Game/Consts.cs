@@ -10,6 +10,7 @@ public class Consts
     public static CellTypes[] types = { CellTypes.TREE, CellTypes.ROCK, CellTypes.WATER };
 
     public static Color transparentColor = new Color(0.82f, 0.78f, 0.72f, 0);
+    public static Color semiTransparentColor = new Color(1f, 1f, 1f, 0.5f);
 
     public static int width = 19;
     public static int ONE_ROW = 10;

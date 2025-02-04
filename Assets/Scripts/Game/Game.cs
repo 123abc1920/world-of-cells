@@ -42,14 +42,20 @@ public class Game
     {
         for (int i = 0; i < cells.Length; i++)
         {
-            if (this.player.getAvailableCells().Contains(i))
+            if (this.player.getAvailableCells().Contains(i) || i == player.cell)
             {
                 if (cells[i].pos.x - Consts.width / 2 <= start.x && start.x < cells[i].pos.x + Consts.width / 2)
                 {
                     if (cells[i].pos.y + Consts.width / 2 >= start.y && start.y > cells[i].pos.y - Consts.width / 2)
                     {
-                        if (cells[i].isAlive || cells[i].isBridge)
+                        if (i == player.cell)
                         {
+                            player.semiTransparent = !player.semiTransparent;
+                            return;
+                        }
+                        else if (cells[i].isAlive || cells[i].isBridge)
+                        {
+                            player.semiTransparent = false;
                             player.cell = i;
                             player.newPos(cells[i].pos.x, cells[i].pos.y);
                             Consts.game.cells[i].getResource();
@@ -95,6 +101,7 @@ public class Game
 
     public void skipStep()
     {
+        player.semiTransparent = false;
         Consts.game.stepCount++;
 
         effectsDoing();
