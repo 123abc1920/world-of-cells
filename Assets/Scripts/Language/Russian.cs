@@ -39,7 +39,7 @@ public class Russian : Language
         SkipStep = "Пропустить шаг";
         BuildBridge = "Строить мост";
         BuildHut = "Строить дом";
-        BackToMenu = "Назад";
+        BackToMenu = "Меню";
 
         Ok = "Принять";
         Close = "Закрыть";

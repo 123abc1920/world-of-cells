@@ -39,7 +39,7 @@ public class English : Language
         SkipStep = "Skip step";
         BuildBridge = "Build bridge";
         BuildHut = "Build hut";
-        BackToMenu = "Back";
+        BackToMenu = "Menu";
 
         Ok = "Accept";
         Close = "Close";

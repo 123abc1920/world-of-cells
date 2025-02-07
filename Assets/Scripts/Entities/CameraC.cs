@@ -55,11 +55,12 @@ public class CameraC : MonoBehaviour
 
                     transform.Translate(new Vector3(Mathf.Lerp(fx, sx, 0.5f), Mathf.Lerp(fy, sy, 0.5f), 0), Space.World);
                     start = finish;
+
                     return;
                 }
                 if (touch.phase == TouchPhase.Stationary)
                 {
-                    if (Time.time - Consts.lastClick >= delta)
+                    if (Time.time - Consts.lastClick > delta)
                     {
                         if (Consts.buildBridge || Consts.buildHut)
                         {

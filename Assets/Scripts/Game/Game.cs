@@ -44,9 +44,14 @@ public class Game
         {
             if (this.player.getAvailableCells().Contains(i) || i == player.cell)
             {
-                if (cells[i].pos.x - Consts.width / 2 <= start.x && start.x < cells[i].pos.x + Consts.width / 2)
+                int sm = Consts.width / 2;
+                if (Consts.width % 2 != 0)
                 {
-                    if (cells[i].pos.y + Consts.width / 2 >= start.y && start.y > cells[i].pos.y - Consts.width / 2)
+                    sm += 1;
+                }
+                if (cells[i].pos.x - sm <= start.x && start.x < cells[i].pos.x + sm)
+                {
+                    if (cells[i].pos.y + sm >= start.y && start.y > cells[i].pos.y - sm)
                     {
                         if (i == player.cell)
                         {
@@ -137,7 +142,7 @@ public class Game
 
     private void checkResult()
     {
-        if (!this.cells[player.cell].isAlive && !this.cells[player.cell].isBridge)
+        if (!this.cells[player.cell].isAlive)
         {
             Consts.titleText = LanguageManager.L.LoseTxt;
             Consts.textText = LanguageManager.L.CosmosEnd;
