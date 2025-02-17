@@ -11,9 +11,24 @@ public class Audio : MonoBehaviour
 
         if (objs.Length > 1)
         {
-            Destroy(this.gameObject);
+            Destroy(objs[1]);
         }
 
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    void Start()
+    {
+
+    }
+
+    void Update()
+    {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("music");
+
+        if (objs.Length > 1)
+        {
+            Destroy(objs[1]);
+        }
     }
 }

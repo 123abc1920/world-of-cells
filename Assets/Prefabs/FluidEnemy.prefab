@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8777998670137016947}
   - component: {fileID: 5530716682718224516}
   - component: {fileID: -5868111930159657639}
+  - component: {fileID: 8944207597646355724}
   m_Layer: 0
   m_Name: FluidEnemy
   m_TagString: Untagged
@@ -74,15 +75,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 7e63b24ede99ffa4e9a6a0bd55657162, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8737446c38cb0ca4299d35adbb0fc626, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.4285715, y: 1.4285715}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &-5868111930159657639
@@ -98,10 +99,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cell: 0
-  a: 010000000a000000fffffffff6ffffff
   type: 0
   isAlive: 1
   canMove: 1
   waterSprite: {fileID: 21300000, guid: 70c7d1bd9a15c6d4cbb04ded6827fdb8, type: 3}
   treeSprite: {fileID: 21300000, guid: c88dcd7998269904abcbee8cafde2542, type: 3}
   rockSprite: {fileID: 21300000, guid: 8737446c38cb0ca4299d35adbb0fc626, type: 3}
+--- !u!95 &8944207597646355724
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5930773079118262010}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: aedffb41cda33034f8395b7aca5039b6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

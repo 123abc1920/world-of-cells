@@ -33,6 +33,7 @@ public class Consts
     public static float lastClick = 0;
 
     public static bool audio;
+    public static bool first = true;
 
     public static Game game;
 
