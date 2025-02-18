@@ -42,7 +42,7 @@ public class CameraC : MonoBehaviour
                         fx = 0;
                         sx = 0;
                     }
-                    if (transform.position.y > -40 && -finish.y + start.y > 0)
+                    if (transform.position.y > -10 && -finish.y + start.y > 0)
                     {
                         fy = 0;
                         sy = 0;

@@ -60,6 +60,7 @@ public class Game
                         }
                         else if (cells[i].isAlive || cells[i].isBridge)
                         {
+                            Consts.game.cells[i].tapCell();
                             player.semiTransparent = false;
                             player.cell = i;
                             player.newPos(cells[i].pos.x, cells[i].pos.y);

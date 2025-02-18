@@ -34,6 +34,8 @@ public class Cell : MonoBehaviour
     public Sprite waterEmptySprite;
     public Sprite rockEmptySprite;
 
+    public Animation anim;
+
     void Start()
     {
 
@@ -112,6 +114,11 @@ public class Cell : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().color = Consts.transparentColor;
         }
+    }
+
+    public void tapCell()
+    {
+        GetComponent<Animator>().Play("CellAnim", -1, 0.0f);
     }
 
     public void newPos(int x, int y)
@@ -193,5 +200,6 @@ public class Cell : MonoBehaviour
         this.maxCount = this.resourceCount;
 
         GetComponent<SpriteRenderer>().color = Color.white;
+        tapCell();
     }
 }
