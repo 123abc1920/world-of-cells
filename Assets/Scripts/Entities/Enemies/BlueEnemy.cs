@@ -8,6 +8,7 @@ public class BlueEnemy : MonoBehaviour
     private int[] a = { 1, Consts.ONE_ROW, -1, -Consts.ONE_ROW };
     public bool isAlive = true;
     public bool canMove = true;
+    private bool toLeft = true;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +32,20 @@ public class BlueEnemy : MonoBehaviour
     public void newPos(float x, float y)
     {
         transform.position = new Vector3(x, y + 10, 1);
+    }
+
+    public void flip(int old, int neu)
+    {
+        bool newLeft = true;
+        if (old % 10 <= neu % 10)
+        {
+            newLeft = false;
+        }
+        if (toLeft != newLeft)
+        {
+            GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
+            toLeft = newLeft;
+        }
     }
 
     public List<int> getAvailableCells()

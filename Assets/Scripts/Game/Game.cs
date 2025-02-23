@@ -62,6 +62,7 @@ public class Game
                         {
                             Consts.game.cells[i].tapCell();
                             player.semiTransparent = false;
+                            player.flip(player.cell, i);
                             player.cell = i;
                             player.newPos(cells[i].pos.x, cells[i].pos.y);
                             Consts.game.cells[i].getResource();
@@ -194,16 +195,17 @@ public class Game
                 int index = availableCells[this.random.Next(availableCells.Count)];
                 for (int i = 0; i < availableCells.Count; i++)
                 {
-                    if (Consts.game.player.cell == availableCells[i] && !cells[Consts.game.player.cell].isHut)
+                    if (player.cell == availableCells[i] && !cells[player.cell].isHut)
                     {
                         index = availableCells[i];
                     }
                 }
                 if (cells[index].isAlive || cells[index].isBridge)
                 {
-                    Cell newCell = Consts.game.cells[index];
-                    Consts.game.redEnemy.newPos(newCell.pos.x, newCell.pos.y);
-                    Consts.game.redEnemy.cell = index;
+                    Cell newCell = cells[index];
+                    redEnemy.newPos(newCell.pos.x, newCell.pos.y);
+                    redEnemy.flip(redEnemy.cell, index);
+                    redEnemy.cell = index;
                 }
             }
             redEnemy.effect();
@@ -217,16 +219,17 @@ public class Game
                 int index = availableCells[this.random.Next(availableCells.Count)];
                 for (int i = 0; i < availableCells.Count; i++)
                 {
-                    if (Consts.game.player.cell == availableCells[i] && !cells[Consts.game.player.cell].isHut)
+                    if (player.cell == availableCells[i] && !cells[player.cell].isHut)
                     {
                         index = availableCells[i];
                     }
                 }
                 if (cells[index].isAlive || cells[index].isBridge)
                 {
-                    Cell newCell = Consts.game.cells[index];
-                    Consts.game.blueEnemy.newPos(newCell.pos.x, newCell.pos.y);
-                    Consts.game.blueEnemy.cell = index;
+                    Cell newCell = cells[index];
+                    blueEnemy.newPos(newCell.pos.x, newCell.pos.y);
+                    blueEnemy.flip(blueEnemy.cell, index);
+                    blueEnemy.cell = index;
                 }
                 blueEnemy.effect();
             }
@@ -240,16 +243,17 @@ public class Game
                 int index = availableCells[this.random.Next(availableCells.Count)];
                 for (int i = 0; i < availableCells.Count; i++)
                 {
-                    if (cells[availableCells[i]].type == fluidEnemy.type && cells[availableCells[i]].resourceCount != 0 && !cells[Consts.game.player.cell].isHut)
+                    if (cells[availableCells[i]].type == fluidEnemy.type && cells[availableCells[i]].resourceCount != 0 && !cells[player.cell].isHut)
                     {
                         index = availableCells[i];
                     }
                 }
                 if (cells[index].isAlive || cells[index].isBridge)
                 {
-                    Cell newCell = Consts.game.cells[index];
-                    Consts.game.fluidEnemy.newPos(newCell.pos.x, newCell.pos.y);
-                    Consts.game.fluidEnemy.cell = index;
+                    Cell newCell = cells[index];
+                    fluidEnemy.newPos(newCell.pos.x, newCell.pos.y);
+                    fluidEnemy.flip(fluidEnemy.cell, index);
+                    fluidEnemy.cell = index;
                 }
                 fluidEnemy.effect();
             }

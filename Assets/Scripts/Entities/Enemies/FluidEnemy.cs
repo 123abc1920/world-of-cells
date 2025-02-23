@@ -17,6 +17,7 @@ public class FluidEnemy : MonoBehaviour
     public Sprite rockSprite;
 
     private System.Random random = new System.Random();
+    private bool toLeft = true;
 
     // Start is called before the first frame update
     void Start()
@@ -86,6 +87,20 @@ public class FluidEnemy : MonoBehaviour
         if (random.Next(5) == 1)
         {
             this.type = Consts.types[random.Next(Consts.types.Length)];
+        }
+    }
+
+    public void flip(int old, int neu)
+    {
+        bool newLeft = true;
+        if (old % 10 <= neu % 10)
+        {
+            newLeft = false;
+        }
+        if (toLeft != newLeft)
+        {
+            GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
+            toLeft = newLeft;
         }
     }
 

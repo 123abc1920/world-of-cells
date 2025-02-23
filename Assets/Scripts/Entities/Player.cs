@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public int cell;
     public bool canMove = true;
     public bool semiTransparent = false;
+    private bool toLeft = false;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +55,20 @@ public class Player : MonoBehaviour
         }
 
         return result;
+    }
+
+    public void flip(int old, int neu)
+    {
+        bool newLeft = true;
+        if (old % 10 <= neu % 10)
+        {
+            newLeft = false;
+        }
+        if (toLeft != newLeft)
+        {
+            GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
+            toLeft = newLeft;
+        }
     }
 
     public void renew(int index)
