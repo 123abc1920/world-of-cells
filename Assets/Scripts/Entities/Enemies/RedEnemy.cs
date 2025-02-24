@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -80,6 +81,18 @@ public class RedEnemy : MonoBehaviour
             Consts.spriteText = Resources.Load<Sprite>("Sprites/redEnemyEnd");
             Consts.EndShown = true;
         }
+    }
+
+    public int scan()
+    {
+        int target = Consts.game.player.cell;
+        int min = Math.Max(0, this.cell - 23);
+        int max = Math.Min(99, this.cell + 23);
+        if (target % 10 >= min % 10 && target / 10 >= min / 10 && target % 10 <= max % 10 && target / 10 <= max / 10)
+        {
+            return FindPath.findPath(this.cell, target, this.a);
+        }
+        return -1;
     }
 
     public void renew(int index)

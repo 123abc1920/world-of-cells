@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class BlueEnemy : MonoBehaviour
 {
@@ -69,6 +70,18 @@ public class BlueEnemy : MonoBehaviour
         }
 
         return result;
+    }
+
+    public int scan()
+    {
+        int target = Consts.game.player.cell;
+        int min = Math.Max(0, this.cell - 12);
+        int max = Math.Min(99, this.cell + 12);
+        if (target % 10 >= min % 10 && target / 10 >= min / 10 && target % 10 <= max % 10 && target / 10 <= max / 10)
+        {
+            return FindPath.findPath(this.cell, target, this.a);
+        }
+        return -1;
     }
 
     public void effect()

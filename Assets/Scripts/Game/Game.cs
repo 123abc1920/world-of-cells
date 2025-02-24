@@ -192,13 +192,10 @@ public class Game
             List<int> availableCells = redEnemy.getAvailableCells();
             if (availableCells.Count > 0)
             {
-                int index = availableCells[this.random.Next(availableCells.Count)];
-                for (int i = 0; i < availableCells.Count; i++)
+                int index = redEnemy.scan();
+                if (index == -1)
                 {
-                    if (player.cell == availableCells[i] && !cells[player.cell].isHut)
-                    {
-                        index = availableCells[i];
-                    }
+                    index = availableCells[this.random.Next(availableCells.Count)];
                 }
                 if (cells[index].isAlive || cells[index].isBridge)
                 {
@@ -216,13 +213,10 @@ public class Game
             List<int> availableCells = blueEnemy.getAvailableCells();
             if (availableCells.Count > 0)
             {
-                int index = availableCells[this.random.Next(availableCells.Count)];
-                for (int i = 0; i < availableCells.Count; i++)
+                int index = blueEnemy.scan();
+                if (index == -1)
                 {
-                    if (player.cell == availableCells[i] && !cells[player.cell].isHut)
-                    {
-                        index = availableCells[i];
-                    }
+                    index = availableCells[this.random.Next(availableCells.Count)];
                 }
                 if (cells[index].isAlive || cells[index].isBridge)
                 {
