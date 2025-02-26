@@ -67,6 +67,50 @@ public class FluidEnemy : MonoBehaviour
         }
     }
 
+    private int[] a1 = { 1, 9, 10, 11 };
+    private int[] a2 = { 2, 19, 20, 21, 22, 18, 8 };
+
+    private int findTarget()
+    {
+        for (int i = 0; i < a1.Length; i++)
+        {
+            int probe = Math.Max(0, Math.Min(99, this.cell + a1[i]));
+            if (Consts.game.cells[probe].resourceCount > 0 && Consts.game.cells[probe].type == this.type && !Consts.game.cells[probe].isBridge && !Consts.game.cells[probe].isHut && Consts.game.cells[probe].isPreAlive)
+            {
+                return probe;
+            }
+            probe = Math.Max(0, Math.Min(99, this.cell - a1[i]));
+            if (Consts.game.cells[probe].resourceCount > 0 && Consts.game.cells[probe].type == this.type && !Consts.game.cells[probe].isBridge && !Consts.game.cells[probe].isHut && Consts.game.cells[probe].isPreAlive)
+            {
+                return probe;
+            }
+        }
+        for (int i = 0; i < a2.Length; i++)
+        {
+            int probe = Math.Max(0, Math.Min(99, this.cell + a2[i]));
+            if (Consts.game.cells[probe].resourceCount > 0 && Consts.game.cells[probe].type == this.type && !Consts.game.cells[probe].isBridge && !Consts.game.cells[probe].isHut && Consts.game.cells[probe].isPreAlive)
+            {
+                return probe;
+            }
+            probe = Math.Max(0, Math.Min(99, this.cell - a2[i]));
+            if (Consts.game.cells[probe].resourceCount > 0 && Consts.game.cells[probe].type == this.type && !Consts.game.cells[probe].isBridge && !Consts.game.cells[probe].isHut && Consts.game.cells[probe].isPreAlive)
+            {
+                return probe;
+            }
+        }
+        return -1;
+    }
+
+    public int scan()
+    {
+        int target = findTarget();
+        if (target == -1)
+        {
+            return target;
+        }
+        return FindPath.findPath(this.cell, target, this.a);
+    }
+
     public void flip(int old, int neu)
     {
         bool newLeft = true;
