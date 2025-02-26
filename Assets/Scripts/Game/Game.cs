@@ -189,7 +189,7 @@ public class Game
 
         if (redEnemy.isAlive && redEnemy.canMove)
         {
-            List<int> availableCells = redEnemy.getAvailableCells();
+            List<int> availableCells = GetAvailableCells.getAvailableCells(redEnemy.cell, redEnemy.a);
             if (availableCells.Count > 0)
             {
                 int index = redEnemy.scan();
@@ -210,7 +210,7 @@ public class Game
 
         if (blueEnemy.isAlive && blueEnemy.canMove)
         {
-            List<int> availableCells = blueEnemy.getAvailableCells();
+            List<int> availableCells = GetAvailableCells.getAvailableCells(blueEnemy.cell, blueEnemy.a);
             if (availableCells.Count > 0)
             {
                 int index = blueEnemy.scan();
@@ -231,7 +231,7 @@ public class Game
 
         if (fluidEnemy.isAlive && fluidEnemy.canMove)
         {
-            List<int> availableCells = fluidEnemy.getAvailableCells();
+            List<int> availableCells = GetAvailableCells.getAvailableCells(fluidEnemy.cell, fluidEnemy.a);
             if (availableCells.Count > 0)
             {
                 int index = availableCells[this.random.Next(availableCells.Count)];

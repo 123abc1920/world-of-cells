@@ -4,28 +4,6 @@ using UnityEngine;
 using System.Linq;
 public class FindPath
 {
-    private static List<int> getAvailableCells(int cell, int[] a)
-    {
-        List<int> result = new List<int>();
-
-        for (int i = 0; i < a.Length; i++)
-        {
-            int index = cell + a[i];
-
-            if (index < 100 && index >= 0 && Consts.game.cells[index].isPreAlive && !Consts.game.cells[index].isHut && Consts.game.cells[index].isAlive)
-            {
-                if (!(cell % 10 == 0 && index % 10 == 9))
-                {
-                    if (!(cell % 10 == 9 && index % 10 == 0))
-                    {
-                        result.Add(index);
-                    }
-                }
-            }
-        }
-
-        return result;
-    }
     public static int findPath(int start, int target, int[] a)
     {
         Queue<int> queue = new Queue<int>();
@@ -40,10 +18,11 @@ public class FindPath
             p = queue.Dequeue();
             showns.Add(p);
 
-            for (int i = 0; i < getAvailableCells(p, a).Count; i++)
+            List<int> availableCells = GetAvailableCells.getAvailableCells(p, a);
+            for (int i = 0; i < availableCells.Count; i++)
             {
-                int probe = Math.Min(99, Math.Max(0, p - a[i]));
-                if (!showns.Contains(probe) && Consts.game.cells[probe].isAlive && !Consts.game.cells[probe].isHut && Consts.game.cells[probe].isPreAlive)
+                int probe = Math.Min(99, Math.Max(0, availableCells[i]));
+                if (!showns.Contains(probe))
                 {
                     queue.Enqueue(probe);
                     if (!path.Keys.Contains(probe))
@@ -52,6 +31,11 @@ public class FindPath
                     }
                 }
             }
+        }
+
+        if (p != target)
+        {
+            return -1;
         }
 
         int step = target;

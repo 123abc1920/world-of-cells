@@ -6,7 +6,7 @@ using System;
 public class BlueEnemy : MonoBehaviour
 {
     public int cell;
-    private int[] a = { 1, Consts.ONE_ROW, -1, -Consts.ONE_ROW };
+    public int[] a = { 1, Consts.ONE_ROW, -1, -Consts.ONE_ROW };
     public bool isAlive = true;
     public bool canMove = true;
     private bool toLeft = true;
@@ -49,34 +49,11 @@ public class BlueEnemy : MonoBehaviour
         }
     }
 
-    public List<int> getAvailableCells()
-    {
-        List<int> result = new List<int>();
-
-        for (int i = 0; i < a.Length; i++)
-        {
-            int index = cell + a[i];
-
-            if (index < 100 && index >= 0 && Consts.game.cells[index].isPreAlive && !Consts.game.cells[index].isHut && Consts.game.cells[index].isAlive)
-            {
-                if (!(cell % 10 == 0 && index % 10 == 9))
-                {
-                    if (!(cell % 10 == 9 && index % 10 == 0))
-                    {
-                        result.Add(index);
-                    }
-                }
-            }
-        }
-
-        return result;
-    }
-
     public int scan()
     {
         int target = Consts.game.player.cell;
-        int min = Math.Max(0, this.cell - 12);
-        int max = Math.Min(99, this.cell + 12);
+        int min = Math.Max(0, this.cell - 22);
+        int max = Math.Min(99, this.cell + 22);
         if (target % 10 >= min % 10 && target / 10 >= min / 10 && target % 10 <= max % 10 && target / 10 <= max / 10)
         {
             return FindPath.findPath(this.cell, target, this.a);

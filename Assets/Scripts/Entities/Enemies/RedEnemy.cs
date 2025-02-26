@@ -6,7 +6,7 @@ using UnityEngine;
 public class RedEnemy : MonoBehaviour
 {
     public int cell;
-    private int[] a = { 1, Consts.ONE_ROW, Consts.ONE_ROW - 1, Consts.ONE_ROW + 1, -1, -Consts.ONE_ROW, -Consts.ONE_ROW + 1, -Consts.ONE_ROW - 1 };
+    public int[] a = { 1, Consts.ONE_ROW, Consts.ONE_ROW - 1, Consts.ONE_ROW + 1, -1, -Consts.ONE_ROW, -Consts.ONE_ROW + 1, -Consts.ONE_ROW - 1 };
     public bool isAlive = true;
     public bool canMove = true;
     private bool toLeft = true;
@@ -33,29 +33,6 @@ public class RedEnemy : MonoBehaviour
     public void newPos(float x, float y)
     {
         transform.position = new Vector3(x, y + 12, 1);
-    }
-
-    public List<int> getAvailableCells()
-    {
-        List<int> result = new List<int>();
-
-        for (int i = 0; i < a.Length; i++)
-        {
-            int index = cell + a[i];
-
-            if (index < 100 && index >= 0 && Consts.game.cells[index].isPreAlive && !Consts.game.cells[index].isHut && Consts.game.cells[index].isAlive)
-            {
-                if (!(cell % 10 == 0 && index % 10 == 9))
-                {
-                    if (!(cell % 10 == 9 && index % 10 == 0))
-                    {
-                        result.Add(index);
-                    }
-                }
-            }
-        }
-
-        return result;
     }
 
     public void flip(int old, int neu)
@@ -86,8 +63,8 @@ public class RedEnemy : MonoBehaviour
     public int scan()
     {
         int target = Consts.game.player.cell;
-        int min = Math.Max(0, this.cell - 23);
-        int max = Math.Min(99, this.cell + 23);
+        int min = Math.Max(0, this.cell - 33);
+        int max = Math.Min(99, this.cell + 33);
         if (target % 10 >= min % 10 && target / 10 >= min / 10 && target % 10 <= max % 10 && target / 10 <= max / 10)
         {
             return FindPath.findPath(this.cell, target, this.a);
