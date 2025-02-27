@@ -130,6 +130,7 @@ public class Cell : MonoBehaviour
     public void setPreDestroy()
     {
         this.isPreAlive = false;
+        tapCell();
     }
 
     public void setDestroy()
@@ -146,6 +147,7 @@ public class Cell : MonoBehaviour
         Consts.game.yourrock -= 10;
         this.isBridge = true;
         Consts.buildBridge = false;
+        tapCell();
     }
 
     public void setHut()
@@ -155,6 +157,7 @@ public class Cell : MonoBehaviour
         Consts.game.yourrock -= 10;
         this.isHut = true;
         Consts.buildHut = false;
+        tapCell();
     }
 
     public void getResource()
