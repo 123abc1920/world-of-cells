@@ -188,6 +188,16 @@ public class Cell : MonoBehaviour
         this.resourceCount = Math.Min(this.resourceCount + 10, this.maxCount);
     }
 
+    public float getX()
+    {
+        return transform.position.x;
+    }
+
+    public float getY()
+    {
+        return transform.position.y;
+    }
+
     public void restartCell()
     {
         this.isAlive = true;

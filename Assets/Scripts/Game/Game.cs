@@ -64,7 +64,6 @@ public class Game
                             player.semiTransparent = false;
                             player.flip(player.cell, i);
                             player.cell = i;
-                            player.newPos(cells[i].pos.x, cells[i].pos.y);
                             Consts.game.cells[i].getResource();
 
                             Consts.game.stepCount++;
@@ -197,8 +196,6 @@ public class Game
                 {
                     index = availableCells[this.random.Next(availableCells.Count)];
                 }
-                Cell newCell = cells[index];
-                redEnemy.newPos(newCell.pos.x, newCell.pos.y);
                 redEnemy.flip(redEnemy.cell, index);
                 redEnemy.cell = index;
             }
@@ -217,8 +214,6 @@ public class Game
                     {
                         index = availableCells[this.random.Next(availableCells.Count)];
                     }
-                    Cell newCell = cells[index];
-                    blueEnemy.newPos(newCell.pos.x, newCell.pos.y);
                     blueEnemy.flip(blueEnemy.cell, index);
                     blueEnemy.cell = index;
                 }
@@ -236,8 +231,6 @@ public class Game
                 {
                     index = availableCells[this.random.Next(availableCells.Count)];
                 }
-                Cell newCell = cells[index];
-                fluidEnemy.newPos(newCell.pos.x, newCell.pos.y);
                 fluidEnemy.flip(fluidEnemy.cell, index);
                 fluidEnemy.cell = index;
                 fluidEnemy.effect();

@@ -10,6 +10,7 @@ public class RedEnemy : MonoBehaviour
     public bool isAlive = true;
     public bool canMove = true;
     private bool toLeft = true;
+    private float step = 0.1f;
 
     // Start is called before the first frame update
     void Start()
@@ -28,11 +29,17 @@ public class RedEnemy : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().color = Consts.transparentColor;
         }
-    }
-
-    public void newPos(float x, float y)
-    {
-        transform.position = new Vector3(x, y + 12, 1);
+        if (transform.position.x != Consts.game.cells[this.cell].getX() || transform.position.y != Consts.game.cells[this.cell].getY() + 12)
+        {
+            Vector3 start = new Vector3(transform.position.x, transform.position.y, 1);
+            Vector3 finish = new Vector3(Consts.game.cells[this.cell].getX(), Consts.game.cells[this.cell].getY() + 12, 1);
+            transform.position = Vector3.Lerp(start, finish, step);
+            step += 0.1f;
+        }
+        else
+        {
+            step = 0.1f;
+        }
     }
 
     public void flip(int old, int neu)
@@ -74,9 +81,7 @@ public class RedEnemy : MonoBehaviour
 
     public void renew(int index)
     {
-        Cell target = Consts.game.cells[index];
         this.cell = index;
-        this.newPos(target.pos.x, target.pos.y);
         this.isAlive = true;
         this.canMove = true;
     }

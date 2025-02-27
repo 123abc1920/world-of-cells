@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public bool canMove = true;
     public bool semiTransparent = false;
     private bool toLeft = false;
+    private float step = 0.1f;
 
     // Start is called before the first frame update
     void Start()
@@ -26,11 +27,17 @@ public class Player : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().color = Color.white;
         }
-    }
-
-    public void newPos(float x, float y)
-    {
-        transform.position = new Vector3(x, y + 16, 1);
+        if (transform.position.x != Consts.game.cells[this.cell].getX() || transform.position.y != Consts.game.cells[this.cell].getY() + 16)
+        {
+            Vector3 start = new Vector3(transform.position.x, transform.position.y, 1);
+            Vector3 finish = new Vector3(Consts.game.cells[this.cell].getX(), Consts.game.cells[this.cell].getY() + 16, 1);
+            transform.position = Vector3.Lerp(start, finish, step);
+            step += 0.1f;
+        }
+        else
+        {
+            step = 0.1f;
+        }
     }
 
     public List<int> getAvailableCells()
@@ -73,8 +80,6 @@ public class Player : MonoBehaviour
 
     public void renew(int index)
     {
-        Cell target = Consts.game.cells[index];
         this.cell = index;
-        this.newPos(target.pos.x, target.pos.y);
     }
 }
