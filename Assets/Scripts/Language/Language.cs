@@ -10,6 +10,7 @@ public abstract class Language
     public string Cards;
     public string Story;
     public string HowToPlay;
+    public string Exit;
 
     public string SettingsTitle;
     public string ProgressLbl;

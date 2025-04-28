@@ -12,6 +12,7 @@ public class MenuScript : MonoBehaviour
     private Button cardsBtn;
     private Button storyBtn;
     private Button howToBtn;
+    private Button exitBtn;
 
     private VisualElement root;
 
@@ -42,6 +43,10 @@ public class MenuScript : MonoBehaviour
         howToBtn = root.Q<Button>("howToBtn");
         howToBtn.text = LanguageManager.L.HowToPlay;
         howToBtn.RegisterCallback<ClickEvent>(howToBtnAction);
+
+        exitBtn = root.Q<Button>("exitBtn");
+        exitBtn.text = LanguageManager.L.Exit;
+        exitBtn.RegisterCallback<ClickEvent>(exitBtnAction);
 
         Consts.MainMenuShown = true;
     }
@@ -79,5 +84,10 @@ public class MenuScript : MonoBehaviour
     {
         Consts.MainMenuShown = false;
         Consts.HowToPlayShown = true;
+    }
+
+    private void exitBtnAction(ClickEvent e)
+    {
+        Application.Quit();
     }
 }

@@ -12,6 +12,7 @@ public class English : Language
         Cards = "Cards";
         Story = "Story";
         HowToPlay = "How To Play";
+        Exit = "Exit";
 
         SettingsTitle = "Settings";
         ProgressLbl = "Progress: {0}%";

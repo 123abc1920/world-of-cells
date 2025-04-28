@@ -12,6 +12,7 @@ public class Russian : Language
         Cards = "Карты";
         Story = "История";
         HowToPlay = "Как играть";
+        Exit = "Выход";
 
         SettingsTitle = "Настройки";
         ProgressLbl = "Прогресс: {0}%";
